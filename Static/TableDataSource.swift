@@ -4,14 +4,30 @@ public class TableDataSource: NSObject, UITableViewDataSource, UITableViewDelega
 
     // MARK: - Properties
 
-    private weak var tableView: UITableView?
-    weak var tableViewDataSource: UITableViewDataSource?
-    weak var tableViewDelegate: UITableViewDelegate?
+	/// The table view that will use this as its data source.
+	public weak var tableView: UITableView? {
+		willSet {
+			if let tableView = tableView {
+				tableView.dataSource = nil
+				tableView.delegate = nil
+			}
+		}
 
+		didSet {
+			updateTableView()
+		}
+	}
+
+	/// Forwarded data source. If you need to implement some data source methods, most are forwarded to this object.
+    public weak var tableViewDataSource: UITableViewDataSource?
+
+	/// Forwarded delegate. If you need to implement some delegate methods, most are forwarded to this object.
+    public weak var tableViewDelegate: UITableViewDelegate?
+
+	/// Static sections to use in the table view.
     public var sections = [Section]() {
         didSet {
-            refreshTableSections(oldValue)
-            refreshRegisteredCells()
+            refresh()
         }
     }
 
@@ -20,15 +36,30 @@ public class TableDataSource: NSObject, UITableViewDataSource, UITableViewDelega
 
     // MARK: - Initializers
 
-    public required init(tableView: UITableView) {
+    public init(tableView: UITableView? = nil) {
         super.init()
         self.tableView = tableView
-        tableView.dataSource = self
-        tableView.delegate = self
+        updateTableView()
     }
-    
+
+	deinit {
+		tableView = nil
+	}
+
 
     // MARK: - Private
+
+	private func updateTableView() {
+		guard let tableView = tableView else { return }
+		tableView.dataSource = self
+		tableView.delegate = self
+		refresh()
+	}
+
+	private func refresh() {
+		refreshTableSections()
+		refreshRegisteredCells()
+	}
 
     private func sectionForIndex(index: Int) -> Section? {
         if sections.count <= index {
@@ -51,33 +82,37 @@ public class TableDataSource: NSObject, UITableViewDataSource, UITableViewDelega
         return nil
     }
 
-    private func refreshTableSections(oldSections: [Section]) {
-        if let tableView = tableView {
-            let oldCount = oldSections.count
-            let newCount = sections.count
-            let delta = newCount - oldCount
-            let animation: UITableViewRowAnimation = .Automatic
+    private func refreshTableSections(oldSections: [Section]? = nil) {
+		guard let tableView = tableView else { return }
+		guard let oldSections = oldSections else {
+			tableView.reloadData()
+			return
+		}
 
-            tableView.beginUpdates()
+		let oldCount = oldSections.count
+		let newCount = sections.count
+		let delta = newCount - oldCount
+		let animation: UITableViewRowAnimation = .Automatic
 
-            if delta == 0 {
-                tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, newCount)), withRowAnimation: animation)
-            } else {
-                if delta > 0 {
-                    // Insert sections
-                    tableView.insertSections(NSIndexSet(indexesInRange: NSMakeRange(oldCount - 1, delta)), withRowAnimation: animation)
-                } else {
-                    // Remove sections
-                    tableView.deleteSections(NSIndexSet(indexesInRange: NSMakeRange(oldCount - 1, -delta)), withRowAnimation: animation)
-                }
+		tableView.beginUpdates()
 
-                // Reload existing sections
-                let commonCount = min(oldCount, newCount)
-                tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, commonCount)), withRowAnimation: animation)
-            }
+		if delta == 0 {
+			tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, newCount)), withRowAnimation: animation)
+		} else {
+			if delta > 0 {
+				// Insert sections
+				tableView.insertSections(NSIndexSet(indexesInRange: NSMakeRange(oldCount - 1, delta)), withRowAnimation: animation)
+			} else {
+				// Remove sections
+				tableView.deleteSections(NSIndexSet(indexesInRange: NSMakeRange(oldCount - 1, -delta)), withRowAnimation: animation)
+			}
 
-            tableView.endUpdates()
-        }
+			// Reload existing sections
+			let commonCount = min(oldCount, newCount)
+			tableView.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, commonCount)), withRowAnimation: animation)
+		}
+
+		tableView.endUpdates()
     }
 
     private func refreshRegisteredCells() {
