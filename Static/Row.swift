@@ -1,28 +1,28 @@
 import UIKit
 
-typealias RowSelection = Void -> Void
+public typealias RowSelection = Void -> Void
 
-struct Row: Hashable, Equatable {
-    let UUID: String
-    var text: String?
-    var detailText: String?
-    var accessory: UITableViewCellAccessoryType = .None
-    var selection: RowSelection?
-    var cellClass: UITableViewCell.Type = Value1Cell.self
+public struct Row: Hashable, Equatable {
+    public let UUID: String
+    public var text: String?
+    public var detailText: String?
+    public var accessory: UITableViewCellAccessoryType = .None
+    public var selection: RowSelection?
+    public var cellClass: UITableViewCell.Type = Value1Cell.self
 
-    var cellIdentifier: String {
+    public var cellIdentifier: String {
         return cellClass.description()
     }
 
-    var isSelectable: Bool {
+    public var isSelectable: Bool {
         return selection != nil
     }
 
-    var hashValue: Int {
+    public var hashValue: Int {
         return UUID.hashValue
     }
 
-    init(UUID: String = NSUUID().UUIDString, text: String? = nil, detailText: String? = nil, accessory: UITableViewCellAccessoryType? = nil, selection: RowSelection? = nil, cellClass: UITableViewCell.Type? = nil) {
+    public init(UUID: String = NSUUID().UUIDString, text: String? = nil, detailText: String? = nil, accessory: UITableViewCellAccessoryType? = nil, selection: RowSelection? = nil, cellClass: UITableViewCell.Type? = nil) {
         self.UUID = UUID
         self.text = text
         self.detailText = detailText
@@ -39,6 +39,6 @@ struct Row: Hashable, Equatable {
 }
 
 
-func ==(lhs: Row, rhs: Row) -> Bool {
+public func ==(lhs: Row, rhs: Row) -> Bool {
     return lhs.UUID == rhs.UUID
 }

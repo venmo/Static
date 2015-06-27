@@ -1,16 +1,16 @@
 import Foundation
 
-struct Section: Hashable, Equatable {
-    let UUID: String
-    var header: String?
-    var footer: String?
-    var rows: [Row]
+public struct Section: Hashable, Equatable {
+    public let UUID: String
+    public var header: String?
+    public var footer: String?
+    public var rows: [Row]
 
-    var hashValue: Int {
+    public var hashValue: Int {
         return UUID.hashValue
     }
 
-    init(UUID: String = NSUUID().UUIDString, header: String? = nil, footer: String? = nil, rows: [Row]) {
+    public init(UUID: String = NSUUID().UUIDString, header: String? = nil, footer: String? = nil, rows: [Row]) {
         self.UUID = UUID
         self.header = header
         self.footer = footer
@@ -19,6 +19,6 @@ struct Section: Hashable, Equatable {
 }
 
 
-func ==(lhs: Section, rhs: Section) -> Bool {
+public func ==(lhs: Section, rhs: Section) -> Bool {
     return lhs.UUID == rhs.UUID
 }
