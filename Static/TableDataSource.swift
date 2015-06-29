@@ -144,7 +144,7 @@ extension TableDataSource {
             let tableCell = tableView.dequeueReusableCellWithIdentifier(row.cellIdentifier, forIndexPath: indexPath)
 
             if let cell = tableCell as? Cell {
-                cell.setRow(row)
+                cell.configure(row: row)
             }
 
             return tableCell

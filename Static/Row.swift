@@ -36,10 +36,6 @@ public struct Row: Hashable, Equatable {
             self.cellClass = cellClass
         }
     }
-
-    func configureCell(cell: Cell) {
-        cell.setRow(self)
-    }
 }
 
 
