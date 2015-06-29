@@ -1,6 +1,6 @@
 import UIKit
 
-public class ButtonCell: UITableViewCell {
+public class ButtonCell: UITableViewCell, Cell {
 
     // MARK: - Initializers
 

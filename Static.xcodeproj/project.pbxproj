@@ -17,6 +17,7 @@
 		21826ACD1B3F51D000AA9641 /* Value1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21826AC81B3F51D000AA9641 /* Value1Cell.swift */; };
 		21826ACF1B3F534000AA9641 /* Value2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21826ACE1B3F534000AA9641 /* Value2Cell.swift */; };
 		21826AD11B3F535A00AA9641 /* SubtitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21826AD01B3F535A00AA9641 /* SubtitleCell.swift */; };
+		36799F991B41C857009A9D16 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36799F981B41C857009A9D16 /* Cell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		21826AC81B3F51D000AA9641 /* Value1Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value1Cell.swift; sourceTree = "<group>"; };
 		21826ACE1B3F534000AA9641 /* Value2Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value2Cell.swift; sourceTree = "<group>"; };
 		21826AD01B3F535A00AA9641 /* SubtitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtitleCell.swift; sourceTree = "<group>"; };
+		36799F981B41C857009A9D16 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				21826AC71B3F51D000AA9641 /* TableDataSource.swift */,
 				21826AC61B3F51D000AA9641 /* Section.swift */,
 				21826AC51B3F51D000AA9641 /* Row.swift */,
+				36799F981B41C857009A9D16 /* Cell.swift */,
 				21826AC81B3F51D000AA9641 /* Value1Cell.swift */,
 				21826ACE1B3F534000AA9641 /* Value2Cell.swift */,
 				21826AD01B3F535A00AA9641 /* SubtitleCell.swift */,
@@ -220,6 +223,7 @@
 				21826ACA1B3F51D000AA9641 /* Row.swift in Sources */,
 				21826AC91B3F51D000AA9641 /* ButtonCell.swift in Sources */,
 				21826ACF1B3F534000AA9641 /* Value2Cell.swift in Sources */,
+				36799F991B41C857009A9D16 /* Cell.swift in Sources */,
 				21826AD11B3F535A00AA9641 /* SubtitleCell.swift in Sources */,
 				21826ACD1B3F51D000AA9641 /* Value1Cell.swift in Sources */,
 			);
