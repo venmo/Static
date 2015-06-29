@@ -8,7 +8,7 @@ public struct Row: Hashable, Equatable {
     public var detailText: String?
     public var accessory: UITableViewCellAccessoryType = .None
     public var selection: RowSelection?
-    public var cellClass: UITableViewCell.Type = Value1Cell.self
+    public var cellClass: Cell.Type = Value1Cell.self
 
     public var cellIdentifier: String {
         return cellClass.description()
@@ -22,7 +22,7 @@ public struct Row: Hashable, Equatable {
         return UUID.hashValue
     }
 
-    public init(UUID: String = NSUUID().UUIDString, text: String? = nil, detailText: String? = nil, accessory: UITableViewCellAccessoryType? = nil, selection: RowSelection? = nil, cellClass: UITableViewCell.Type? = nil) {
+    public init(UUID: String = NSUUID().UUIDString, text: String? = nil, detailText: String? = nil, accessory: UITableViewCellAccessoryType? = nil, selection: RowSelection? = nil, cellClass: Cell.Type? = nil) {
         self.UUID = UUID
         self.text = text
         self.detailText = detailText
