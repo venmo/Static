@@ -5,7 +5,7 @@ public class SubtitleCell: UITableViewCell, Cell {
         super.init(style: .Subtitle, reuseIdentifier: reuseIdentifier)
     }
 
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 }

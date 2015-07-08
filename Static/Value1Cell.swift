@@ -5,7 +5,7 @@ public class Value1Cell: UITableViewCell, Cell {
         super.init(style: .Value1, reuseIdentifier: reuseIdentifier)
     }
 
-    public required init(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 }
