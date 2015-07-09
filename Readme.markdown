@@ -100,7 +100,7 @@ Row(text: "My Profile", accessory: .View(someEditButton))
 
 ### Custom Section Header & Footer Views
 
-`Section` takes has properties for `header` and `footer`. These take a `Section.Extremity`. This is an enum with `Title` and `View` cases. `Extremity` is `StringLiteralConvertible` you can simply specify strings if you want titles like we did the [Getting Started](#getting-started) section.
+`Section` has properties for `header` and `footer`. These take a `Section.Extremity`. This is an enum with `Title` and `View` cases. `Extremity` is `StringLiteralConvertible` you can simply specify strings if you want titles like we did the [Getting Started](#getting-started) section.
 
 For a custom view, you can simply specify the `View` case:
 
