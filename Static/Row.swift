@@ -1,9 +1,59 @@
 import UIKit
 
+/// Row or Accessory selection callback.
 public typealias Selection = () -> Void
 
 /// Representation of a table row.
 public struct Row: Hashable, Equatable {
+
+    // MARK: - Types
+
+    /// Representation of a row accessory.
+    public enum Accessory: Equatable {
+        /// No accessory.
+        case None
+
+        /// System disclosure indicator
+        case DisclosureIndicator
+
+        /// System detail button. This requires a selection.
+        case DetailDisclosureButton(Selection)
+
+        /// System checkmark
+        case Checkmark
+
+        /// System detail button. This requires a selection.
+        case DetailButton(Selection)
+
+        /// Custom view
+        case View(UIView)
+
+        public var type: UITableViewCellAccessoryType {
+            switch self {
+            case DisclosureIndicator: return .DisclosureIndicator
+            case DetailDisclosureButton(_): return .DetailDisclosureButton
+            case Checkmark: return .Checkmark
+            case DetailButton(_): return .DetailButton
+            default: return .None
+            }
+        }
+
+        public var view: UIView? {
+            switch self {
+            case View(let view): return view
+            default: return nil
+            }
+        }
+
+        public var selection: Selection? {
+            switch self {
+            case DetailDisclosureButton(let selection): return selection
+            case DetailButton(let selection): return selection
+            default: return nil
+            }
+        }
+    }
+
 
     // MARK: - Properties
 
@@ -52,47 +102,13 @@ public struct Row: Hashable, Equatable {
         self.cellClass = cellClass ?? Value1Cell.self
         self.context = context
     }
-
-
-    // MARK: - Accessory
-    public enum Accessory: Equatable {
-        case None
-        case DisclosureIndicator
-        case DetailDisclosureButton(Selection)
-        case Checkmark
-        case DetailButton(Selection)
-        case View(UIView)
-
-        public var type: UITableViewCellAccessoryType {
-            switch self {
-            case DisclosureIndicator: return .DisclosureIndicator
-            case DetailDisclosureButton(_): return .DetailDisclosureButton
-            case Checkmark: return .Checkmark
-            case DetailButton(_): return .DetailButton
-            default: return .None
-            }
-        }
-
-        public var view: UIView? {
-            switch self {
-            case View(let view): return view
-            default: return nil
-            }
-        }
-
-        public var selection: Selection? {
-            switch self {
-            case DetailDisclosureButton(let selection): return selection
-            case DetailButton(let selection): return selection
-            default: return nil
-            }
-        }
-    }
 }
+
 
 public func ==(lhs: Row, rhs: Row) -> Bool {
     return lhs.UUID == rhs.UUID
 }
+
 
 public func ==(lhs: Row.Accessory, rhs: Row.Accessory) -> Bool {
     switch (lhs, rhs) {
