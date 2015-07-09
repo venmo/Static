@@ -17,8 +17,6 @@ class RowTests: XCTestCase {
         XCTAssertEqual(.Checkmark, row.accessoryType)
         XCTAssertEqual(accessory, row.accessoryView!)
         XCTAssertEqual(context["Hello"]!, row.context!["Hello"] as! String)
-        XCTAssertTrue(row.isSelectable)
-        XCTAssertNotNil(row.cellIdentifier)
     }
 
     func testHashable() {

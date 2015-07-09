@@ -1,5 +1,6 @@
 import UIKit
 
+/// Representation of a table section.
 public struct Section: Hashable, Equatable {
 
     // MARK: - Types
@@ -14,19 +15,15 @@ public struct Section: Hashable, Equatable {
 
         public var title: String? {
             switch self {
-            case .Title(let extremityTitle):
-                return extremityTitle
-            default:
-                return nil
+            case .Title(let extremityTitle): return extremityTitle
+            default: return nil
             }
         }
 
         public var view: UIView? {
             switch self {
-            case .View(let extremityView):
-                return extremityView
-            default:
-                return nil
+            case .View(let extremityView): return extremityView
+            default: return nil
             }
         }
 
@@ -38,9 +35,16 @@ public struct Section: Hashable, Equatable {
 
     // MARK: - Properties
 
+    /// Unique identifier used to identify the section.
     public let UUID: String
+
+    /// Title or view for the header of the section.
     public var header: Extremity?
+
+    /// Array of rows for the section.
     public var rows: [Row]
+
+    /// Title or view for the header of the section.
     public var footer: Extremity?
 
     public var hashValue: Int {
