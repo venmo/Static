@@ -55,7 +55,7 @@ class DataSourceTests: XCTestCase {
         XCTAssertEqual(.DisclosureIndicator, cell.accessoryType)
     }
 
-    func testExtremities() {
+    func testExtremityTitles() {
         dataSource.sections = [
             Section(header: "Head", rows: [Row(text: "and")], footer: "shoulders"),
             Section(header: "Knees", rows: [Row(text: "and")]),
@@ -66,6 +66,19 @@ class DataSourceTests: XCTestCase {
         XCTAssertEqual("shoulders", dataSource.tableView(tableView, titleForFooterInSection: 0)!)
         XCTAssertEqual("Knees", dataSource.tableView(tableView, titleForHeaderInSection: 1)!)
         XCTAssertEqual("toes", dataSource.tableView(tableView, titleForFooterInSection: 2)!)
+    }
+
+    func testExtremityViews() {
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 100))
+        let footer = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
+        dataSource.sections = [
+            Section(header: .View(header), footer: .View(footer))
+        ]
+
+        XCTAssertEqual(header, dataSource.tableView(tableView, viewForHeaderInSection: 0)!)
+        XCTAssertEqual(100, dataSource.tableView(tableView, heightForHeaderInSection: 0))
+        XCTAssertEqual(footer, dataSource.tableView(tableView, viewForFooterInSection: 0)!)
+        XCTAssertEqual(44, dataSource.tableView(tableView, heightForFooterInSection: 0))
     }
 
     func testHighlight() {
