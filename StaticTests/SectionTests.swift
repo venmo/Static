@@ -11,4 +11,21 @@ class SectionTests: XCTestCase {
         XCTAssertEqual(rows, section.rows)
         XCTAssertEqual("Footer", section.footer!)
     }
+
+    func testHashable() {
+        let section = Section()
+        var hash = [
+            section: "hi"
+        ]
+
+        XCTAssertEqual("hi", hash[section]!)
+    }
+
+    func testEquatable() {
+        let section1 = Section()
+        let section2 = Section()
+
+        XCTAssertEqual(section1, section1)
+        XCTAssertFalse(section1 == section2)
+    }
 }

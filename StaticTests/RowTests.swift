@@ -13,4 +13,21 @@ class RowTests: XCTestCase {
         XCTAssertTrue(row.isSelectable)
         XCTAssertNotNil(row.cellIdentifier)
     }
+
+    func testHashable() {
+        let row = Row()
+        var hash = [
+            row: "hi"
+        ]
+
+        XCTAssertEqual("hi", hash[row]!)
+    }
+
+    func testEquatable() {
+        let row1 = Row()
+        let row2 = Row()
+
+        XCTAssertEqual(row1, row1)
+        XCTAssertFalse(row1 == row2)
+    }
 }
