@@ -29,6 +29,10 @@ public struct Section: Hashable, Equatable {
                 return nil
             }
         }
+
+        public var viewHeight: CGFloat? {
+            return view?.bounds.height
+        }
     }
 
 
