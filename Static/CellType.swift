@@ -1,15 +1,16 @@
 import UIKit
 
-public protocol Cell: class {
+public protocol CellType: class {
     static func description() -> String
     func configure(row row: Row)
 }
 
 
-extension Cell where Self: UITableViewCell {
+extension CellType where Self: UITableViewCell {
     public func configure(row row: Row) {
         textLabel?.text = row.text
         detailTextLabel?.text = row.detailText
-        accessoryType = row.accessory
+        accessoryType = row.accessoryType
+        accessoryView = row.accessoryView
     }
 }
