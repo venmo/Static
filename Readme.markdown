@@ -48,7 +48,7 @@ Section(header: "Money", rows: [
 ], footer: "Transfers usually arrive within 1-3 business days.")
 ```
 
-Since this is Swift, we can instead provide instance methods instead of inline blocks for selections. This makes things really nice. You don't have to switch on index paths in a `tableView:didSelectRowAtIndexPath:` any more!
+Since this is Swift, we can provide instance methods instead of inline blocks for selections. This makes things really nice. You don't have to switch on index paths in a `tableView:didSelectRowAtIndexPath:` any more!
 
 
 ### Customizing Appearance
@@ -130,7 +130,7 @@ Now assign your table view:
 dataSource.tableView = tableView
 ```
 
-Easy as that! If you modify your data source later, it will automatically update the table view for you. It is important that you don't change the table view's `dataSource` or `delgate`. The `TableDataSource` needs to be those so it can handle events correctly. The purpose of `Static` is to abstract all of that away from you.
+Easy as that! If you modify your data source later, it will automatically update the table view for you. It is important that you don't change the table view's `dataSource` or `delegate`. The `TableDataSource` needs to be those so it can handle events correctly. The purpose of `Static` is to abstract all of that away from you.
 
 
 ### Wrapping Up
