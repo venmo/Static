@@ -1,5 +1,6 @@
 import UIKit
 
+/// Representation of a table row.
 public struct Row: Hashable, Equatable {
 
     // MARK: - Types
@@ -9,21 +10,34 @@ public struct Row: Hashable, Equatable {
 
     // MARK: - Properties
 
+    /// Unique identifier for the row.
     public let UUID: String
+
+    /// The row's primary text.
     public var text: String?
+
+    /// The rows secondary text.
     public var detailText: String?
+
+    /// Accessory for the row.
     public var accessoryType: UITableViewCellAccessoryType
     public var accessoryView: UIView?
+
+    /// Action to run when the row is selected.
     public var selection: Selection?
+
+    /// View to be used for the row.
     public var cellClass: CellType.Type
+
+    /// Additional information for the row.
     public var context: [String: AnyObject]?
 
-    public var cellIdentifier: String {
-        return cellClass.description()
+    var isSelectable: Bool {
+        return selection != nil
     }
 
-    public var isSelectable: Bool {
-        return selection != nil
+    var cellIdentifier: String {
+        return cellClass.description()
     }
 
     public var hashValue: Int {

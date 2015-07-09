@@ -1,10 +1,11 @@
 import UIKit
 
-public class DataSource: NSObject, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
+/// Table view data source.
+public class DataSource: NSObject {
 
     // MARK: - Properties
 
-    /// The table view that will use this as its data source.
+    /// The table view that will use this object as its data source.
     public weak var tableView: UITableView? {
         willSet {
             if let tableView = tableView {
@@ -18,7 +19,7 @@ public class DataSource: NSObject, UITableViewDataSource, UITableViewDelegate, U
         }
     }
 
-    /// Static sections to use in the table view.
+    /// Sections to use in the table view.
     public var sections = [Section]() {
         didSet {
             refresh()
@@ -30,9 +31,15 @@ public class DataSource: NSObject, UITableViewDataSource, UITableViewDelegate, U
 
     // MARK: - Initializers
 
-    public init(tableView: UITableView? = nil) {
+    public init(tableView: UITableView? = nil, sections: [Section]? = nil) {
         super.init()
+
         self.tableView = tableView
+
+        if let sections = sections {
+            self.sections = sections
+        }
+
         updateTableView()
     }
 
@@ -130,7 +137,7 @@ public class DataSource: NSObject, UITableViewDataSource, UITableViewDelegate, U
 }
 
 
-extension DataSource {
+extension DataSource: UITableViewDataSource {
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sectionForIndex(section)?.rows.count ?? 0
     }
@@ -178,7 +185,7 @@ extension DataSource {
     }
 }
 
-extension DataSource {
+extension DataSource: UITableViewDelegate {
     public func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return rowForIndexPath(indexPath)?.isSelectable ?? false
     }
