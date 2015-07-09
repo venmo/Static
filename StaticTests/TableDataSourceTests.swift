@@ -40,6 +40,9 @@ class TableDataSourceTests: XCTestCase {
         XCTAssertEqual(2, tableView.numberOfRowsInSection(0))
         XCTAssertEqual(4, tableView.numberOfRowsInSection(1))
         XCTAssertEqual(2, tableView.numberOfRowsInSection(2))
+
+        dataSource.sections = []
+        XCTAssertEqual(0, tableView.numberOfSections)
     }
 
     func testCellForRowAtIndexPath() {
@@ -88,5 +91,18 @@ class TableDataSourceTests: XCTestCase {
         ]
         dataSource.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
         waitForExpectationsWithTimeout(1, handler: nil)
+    }
+
+    func testChangeTableView() {
+        XCTAssertEqual(dataSource, tableView.dataSource as! TableDataSource)
+        XCTAssertEqual(dataSource, tableView.delegate as! TableDataSource)
+
+        let tableView2 = UITableView()
+        dataSource.tableView = tableView2
+
+        XCTAssertNil(tableView.dataSource)
+        XCTAssertNil(tableView.delegate)
+        XCTAssertEqual(dataSource, tableView2.dataSource as! TableDataSource)
+        XCTAssertEqual(dataSource, tableView2.delegate as! TableDataSource)
     }
 }
