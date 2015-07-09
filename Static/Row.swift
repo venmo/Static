@@ -10,19 +10,19 @@ public struct Row: Hashable, Equatable {
 
     /// Representation of a row accessory.
     public enum Accessory: Equatable {
-        /// No accessory.
+        /// No accessory
         case None
 
-        /// System disclosure indicator
+        /// Chevron
         case DisclosureIndicator
 
-        /// System detail button. This requires a selection.
+        /// Info button with chevron. Handles selection.
         case DetailDisclosureButton(Selection)
 
-        /// System checkmark
+        /// Checkmark
         case Checkmark
 
-        /// System detail button. This requires a selection.
+        /// Info button. Handles selection.
         case DetailButton(Selection)
 
         /// Custom view
