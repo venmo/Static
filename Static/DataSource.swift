@@ -132,11 +132,7 @@ public class DataSource: NSObject, UITableViewDataSource, UITableViewDelegate, U
 
 extension DataSource {
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let s = sectionForIndex(section) {
-            return s.rows.count
-        }
-
-        return 0
+        return sectionForIndex(section)?.rows.count ?? 0
     }
 
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -158,26 +154,33 @@ extension DataSource {
     }
 
     public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let s = sectionForIndex(section) {
-            return s.header
-        }
-        return nil
+        return sectionForIndex(section)?.header?.title
+    }
+
+    public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return sectionForIndex(section)?.header?.view
+    }
+
+    public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return sectionForIndex(section)?.header?.view?.bounds.height ?? 0
     }
 
     public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        if let s = sectionForIndex(section) {
-            return s.footer
-        }
-        return nil
+        return sectionForIndex(section)?.footer?.title
+    }
+
+    public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return sectionForIndex(section)?.footer?.view
+    }
+
+    public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return sectionForIndex(section)?.footer?.view?.bounds.height ?? 0
     }
 }
 
 extension DataSource {
     public func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if let row = rowForIndexPath(indexPath) {
-            return row.isSelectable
-        }
-        return false
+        return rowForIndexPath(indexPath)?.isSelectable ?? false
     }
 
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
