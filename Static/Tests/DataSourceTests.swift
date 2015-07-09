@@ -2,12 +2,12 @@ import XCTest
 import UIKit
 import Static
 
-class TableDataSourceTests: XCTestCase {
+class DataSourceTests: XCTestCase {
 
     // MARK: - Properties
 
     let tableView = UITableView()
-    let dataSource = TableDataSource()
+    let dataSource = DataSource()
 
 
     // MARK: - XCTestCase
@@ -94,15 +94,15 @@ class TableDataSourceTests: XCTestCase {
     }
 
     func testChangeTableView() {
-        XCTAssertEqual(dataSource, tableView.dataSource as! TableDataSource)
-        XCTAssertEqual(dataSource, tableView.delegate as! TableDataSource)
+        XCTAssertEqual(dataSource, tableView.dataSource as! DataSource)
+        XCTAssertEqual(dataSource, tableView.delegate as! DataSource)
 
         let tableView2 = UITableView()
         dataSource.tableView = tableView2
 
         XCTAssertNil(tableView.dataSource)
         XCTAssertNil(tableView.delegate)
-        XCTAssertEqual(dataSource, tableView2.dataSource as! TableDataSource)
-        XCTAssertEqual(dataSource, tableView2.delegate as! TableDataSource)
+        XCTAssertEqual(dataSource, tableView2.dataSource as! DataSource)
+        XCTAssertEqual(dataSource, tableView2.delegate as! DataSource)
     }
 }
