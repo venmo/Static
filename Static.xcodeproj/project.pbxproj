@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		21826AAE1B3F51A100AA9641 /* Static.h in Headers */ = {isa = PBXBuildFile; fileRef = 21826AAD1B3F51A100AA9641 /* Static.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		21826AB51B3F51A100AA9641 /* Static.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21826AAA1B3F51A100AA9641 /* Static.framework */; };
-		21826ABA1B3F51A100AA9641 /* TableDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21826AB91B3F51A100AA9641 /* TableDataSourceTests.swift */; };
 		21826AC91B3F51D000AA9641 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21826AC41B3F51D000AA9641 /* ButtonCell.swift */; };
 		21826ACA1B3F51D000AA9641 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21826AC51B3F51D000AA9641 /* Row.swift */; };
 		21826ACB1B3F51D000AA9641 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21826AC61B3F51D000AA9641 /* Section.swift */; };
@@ -17,10 +16,11 @@
 		21826ACD1B3F51D000AA9641 /* Value1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21826AC81B3F51D000AA9641 /* Value1Cell.swift */; };
 		21826ACF1B3F534000AA9641 /* Value2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21826ACE1B3F534000AA9641 /* Value2Cell.swift */; };
 		21826AD11B3F535A00AA9641 /* SubtitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21826AD01B3F535A00AA9641 /* SubtitleCell.swift */; };
-		366AB2E21B4DE8D9002C4717 /* RowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366AB2E11B4DE8D9002C4717 /* RowTests.swift */; };
-		366AB2E41B4DEAA4002C4717 /* SectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366AB2E31B4DEAA4002C4717 /* SectionTests.swift */; };
+		366AB2F31B4EE1A7002C4717 /* RowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366AB2EF1B4EE1A7002C4717 /* RowTests.swift */; };
+		366AB2F41B4EE1A7002C4717 /* SectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366AB2F01B4EE1A7002C4717 /* SectionTests.swift */; };
 		36799F991B41C857009A9D16 /* CellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36799F981B41C857009A9D16 /* CellType.swift */; };
 		36C8FE9B1B4EECF30004DA5B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C8FE9A1B4EECF30004DA5B /* TableViewController.swift */; };
+		366AB2F51B4EE1A7002C4717 /* TableDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366AB2F11B4EE1A7002C4717 /* TableDataSourceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +38,6 @@
 		21826AAD1B3F51A100AA9641 /* Static.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Static.h; sourceTree = "<group>"; };
 		21826AAF1B3F51A100AA9641 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21826AB41B3F51A100AA9641 /* StaticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StaticTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		21826AB91B3F51A100AA9641 /* TableDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataSourceTests.swift; sourceTree = "<group>"; };
-		21826ABB1B3F51A100AA9641 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21826AC41B3F51D000AA9641 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		21826AC51B3F51D000AA9641 /* Row.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
 		21826AC61B3F51D000AA9641 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
@@ -47,10 +45,12 @@
 		21826AC81B3F51D000AA9641 /* Value1Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value1Cell.swift; sourceTree = "<group>"; };
 		21826ACE1B3F534000AA9641 /* Value2Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value2Cell.swift; sourceTree = "<group>"; };
 		21826AD01B3F535A00AA9641 /* SubtitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtitleCell.swift; sourceTree = "<group>"; };
-		366AB2E11B4DE8D9002C4717 /* RowTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowTests.swift; sourceTree = "<group>"; };
-		366AB2E31B4DEAA4002C4717 /* SectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionTests.swift; sourceTree = "<group>"; };
+		366AB2EE1B4EE1A7002C4717 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		366AB2EF1B4EE1A7002C4717 /* RowTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowTests.swift; sourceTree = "<group>"; };
 		36799F981B41C857009A9D16 /* CellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellType.swift; sourceTree = "<group>"; };
 		36C8FE9A1B4EECF30004DA5B /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		366AB2F01B4EE1A7002C4717 /* SectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionTests.swift; sourceTree = "<group>"; };
+		366AB2F11B4EE1A7002C4717 /* TableDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDataSourceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +76,6 @@
 			isa = PBXGroup;
 			children = (
 				21826AAC1B3F51A100AA9641 /* Static */,
-				21826AB81B3F51A100AA9641 /* StaticTests */,
 				21826AAB1B3F51A100AA9641 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -100,19 +99,20 @@
 				21826AC51B3F51D000AA9641 /* Row.swift */,
 				366AB2E91B4DFCDD002C4717 /* Cells */,
 				21826AAF1B3F51A100AA9641 /* Info.plist */,
+				366AB2ED1B4EE1A7002C4717 /* Tests */,
 			);
 			path = Static;
 			sourceTree = "<group>";
 		};
-		21826AB81B3F51A100AA9641 /* StaticTests */ = {
+		366AB2ED1B4EE1A7002C4717 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				21826AB91B3F51A100AA9641 /* TableDataSourceTests.swift */,
-				366AB2E11B4DE8D9002C4717 /* RowTests.swift */,
-				366AB2E31B4DEAA4002C4717 /* SectionTests.swift */,
-				21826ABB1B3F51A100AA9641 /* Info.plist */,
+				366AB2EF1B4EE1A7002C4717 /* RowTests.swift */,
+				366AB2F01B4EE1A7002C4717 /* SectionTests.swift */,
+				366AB2F11B4EE1A7002C4717 /* TableDataSourceTests.swift */,
+				366AB2EE1B4EE1A7002C4717 /* Info.plist */,
 			);
-			path = StaticTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		366AB2E91B4DFCDD002C4717 /* Cells */ = {
@@ -251,9 +251,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				366AB2E21B4DE8D9002C4717 /* RowTests.swift in Sources */,
-				21826ABA1B3F51A100AA9641 /* TableDataSourceTests.swift in Sources */,
-				366AB2E41B4DEAA4002C4717 /* SectionTests.swift in Sources */,
+				366AB2F31B4EE1A7002C4717 /* RowTests.swift in Sources */,
+				366AB2F41B4EE1A7002C4717 /* SectionTests.swift in Sources */,
+				366AB2F51B4EE1A7002C4717 /* TableDataSourceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +369,7 @@
 				INFOPLIST_FILE = Static/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.venmo.Static;
+				PRODUCT_BUNDLE_IDENTIFIER = com.venmo.static;
 				PRODUCT_NAME = Static;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -388,7 +388,7 @@
 				INFOPLIST_FILE = Static/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.venmo.Static;
+				PRODUCT_BUNDLE_IDENTIFIER = com.venmo.static;
 				PRODUCT_NAME = Static;
 				SKIP_INSTALL = YES;
 			};
@@ -397,9 +397,9 @@
 		21826AC21B3F51A100AA9641 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = StaticTests/Info.plist;
+				INFOPLIST_FILE = Static/Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.venmo.StaticTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.venmo.static.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -407,9 +407,9 @@
 		21826AC31B3F51A100AA9641 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = StaticTests/Info.plist;
+				INFOPLIST_FILE = Static/Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.venmo.StaticTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.venmo.static.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
