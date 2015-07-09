@@ -1,14 +1,22 @@
 import UIKit
 
-public typealias RowSelection = Void -> Void
-
 public struct Row: Hashable, Equatable {
+
+    // MARK: - Types
+
+    public typealias Selection = () -> Void
+
+
+    // MARK: - Properties
+
     public let UUID: String
     public var text: String?
     public var detailText: String?
-    public var accessory: UITableViewCellAccessoryType = .None
-    public var selection: RowSelection?
-    public var cellClass: Cell.Type = Value1Cell.self
+    public var accessoryType: UITableViewCellAccessoryType
+    public var accessoryView: UIView?
+    public var selection: Selection?
+    public var cellClass: CellType.Type
+    public var context: [String: AnyObject]?
 
     public var cellIdentifier: String {
         return cellClass.description()
@@ -22,19 +30,18 @@ public struct Row: Hashable, Equatable {
         return UUID.hashValue
     }
 
-    public init(UUID: String = NSUUID().UUIDString, text: String? = nil, detailText: String? = nil, accessory: UITableViewCellAccessoryType? = nil, selection: RowSelection? = nil, cellClass: Cell.Type? = nil) {
+
+    // MARK: - Initiallizers
+
+    public init(text: String? = nil, detailText: String? = nil, accessoryType: UITableViewCellAccessoryType? = nil, accessoryView: UIView? = nil, selection: Selection? = nil, cellClass: CellType.Type? = nil, context: [String: AnyObject]? = nil, UUID: String = NSUUID().UUIDString) {
         self.UUID = UUID
         self.text = text
         self.detailText = detailText
         self.selection = selection
-
-        if let accessory = accessory {
-            self.accessory = accessory
-        }
-
-        if let cellClass = cellClass {
-            self.cellClass = cellClass
-        }
+        self.accessoryType = accessoryType ?? .None
+        self.accessoryView = accessoryView
+        self.cellClass = cellClass ?? Value1Cell.self
+        self.context = context
     }
 }
 

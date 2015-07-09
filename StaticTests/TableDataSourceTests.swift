@@ -47,7 +47,7 @@ class TableDataSourceTests: XCTestCase {
 
     func testCellForRowAtIndexPath() {
         dataSource.sections = [
-            Section(rows: [Row(text: "Merrily", detailText: "merrily", accessory: .DisclosureIndicator)])
+            Section(rows: [Row(text: "Merrily", detailText: "merrily", accessoryType: .DisclosureIndicator)])
         ]
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))!
         XCTAssertEqual("Merrily", cell.textLabel!.text!)

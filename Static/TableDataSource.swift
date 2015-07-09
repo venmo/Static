@@ -143,7 +143,7 @@ extension TableDataSource {
         if let row = rowForIndexPath(indexPath) {
             let tableCell = tableView.dequeueReusableCellWithIdentifier(row.cellIdentifier, forIndexPath: indexPath)
 
-            if let cell = tableCell as? Cell {
+            if let cell = tableCell as? CellType {
                 cell.configure(row: row)
             }
 
