@@ -1,6 +1,6 @@
 import UIKit
 
-public class TableDataSource: NSObject, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
+public class DataSource: NSObject, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
 
     // MARK: - Properties
 
@@ -130,7 +130,7 @@ public class TableDataSource: NSObject, UITableViewDataSource, UITableViewDelega
 }
 
 
-extension TableDataSource {
+extension DataSource {
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let s = sectionForIndex(section) {
             return s.rows.count
@@ -172,7 +172,7 @@ extension TableDataSource {
     }
 }
 
-extension TableDataSource {
+extension DataSource {
     public func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         if let row = rowForIndexPath(indexPath) {
             return row.isSelectable

@@ -4,7 +4,7 @@ public class TableViewController: UITableViewController {
 
     // MARK: - Properties
 
-    public var dataSource = TableDataSource()
+    public var dataSource = DataSource()
 
 
     // MARK: - UIViewController
