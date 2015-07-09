@@ -16,7 +16,7 @@ public struct Row: Hashable, Equatable {
     /// The row's primary text.
     public var text: String?
 
-    /// The rows secondary text.
+    /// The row's secondary text.
     public var detailText: String?
 
     /// Accessory for the row.
