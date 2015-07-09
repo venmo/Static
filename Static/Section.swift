@@ -15,19 +15,15 @@ public struct Section: Hashable, Equatable {
 
         public var title: String? {
             switch self {
-            case .Title(let extremityTitle):
-                return extremityTitle
-            default:
-                return nil
+            case .Title(let extremityTitle): return extremityTitle
+            default: return nil
             }
         }
 
         public var view: UIView? {
             switch self {
-            case .View(let extremityView):
-                return extremityView
-            default:
-                return nil
+            case .View(let extremityView): return extremityView
+            default: return nil
             }
         }
 
