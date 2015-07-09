@@ -197,4 +197,10 @@ extension DataSource: UITableViewDelegate {
             row.selection?()
         }
     }
+
+    public func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        if let row = rowForIndexPath(indexPath) {
+            row.accessory.selection?()
+        }
+    }
 }
