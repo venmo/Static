@@ -1,6 +1,6 @@
 # Static
 
-[![Version](https://img.shields.io/github/release/venmo/Static.svg)](https://github.com/venmo/Static/releases) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![CocoaPods compatible](https://img.shields.io/cocoapods/v/Static.svg)](https://cocoapods.org/pods/Static)
+[![Version](https://img.shields.io/github/release/venmo/Static.svg)](https://github.com/venmo/Static/releases) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Simple static table views for iOS in Swift. Static's goal is to separate model data from presentation. `Row`s and `Section`s are your “view models” for your cells. You simply specify a cell class to use and that handles all of the presentation. See the [usage](usage) section below for details.
 
@@ -16,12 +16,6 @@ Static is written in Swift 2 so Xcode 7b3 is required. There aren't any dependen
 
 ``` ruby
 github "venmo/Static"
-```
-
-You can also install with [CocoaPods](https://cocoapods.org):
-
-``` ruby
-pod 'Static'
 ```
 
 For manual installation, it's recommended to add the project as a subproject to your project or workspace and adding the appropriate framework as a target dependency.
