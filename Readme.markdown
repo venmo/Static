@@ -29,7 +29,7 @@ For manual installation, it's recommended to add the project as a subproject to 
 
 ## Usage
 
-## Getting Started
+### Getting Started
 
 To use Static, you need to define [`Row`s](Static/Row.swift) and [`Section`s](Static/Section.swift) to describe your data. Here's a simple example:
 
@@ -57,7 +57,7 @@ Section(header: "Money", rows: [
 Since this is Swift, we can instead provide instance methods instead of inline blocks for selections. This makes things really nice. You don't have to switch on index paths in a `tableView:didSelectRowAtIndexPath:` any more!
 
 
-## Customizing Appearance
+### Customizing Appearance
 
 The `Row` never has access to the cell. This is by design. The `Row` shouldn't care about its appearance other specifying what will handle it. In practice, this has been really nice. Our cells have one responsibility.
 
@@ -79,7 +79,20 @@ This gets called by [`TableDataSource`](Static/TableDataSource.swift) (which we'
 `Row` also has a `context` property. You can put whatever you want in here that the cell needs to know. You should try to use this as sparingly as possible.
 
 
-## Working with the Data Source
+### Custom Section Header & Footer Views
+
+`Section` takes has properties for `header` and `footer`. These take a `Section.Extremity`. This is an enum with `Title` and `View` cases. `Extremity` is `StringLiteralConvertible` you can simply specify strings if you want titles like we did the [Getting Started](#getting-started) section.
+
+For a custom view, you can simply specify the `View` case:
+
+```swift
+Section(header: .View(yourView))
+```
+
+The height returned to the table view will be the view's `bounds.height` so be sure it's already sized properly.
+
+
+### Working with the Data Source
 
 To hook up your `Section`s and `Row`s to a table view, simply initialize a `TableDataSource`:
 
@@ -101,4 +114,3 @@ dataSource.tableView = tableView
 Easy as that! If you modify your data source later, it will automatically update the table view for you. It is important that you don't change the table view's `dataSource` or `delgate`. The `TableDataSource` needs to be those so it can handle events correctly. The purpose of `Static` is to abstract all of that away from you.
 
 Enjoy.
-
