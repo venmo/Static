@@ -10,7 +10,7 @@ extension CellType where Self: UITableViewCell {
     public func configure(row row: Row) {
         textLabel?.text = row.text
         detailTextLabel?.text = row.detailText
-        accessoryType = row.accessoryType
-        accessoryView = row.accessoryView
+        accessoryType = row.accessory.type
+        accessoryView = row.accessory.view
     }
 }

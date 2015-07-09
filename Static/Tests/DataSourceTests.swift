@@ -47,7 +47,9 @@ class DataSourceTests: XCTestCase {
 
     func testCellForRowAtIndexPath() {
         dataSource.sections = [
-            Section(rows: [Row(text: "Merrily", detailText: "merrily", accessoryType: .DisclosureIndicator)])
+            Section(rows: [
+                Row(text: "Merrily", detailText: "merrily", accessory: .DisclosureIndicator)
+            ])
         ]
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))!
         XCTAssertEqual("Merrily", cell.textLabel!.text!)
@@ -103,6 +105,22 @@ class DataSourceTests: XCTestCase {
             Section(rows: [Row(text: "Button", selection: selection)])
         ]
         dataSource.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+        waitForExpectationsWithTimeout(1, handler: nil)
+    }
+
+    func testAccessorySelection() {
+        let expectation = expectationWithDescription("Accessory Selected")
+        let selection = {
+            expectation.fulfill()
+        }
+
+        let accessory = Row.Accessory.DetailButton(selection)
+
+        dataSource.sections = [
+            Section(rows: [Row(text: "Banana Cream Pie", accessory: accessory)])
+        ]
+
+        dataSource.tableView(tableView, accessoryButtonTappedForRowWithIndexPath: NSIndexPath(forRow: 0, inSection: 0))
         waitForExpectationsWithTimeout(1, handler: nil)
     }
 
