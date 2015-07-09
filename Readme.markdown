@@ -79,6 +79,31 @@ This gets called by [`TableDataSource`](Static/TableDataSource.swift) (which we'
 `Row` also has a `context` property. You can put whatever you want in here that the cell needs to know. You should try to use this as sparingly as possible.
 
 
+### Custom Row Accessories
+
+`Row` has an `accessory` property that is an `Accessory` enum. This has cases for all of `UITableViewCellAccessoryType`. Here's a row with a checkmark:
+
+```swift
+Row(text: "Buy milk", accessory: .Checkmark)
+```
+
+Easy enough. Some of the system accessory types are selectable (like that little *i* button with a circle around it). You can make those and handle the selection like this:
+
+```swift
+Row(text: "Sam Soffes", accessory: .DetailButton({
+  // Show info about this contact
+}))
+```
+
+Again, you could use whatever function here. Instance methods are great for this.
+
+There is an additional case called `.View` that takes a custom view. Here's a `Row` with a custom accessory view:
+
+```swift
+Row(text: "My Profile", accessory: .View(someEditButton))
+```
+
+
 ### Custom Section Header & Footer Views
 
 `Section` takes has properties for `header` and `footer`. These take a `Section.Extremity`. This is an enum with `Title` and `View` cases. `Extremity` is `StringLiteralConvertible` you can simply specify strings if you want titles like we did the [Getting Started](#getting-started) section.
@@ -112,5 +137,24 @@ dataSource.tableView = tableView
 ```
 
 Easy as that! If you modify your data source later, it will automatically update the table view for you. It is important that you don't change the table view's `dataSource` or `delgate`. The `TableDataSource` needs to be those so it can handle events correctly. The purpose of `Static` is to abstract all of that away from you.
+
+
+### Wrapping Up
+
+There is a provided `[TableViewController](Static/TableViewController.swift)` that sets up a `DataSource` for you. Here's a short example:
+
+```swift
+class SomeViewController: TableViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        dataSource.sections = [
+            Section(rows: [
+                Row(text: "Hi")
+            ]),
+            // ...
+        ]
+    }
+}
+```
 
 Enjoy.
