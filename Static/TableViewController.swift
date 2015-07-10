@@ -6,7 +6,7 @@ public class TableViewController: UITableViewController {
     // MARK: - Properties
 
     /// Table view data source.
-    public var dataSource = DataSource()
+    public let dataSource = DataSource()
 
 
     // MARK: - UIViewController
