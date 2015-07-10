@@ -7,7 +7,7 @@ public struct Section: Hashable, Equatable {
 
     /// Representation of a section header or footer.
     public enum Extremity {
-        /// System definted style for the title of the header or footer.
+        /// System defined style for the title of the header or footer.
         case Title(String)
 
         /// Custom view for the header or footer. The height will be the view's `bounds.height`.
