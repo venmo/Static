@@ -91,7 +91,7 @@ public struct Row: Hashable, Equatable {
     }
 
 
-    // MARK: - Initiallizers
+    // MARK: - Initializers
 
     public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, context: [String: AnyObject]? = nil, UUID: String = NSUUID().UUIDString) {
         self.UUID = UUID
