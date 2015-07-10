@@ -2,7 +2,7 @@
 
 [![Version](https://img.shields.io/github/release/venmo/Static.svg)](https://github.com/venmo/Static/releases) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-Simple static table views for iOS in Swift. Static's goal is to separate model data from presentation. `Row`s and `Section`s are your “view models” for your cells. You simply specify a cell class to use and that handles all of the presentation. See the [usage](usage) section below for details.
+Simple static table views for iOS in Swift. Static's goal is to separate model data from presentation. `Row`s and `Section`s are your “view models” for your cells. You simply specify a cell class to use and that handles all of the presentation. See the [usage](#usage) section below for details.
 
 
 ## Building
@@ -56,7 +56,7 @@ Since this is Swift, we can provide instance methods instead of inline blocks fo
 
 ### Customizing Appearance
 
-The `Row` never has access to the cell. This is by design. The `Row` shouldn't care about its appearance other specifying what will handle it. In practice, this has been really nice. Our cells have one responsibility.
+The `Row` never has access to the cell. This is by design. The `Row` shouldn't care about its appearance other than specifying what will handle it. In practice, this has been really nice. Our cells have one responsibility.
 
 There are several custom cells provided:
 
@@ -138,7 +138,7 @@ Easy as that! If you modify your data source later, it will automatically update
 
 ### Wrapping Up
 
-There is a provided `[TableViewController](Static/TableViewController.swift)` that sets up a `DataSource` for you. Here's a short example:
+There is a provided [`TableViewController`](Static/TableViewController.swift) that sets up a `DataSource` for you. Here's a short example:
 
 ```swift
 class SomeViewController: TableViewController {
