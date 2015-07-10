@@ -71,7 +71,7 @@ All of these conform to [`CellType`](Static/CellType.swift). The gist of the pro
 func configure(row row: Row)
 ```
 
-This gets called by [`TableDataSource`](Static/TableDataSource.swift) (which we'll look at more in a minute) to set the row on the cell. There is a default implementation provided by the protocol that simply sets the `Row`'s `text` on the cell's `textLabel`, etc. If you need to do custom things, this is a great place to hook in.
+This gets called by [`DataSource`](Static/DataSource.swift) (which we'll look at more in a minute) to set the row on the cell. There is a default implementation provided by the protocol that simply sets the `Row`'s `text` on the cell's `textLabel`, etc. If you need to do custom things, this is a great place to hook in.
 
 `Row` also has a `context` property. You can put whatever you want in here that the cell needs to know. You should try to use this as sparingly as possible.
 
