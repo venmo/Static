@@ -23,6 +23,9 @@ For manual installation, it's recommended to add the project as a subproject to 
 
 ## Usage
 
+An [example app](Example) is included demonstrating Static's functionality.
+
+
 ### Getting Started
 
 To use Static, you need to define [`Row`s](Static/Row.swift) and [`Section`s](Static/Section.swift) to describe your data. Here's a simple example:
