@@ -169,7 +169,7 @@ extension DataSource: UITableViewDataSource {
     }
 
     public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return sectionForIndex(section)?.header?.viewHeight ?? 0
+        return sectionForIndex(section)?.header?.viewHeight ?? UITableViewAutomaticDimension
     }
 
     public func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
@@ -181,7 +181,7 @@ extension DataSource: UITableViewDataSource {
     }
 
     public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return sectionForIndex(section)?.footer?.viewHeight ?? 0
+        return sectionForIndex(section)?.footer?.viewHeight ?? UITableViewAutomaticDimension
     }
 }
 
