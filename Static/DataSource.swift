@@ -17,6 +17,7 @@ public class DataSource: NSObject {
         }
 
         didSet {
+            assert(NSThread.isMainThread(), "You must access Static.DataSource from the main thread.")
             updateTableView()
         }
     }
@@ -24,6 +25,7 @@ public class DataSource: NSObject {
     /// Sections to use in the table view.
     public var sections: [Section] {
         didSet {
+            assert(NSThread.isMainThread(), "You must access Static.DataSource from the main thread.")
             refresh()
         }
     }
