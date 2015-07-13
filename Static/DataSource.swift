@@ -1,6 +1,8 @@
 import UIKit
 
 /// Table view data source.
+///
+/// You should always access this object from the main thread since it talks to UIKit.
 public class DataSource: NSObject {
 
     // MARK: - Properties
@@ -15,13 +17,15 @@ public class DataSource: NSObject {
         }
 
         didSet {
+            assert(NSThread.isMainThread(), "You must access Static.DataSource from the main thread.")
             updateTableView()
         }
     }
 
     /// Sections to use in the table view.
-    public var sections = [Section]() {
+    public var sections: [Section] {
         didSet {
+            assert(NSThread.isMainThread(), "You must access Static.DataSource from the main thread.")
             refresh()
         }
     }
@@ -31,19 +35,18 @@ public class DataSource: NSObject {
 
     // MARK: - Initializers
 
+    /// Initialize with optional `tableView` and `sections`.
     public init(tableView: UITableView? = nil, sections: [Section]? = nil) {
-        super.init()
-
         self.tableView = tableView
+        self.sections = sections ?? []
 
-        if let sections = sections {
-            self.sections = sections
-        }
+        super.init()
 
         updateTableView()
     }
 
     deinit {
+        // nil out the table view to ensure the table view data source and delegate niled out
         tableView = nil
     }
 

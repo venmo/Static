@@ -28,6 +28,7 @@ public struct Row: Hashable, Equatable {
         /// Custom view
         case View(UIView)
 
+        /// Table view cell accessory type
         public var type: UITableViewCellAccessoryType {
             switch self {
             case DisclosureIndicator: return .DisclosureIndicator
@@ -38,6 +39,7 @@ public struct Row: Hashable, Equatable {
             }
         }
 
+        /// Accessory view
         public var view: UIView? {
             switch self {
             case View(let view): return view
@@ -45,6 +47,7 @@ public struct Row: Hashable, Equatable {
             }
         }
 
+        /// Selection block for accessory buttons
         public var selection: Selection? {
             switch self {
             case DetailDisclosureButton(let selection): return selection
