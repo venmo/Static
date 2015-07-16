@@ -1,4 +1,4 @@
-# Static
+![Static Logo](docs/static.png)
 
 [![Version](https://img.shields.io/github/release/venmo/Static.svg)](https://github.com/venmo/Static/releases) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
