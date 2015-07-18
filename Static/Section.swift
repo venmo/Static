@@ -54,7 +54,7 @@ public struct Section: Hashable, Equatable {
 
     // MARK: - Initiailizers
 
-    public init(UUID: String = NSUUID().UUIDString, header: Extremity? = nil, rows: [Row] = [], footer: Extremity? = nil) {
+    public init(header: Extremity? = nil, rows: [Row] = [], footer: Extremity? = nil, UUID: String = NSUUID().UUIDString) {
         self.UUID = UUID
         self.header = header
         self.rows = rows
