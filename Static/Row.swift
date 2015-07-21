@@ -57,6 +57,8 @@ public struct Row: Hashable, Equatable {
         }
     }
 
+    public typealias Context = [String: Any]
+
 
     // MARK: - Properties
 
@@ -79,7 +81,7 @@ public struct Row: Hashable, Equatable {
     public var cellClass: CellType.Type
 
     /// Additional information for the row.
-    public var context: [String: AnyObject]?
+    public var context: Context?
 
     var isSelectable: Bool {
         return selection != nil
@@ -96,7 +98,7 @@ public struct Row: Hashable, Equatable {
 
     // MARK: - Initializers
 
-    public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, context: [String: AnyObject]? = nil, UUID: String = NSUUID().UUIDString) {
+    public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, context: Context? = nil, UUID: String = NSUUID().UUIDString) {
         self.UUID = UUID
         self.text = text
         self.detailText = detailText
