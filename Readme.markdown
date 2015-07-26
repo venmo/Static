@@ -116,10 +116,10 @@ The height returned to the table view will be the view's `bounds.height` so be s
 
 ### Working with the Data Source
 
-To hook up your `Section`s and `Row`s to a table view, simply initialize a `TableDataSource`:
+To hook up your `Section`s and `Row`s to a table view, simply initialize a `DataSource`:
 
 ```swift
-let dataSource = TableDataSource()
+let dataSource = DataSource()
 dataSource.sections = [
     Section(rows: [
         Row(text: "Hello")
@@ -133,7 +133,7 @@ Now assign your table view:
 dataSource.tableView = tableView
 ```
 
-Easy as that! If you modify your data source later, it will automatically update the table view for you. It is important that you don't change the table view's `dataSource` or `delegate`. The `TableDataSource` needs to be those so it can handle events correctly. The purpose of `Static` is to abstract all of that away from you.
+Easy as that! If you modify your data source later, it will automatically update the table view for you. It is important that you don't change the table view's `dataSource` or `delegate`. The `DataSource` needs to be those so it can handle events correctly. The purpose of `Static` is to abstract all of that away from you.
 
 
 ### Wrapping Up
