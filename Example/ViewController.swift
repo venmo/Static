@@ -43,6 +43,12 @@ class ViewController: TableViewController {
             ], footer: "Try tapping the ⓘ buttons."),
             Section(header: "Selection", rows: [
                 Row(text: "Tap this row", selection: selection)
+            ]),
+            Section(header: "Editing", rows: [
+                Row(text: "Swipe this row", editActions: [
+                    Row.EditAction(title: "Warn", backgroundColor: .orangeColor(), selection: warn),
+                    Row.EditAction(title: "Delete", style: .Destructive, selection: delete)
+                ])
             ])
         ]
     }
@@ -60,6 +66,14 @@ class ViewController: TableViewController {
 
     private func selection() {
         showAlert(title: "Row Selection")
+    }
+    
+    private func delete() {
+        showAlert(title: "Deleted.")
+    }
+    
+    private func warn() {
+        showAlert(title: "Warned.")
     }
 
     private func showAlert(title title: String? = nil, message: String? = "You tapped it. Good work.", button: String = "Thanks") {
