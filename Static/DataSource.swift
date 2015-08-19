@@ -186,6 +186,32 @@ extension DataSource: UITableViewDataSource {
     public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return sectionForIndex(section)?.footer?.viewHeight ?? UITableViewAutomaticDimension
     }
+
+    public func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return rowForIndexPath(indexPath)?.canEdit ?? false
+    }
+    
+    public func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        return rowForIndexPath(indexPath)?.editActions.map {
+            action in
+            let rowAction = UITableViewRowAction(style: action.style, title: action.title) { (_, _) in
+                action.selection?()
+            }
+            
+            // These calls have side effects when setting to nil
+            // Setting a background color to nil will wipe out any predefined style
+            // Wrapping these in if-lets prevents nil-setting side effects
+            if let backgroundColor = action.backgroundColor {
+                rowAction.backgroundColor = backgroundColor
+            }
+            
+            if let backgroundEffect = action.backgroundEffect {
+                rowAction.backgroundEffect = backgroundEffect
+            }
+
+            return rowAction
+        }
+    }
 }
 
 extension DataSource: UITableViewDelegate {

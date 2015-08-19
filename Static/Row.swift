@@ -59,6 +59,31 @@ public struct Row: Hashable, Equatable {
 
     public typealias Context = [String: Any]
 
+    /// Representation of an editing action, when swiping to edit a cell.
+    public struct EditAction {
+        /// Title of the action's button.
+        public let title: String
+        
+        /// Styling for button's action, used primarily for destructive actions.
+        public let style: UITableViewRowActionStyle
+        
+        /// Background color of the button.
+        public let backgroundColor: UIColor?
+        
+        /// Visual effect to be applied to the button's background.
+        public let backgroundEffect: UIVisualEffect?
+        
+        /// Invoked when selecting the action.
+        public let selection: Selection?
+        
+        public init(title: String, style: UITableViewRowActionStyle = .Default, backgroundColor: UIColor? = nil, backgroundEffect: UIVisualEffect? = nil, selection: Selection? = nil) {
+            self.title = title
+            self.style = style
+            self.backgroundColor = backgroundColor
+            self.backgroundEffect = backgroundEffect
+            self.selection = selection
+        }
+    }
 
     // MARK: - Properties
 
@@ -82,6 +107,13 @@ public struct Row: Hashable, Equatable {
 
     /// Additional information for the row.
     public var context: Context?
+    
+    /// Actions to show when swiping the cell, such as Delete.
+    public var editActions: [EditAction]
+
+    var canEdit: Bool {
+        return editActions.count > 0
+    }
 
     var isSelectable: Bool {
         return selection != nil
@@ -98,7 +130,7 @@ public struct Row: Hashable, Equatable {
 
     // MARK: - Initializers
 
-    public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, context: Context? = nil, UUID: String = NSUUID().UUIDString) {
+    public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString) {
         self.UUID = UUID
         self.text = text
         self.detailText = detailText
@@ -106,6 +138,7 @@ public struct Row: Hashable, Equatable {
         self.accessory = accessory
         self.cellClass = cellClass ?? Value1Cell.self
         self.context = context
+        self.editActions = editActions
     }
 }
 
