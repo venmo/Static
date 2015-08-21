@@ -31,23 +31,39 @@ class ViewController: TableViewController {
                 Row(text: "Value 1", detailText: "Detail", cellClass: Value1Cell.self),
                 Row(text: "Value 2", detailText: "Detail", cellClass: Value2Cell.self),
                 Row(text: "Subtitle", detailText: "Detail", cellClass: SubtitleCell.self),
-                Row(text: "Button", detailText: "Detail", cellClass: ButtonCell.self)
+                Row(text: "Button", detailText: "Detail", cellClass: ButtonCell.self, selection: { [unowned self] in
+                    self.showAlert(title: "Row Selection")
+                }),
             ], footer: "This is a section footer."),
             Section(header: "Accessories", rows: [
                 Row(text: "None"),
                 Row(text: "Disclosure Indicator", accessory: .DisclosureIndicator),
-                Row(text: "Detail Disclosure Button", accessory: .DetailDisclosureButton(detailDisclosureButtonSelected)),
+                Row(text: "Detail Disclosure Button", accessory: .DetailDisclosureButton({ [unowned self] in
+                    self.showAlert(title: "Detail Disclosure Button")
+                })),
                 Row(text: "Checkmark", accessory: .Checkmark),
-                Row(text: "Detail Button", accessory: .DetailButton(detailButtonSelected)),
+                Row(text: "Detail Button", accessory: .DetailButton({ [unowned self] in
+                    self.showAlert(title: "Detail Button")
+                })),
                 Row(text: "Custom View", accessory: .View(customAccessory))
             ], footer: "Try tapping the ⓘ buttons."),
             Section(header: "Selection", rows: [
-                Row(text: "Tap this row", selection: selection)
+                Row(text: "Tap this row", selection: { [unowned self] in
+                    self.showAlert(title: "Row Selection")
+                }),
+                Row(text: "Tap this row", selection: { [unowned self] in
+                    let viewController = ViewController()
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                })
             ]),
             Section(header: "Editing", rows: [
                 Row(text: "Swipe this row", editActions: [
-                    Row.EditAction(title: "Warn", backgroundColor: .orangeColor(), selection: warn),
-                    Row.EditAction(title: "Delete", style: .Destructive, selection: delete)
+                    Row.EditAction(title: "Warn", backgroundColor: .orangeColor(), selection: { [unowned self] in
+                        self.showAlert(title: "Warned.")
+                    }),
+                    Row.EditAction(title: "Delete", style: .Destructive, selection: { [unowned self] in
+                        self.showAlert(title: "Deleted.")
+                    })
                 ])
             ])
         ]
@@ -55,26 +71,6 @@ class ViewController: TableViewController {
 
 
     // MARK: - Private
-
-    private func detailDisclosureButtonSelected() {
-        showAlert(title: "Detail Disclosure Button")
-    }
-
-    private func detailButtonSelected() {
-        showAlert(title: "Detail Button")
-    }
-
-    private func selection() {
-        showAlert(title: "Row Selection")
-    }
-    
-    private func delete() {
-        showAlert(title: "Deleted.")
-    }
-    
-    private func warn() {
-        showAlert(title: "Warned.")
-    }
 
     private func showAlert(title title: String? = nil, message: String? = "You tapped it. Good work.", button: String = "Thanks") {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)

@@ -46,7 +46,9 @@ Section(header: "Money", rows: [
         // Show statement
     }),
     Row(text: "Transfer to Bank…", cellClass: ButtonCell.self, selection: {
-        // Show transfer to bank modal
+        [unowned self] in
+        let viewController = ViewController()
+        self.presentViewController(viewController, animated: true, completion: nil)
     })
 ], footer: "Transfers usually arrive within 1-3 business days.")
 ```
