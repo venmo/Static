@@ -20,12 +20,12 @@ public class TableViewController: UIViewController, UITableViewDataSource, UITab
     // MARK: - Initialization
 
     public init(style: UITableViewStyle) {
-        tableView = UITableView(frame: .zero, style: style)
+        tableView = UITableView(frame: .zeroRect, style: style)
         super.init(nibName: nil, bundle: nil)
     }
 
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        tableView = UITableView(frame: .zero, style: .Plain)
+        tableView = UITableView(frame: .zeroRect, style: .Plain)
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
