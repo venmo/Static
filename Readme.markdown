@@ -7,16 +7,37 @@ Simple static table views for iOS in Swift. Static's goal is to separate model d
 
 ## Building
 
-Static is written in Swift 2 so Xcode 7b6 is required. There aren't any dependencies besides system frameworks.
+Xcode 7.0 beta 6 is required since Static is written in Swift 2. There aren't any dependencies besides system frameworks.
 
 
 ## Installation
+
+### Carthage
 
 [Carthage](https://github.com/carthage/carthage) is the recommended way to install Static. Add the following to your Cartfile:
 
 ``` ruby
 github "venmo/Static"
 ```
+
+
+### CocoaPods
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. To install Static with CocoaPods:
+
+Make sure CocoaPods is installed (Static requires version 0.37 or greater).
+
+Update your Podfile to include the following:
+
+```ruby
+use_frameworks!
+pod 'Static', git: 'https://github.com/venmo/Static'
+```
+
+Run `pod install`.
+
+
+### Manual
 
 For manual installation, it's recommended to add the project as a subproject to your project or workspace and adding the appropriate framework as a target dependency.
 
