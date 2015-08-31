@@ -14,7 +14,15 @@ public class TableViewController: UIViewController, UITableViewDataSource, UITab
     public var clearsSelectionOnViewWillAppear: Bool = true
 
     /// Table view data source.
-    public let dataSource = DataSource()
+	public var dataSource = DataSource() {
+		willSet {
+			dataSource.tableView = nil
+		}
+		
+		didSet {
+			dataSource.tableView = tableView
+		}
+	}
 
 
     // MARK: - Initialization
