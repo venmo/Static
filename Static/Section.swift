@@ -47,6 +47,9 @@ public struct Section: Hashable, Equatable {
     /// Title or view for the header of the section.
     public var footer: Extremity?
 
+	/// Section index title
+	public var indexTitle: String?
+
     public var hashValue: Int {
         return UUID.hashValue
     }
@@ -54,11 +57,12 @@ public struct Section: Hashable, Equatable {
 
     // MARK: - Initiailizers
 
-    public init(header: Extremity? = nil, rows: [Row] = [], footer: Extremity? = nil, UUID: String = NSUUID().UUIDString) {
+	public init(header: Extremity? = nil, rows: [Row] = [], footer: Extremity? = nil, indexTitle: String? = nil, UUID: String = NSUUID().UUIDString) {
         self.UUID = UUID
         self.header = header
         self.rows = rows
         self.footer = footer
+		self.indexTitle = indexTitle
     }
 }
 

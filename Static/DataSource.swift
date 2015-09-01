@@ -30,6 +30,14 @@ public class DataSource: NSObject {
         }
     }
 
+	/// Section index titles.
+	public var sectionIndexTitles: [String]? {
+		didSet {
+			assert(NSThread.isMainThread(), "You must access Static.DataSource from the main thread.")
+			tableView?.reloadData()
+		}
+	}
+
     private var registeredCellIdentifiers = Set<String>()
 
 
@@ -37,6 +45,8 @@ public class DataSource: NSObject {
 
     /// Initialize with optional `tableView` and `sections`.
     public init(tableView: UITableView? = nil, sections: [Section]? = nil) {
+		assert(NSThread.isMainThread(), "You must access Static.DataSource from the main thread.")
+		
         self.tableView = tableView
         self.sections = sections ?? []
 
@@ -212,7 +222,22 @@ extension DataSource: UITableViewDataSource {
             return rowAction
         }
     }
+
+	public func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+		guard let sectionIndexTitles = sectionIndexTitles where sectionIndexTitles.count >= sections.count else { return nil }
+		return sectionIndexTitles
+	}
+
+	public func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+		for (i, section) in sections.enumerate() {
+			if let indexTitle = section.indexTitle where indexTitle == title {
+				return i
+			}
+		}
+		return max(index, sections.count - 1)
+	}
 }
+
 
 extension DataSource: UITableViewDelegate {
     public func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
