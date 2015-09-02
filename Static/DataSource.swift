@@ -14,6 +14,8 @@ public class DataSource: NSObject {
                 tableView.dataSource = nil
                 tableView.delegate = nil
             }
+
+			registeredCellIdentifiers.removeAll()
         }
 
         didSet {
