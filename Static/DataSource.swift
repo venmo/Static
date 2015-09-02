@@ -132,6 +132,9 @@ public class DataSource: NSObject {
     }
 
     private func refreshRegisteredCells() {
+		// A table view is required to manipulate registered cells
+		guard let tableView = tableView else { return }
+
         // Filter to only rows with unregistered cells
         let rows = sections.map({ $0.rows }).reduce([], combine: +).filter() {
             !self.registeredCellIdentifiers.contains($0.cellIdentifier)
@@ -146,7 +149,7 @@ public class DataSource: NSObject {
             }
 
             registeredCellIdentifiers.insert(identifier)
-            tableView?.registerClass(row.cellClass, forCellReuseIdentifier: identifier)
+            tableView.registerClass(row.cellClass, forCellReuseIdentifier: identifier)
         }
     }
 }
