@@ -54,7 +54,7 @@ class DataSourceTests: XCTestCase {
         let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))!
         XCTAssertEqual("Merrily", cell.textLabel!.text!)
         XCTAssertEqual("merrily", cell.detailTextLabel!.text!)
-        XCTAssertEqual(.DisclosureIndicator, cell.accessoryType)
+        XCTAssertEqual(UITableViewCellAccessoryType.DisclosureIndicator, cell.accessoryType)
     }
 
     func testExtremityTitles() {

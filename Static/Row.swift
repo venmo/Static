@@ -99,6 +99,9 @@ public struct Row: Hashable, Equatable {
     /// Accessory for the row.
     public var accessory: Accessory
 
+    /// Image for the row
+    public var image: UIImage?
+
     /// Action to run when the row is selected.
     public var selection: Selection?
 
@@ -130,11 +133,13 @@ public struct Row: Hashable, Equatable {
 
     // MARK: - Initializers
 
-    public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString) {
+    public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil,
+        image: UIImage? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString) {
         self.UUID = UUID
         self.text = text
         self.detailText = detailText
         self.selection = selection
+        self.image = image
         self.accessory = accessory
         self.cellClass = cellClass ?? Value1Cell.self
         self.context = context
