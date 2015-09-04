@@ -5,7 +5,7 @@ class RowTests: XCTestCase {
 
     func testInit() {
         let selection: Selection = {}
-        let context = [
+        let context: Row.Context = [
             "Hello": "world"
         ]
 
@@ -13,7 +13,13 @@ class RowTests: XCTestCase {
         XCTAssertEqual("1234", row.UUID)
         XCTAssertEqual("Title", row.text!)
         XCTAssertEqual("Detail", row.detailText!)
-        XCTAssertEqual(context["Hello"]!, row.context!["Hello"] as! String)
+        XCTAssertEqual("world", row.context?["Hello"] as? String)
+    }
+
+    func testInitWithImage() {
+        let image = UIImage(named: "Setting")
+        let row = Row(image: image)
+        XCTAssertEqual(row.image, image)
     }
 
     func testInitWithAccessoryType() {
