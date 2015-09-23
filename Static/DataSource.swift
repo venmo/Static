@@ -14,6 +14,8 @@ public class DataSource: NSObject {
                 tableView.dataSource = nil
                 tableView.delegate = nil
             }
+
+			registeredCellIdentifiers.removeAll()
         }
 
         didSet {
@@ -30,6 +32,14 @@ public class DataSource: NSObject {
         }
     }
 
+	/// Section index titles.
+	public var sectionIndexTitles: [String]? {
+		didSet {
+			assert(NSThread.isMainThread(), "You must access Static.DataSource from the main thread.")
+			tableView?.reloadData()
+		}
+	}
+
     private var registeredCellIdentifiers = Set<String>()
 
 
@@ -37,6 +47,8 @@ public class DataSource: NSObject {
 
     /// Initialize with optional `tableView` and `sections`.
     public init(tableView: UITableView? = nil, sections: [Section]? = nil) {
+		assert(NSThread.isMainThread(), "You must access Static.DataSource from the main thread.")
+		
         self.tableView = tableView
         self.sections = sections ?? []
 
@@ -120,6 +132,9 @@ public class DataSource: NSObject {
     }
 
     private func refreshRegisteredCells() {
+		// A table view is required to manipulate registered cells
+		guard let tableView = tableView else { return }
+
         // Filter to only rows with unregistered cells
         let rows = sections.map({ $0.rows }).reduce([], combine: +).filter() {
             !self.registeredCellIdentifiers.contains($0.cellIdentifier)
@@ -134,7 +149,7 @@ public class DataSource: NSObject {
             }
 
             registeredCellIdentifiers.insert(identifier)
-            tableView?.registerClass(row.cellClass, forCellReuseIdentifier: identifier)
+            tableView.registerClass(row.cellClass, forCellReuseIdentifier: identifier)
         }
     }
 }
@@ -212,7 +227,22 @@ extension DataSource: UITableViewDataSource {
             return rowAction
         }
     }
+
+	public func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+		guard let sectionIndexTitles = sectionIndexTitles where sectionIndexTitles.count >= sections.count else { return nil }
+		return sectionIndexTitles
+	}
+
+	public func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+		for (i, section) in sections.enumerate() {
+			if let indexTitle = section.indexTitle where indexTitle == title {
+				return i
+			}
+		}
+		return max(index, sections.count - 1)
+	}
 }
+
 
 extension DataSource: UITableViewDelegate {
     public func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {

@@ -1,7 +1,7 @@
 import UIKit
 
 /// Table view controller with a `DataSource` setup to use its `tableView`.
-public class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+public class TableViewController: UIViewController {
 
     // MARK: - Properties
 
@@ -14,7 +14,15 @@ public class TableViewController: UIViewController, UITableViewDataSource, UITab
     public var clearsSelectionOnViewWillAppear: Bool = true
 
     /// Table view data source.
-    public let dataSource = DataSource()
+	public var dataSource = DataSource() {
+		willSet {
+			dataSource.tableView = nil
+		}
+		
+		didSet {
+			dataSource.tableView = tableView
+		}
+	}
 
 
     // MARK: - Initialization
@@ -22,11 +30,13 @@ public class TableViewController: UIViewController, UITableViewDataSource, UITab
     public init(style: UITableViewStyle) {
         tableView = UITableView(frame: .zero, style: style)
         super.init(nibName: nil, bundle: nil)
+		dataSource.tableView = tableView
     }
 
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         tableView = UITableView(frame: .zero, style: .Plain)
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		dataSource.tableView = tableView
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -42,14 +52,7 @@ public class TableViewController: UIViewController, UITableViewDataSource, UITab
 
     public override func loadView() {
         tableView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        tableView.delegate = self
-        tableView.dataSource = self
         view = tableView
-    }
-
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-        dataSource.tableView = tableView
     }
 
     public override func viewWillAppear(animated: Bool) {
@@ -66,17 +69,6 @@ public class TableViewController: UIViewController, UITableViewDataSource, UITab
     public override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
-    }
-
-
-    // MARK: - UITableViewControllerDataSource
-
-    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-
-    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell(style: .Default, reuseIdentifier: nil)
     }
 
 
