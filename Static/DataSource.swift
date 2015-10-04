@@ -63,6 +63,14 @@ public class DataSource: NSObject {
     }
 
 
+	// MARK: - Public
+
+	public func rowAtPoint(point: CGPoint) -> Row? {
+		guard let indexPath = tableView?.indexPathForRowAtPoint(point) else { return nil }
+		return rowForIndexPath(indexPath)
+	}
+
+
     // MARK: - Private
 
     private func updateTableView() {
