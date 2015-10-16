@@ -222,7 +222,7 @@ extension DataSource: UITableViewDataSource {
     public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return sectionForIndex(section)?.footer?.viewHeight ?? UITableViewAutomaticDimension
     }
-    
+
     public func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return rowForIndexPath(indexPath)?.canEdit ?? false
     }
