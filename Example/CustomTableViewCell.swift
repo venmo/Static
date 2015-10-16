@@ -1,11 +1,3 @@
-//
-//  CustomTableViewCell.swift
-//  Static
-//
-//  Created by Valentin Pertuisot on 09/10/15.
-//  Copyright © 2015 Venmo. All rights reserved.
-//
-
 import UIKit
 import Static
 
