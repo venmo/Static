@@ -111,7 +111,7 @@ public struct Row: Hashable, Equatable {
     /// Nib to be used for the row
     public var cellNib: UINib?
     
-    // Row height
+    /// Row height
     public var height: CGFloat?
     
     /// Additional information for the row.
@@ -141,11 +141,11 @@ public struct Row: Hashable, Equatable {
 
     public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil,
         image: UIImage? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, cellNib: UINib? = nil, height: CGFloat? = nil, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString) {
-            
-        if (cellNib != nil && cellClass == nil)
-        {
+        
+        if let _ = cellNib where cellClass != nil {
             assert(false, "Specifying a cell Nib requires specifying a custom cell Class too")
         }
+            
         self.UUID = UUID
         self.text = text
         self.detailText = detailText
