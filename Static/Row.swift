@@ -153,8 +153,8 @@ public struct Row: Hashable, Equatable {
         self.image = image
         self.accessory = accessory
         self.cellClass = cellClass ?? Value1Cell.self
-        self.cellNib = cellNib ?? nil
-        self.height = height ?? nil
+        self.cellNib = cellNib
+        self.height = height
         self.context = context
         self.editActions = editActions
     }
