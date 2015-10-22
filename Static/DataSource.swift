@@ -157,10 +157,9 @@ public class DataSource: NSObject {
             }
 
             registeredCellIdentifiers.insert(identifier)
-            if let nib = row.cellNib {
+            if let nib = row.cellClass.nib() {
                 tableView.registerNib(nib, forCellReuseIdentifier: identifier)
-            }
-            else {
+            } else {
                 tableView.registerClass(row.cellClass, forCellReuseIdentifier: identifier)
             }
         }
@@ -188,11 +187,17 @@ extension DataSource: UITableViewDataSource {
     }
 
     public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return rowForIndexPath(indexPath)?.height ?? 44
+        return rowForIndexPath(indexPath)?.height ?? UITableViewAutomaticDimension
     }
     
     public func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return rowForIndexPath(indexPath)?.height ?? 44
+        guard let row = rowForIndexPath(indexPath) else { return UITableViewAutomaticDimension }
+
+        if row.height == UITableViewAutomaticDimension {
+            return 44
+        }
+
+        return row.height
     }
     
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
