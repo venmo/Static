@@ -30,6 +30,7 @@ class ViewController: TableViewController {
             Section(header: "Styles", rows: [
                 Row(text: "Value 1", detailText: "Detail", cellClass: Value1Cell.self),
                 Row(text: "Value 1", detailText: "with an image", cellClass: Value1Cell.self, image: UIImage(named: "Settings")),
+                Row(text: "Value 1", detailText: "with a green tinted image", cellClass: Value1Cell.self, image: UIImage(named: "Settings"), imageTintColor: UIColor.greenColor()),
                 Row(text: "Value 2", detailText: "Detail", cellClass: Value2Cell.self),
                 Row(text: "Subtitle", detailText: "Detail", cellClass: SubtitleCell.self),
                 Row(text: "Button", detailText: "Detail", cellClass: ButtonCell.self, selection: { [unowned self] in

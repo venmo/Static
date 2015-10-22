@@ -22,6 +22,13 @@ class RowTests: XCTestCase {
         XCTAssertEqual(row.image, image)
     }
 
+    func testInitWithImageTintColor() {
+        let image = UIImage(named: "Setting")
+        let row = Row(image: image, imageTintColor: UIColor.lightGrayColor())
+        XCTAssertEqual(row.image, image)
+        XCTAssertEqual(row.imageTintColor, UIColor.lightGrayColor())
+    }
+
     func testInitWithAccessoryType() {
         let accessory: Row.Accessory = .Checkmark
 
