@@ -1,25 +1,41 @@
 import UIKit
 import Static
 
-class CustomTableViewCell: UITableViewCell, CellType {
+final class CustomTableViewCell: UITableViewCell, CellType {
 
-    @IBOutlet weak var centeredLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    // MARK: - Properties
+
+    private lazy var centeredLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .Center
+        label.textColor = .whiteColor()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+
+    // MARK: - Initialization
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = .grayColor()
+
+        contentView.addSubview(centeredLabel)
+
+        let views = ["centeredLabel": centeredLabel]
+        var constraints: [NSLayoutConstraint] = NSLayoutConstraint.constraintsWithVisualFormat("|-[centeredLabel]-|", options: [], metrics: nil, views: views)
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|-[centeredLabel]-|", options: [], metrics: nil, views: views)
+        NSLayoutConstraint.activateConstraints(constraints)
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    
-}
 
-extension CellType where Self: CustomTableViewCell {
+
+    // MARK: - CellType
+
     func configure(row row: Row) {
-        centeredLabel?.text = row.text
+        centeredLabel.text = row.text
     }
 }

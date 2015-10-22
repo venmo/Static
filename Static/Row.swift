@@ -111,12 +111,9 @@ public struct Row: Hashable, Equatable {
     /// View to be used for the row.
     public var cellClass: CellType.Type
 
-    /// Nib to be used for the row
-    public var cellNib: UINib?
-    
-    /// Row height
-    public var height: CGFloat?
-    
+    /// The row's height. Defaults to `UITableViewAutomaticDimension`.
+    public var height: CGFloat
+
     /// Additional information for the row.
     public var context: Context?
     
@@ -143,12 +140,8 @@ public struct Row: Hashable, Equatable {
     // MARK: - Initializers
 
     public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil,
-        image: UIImage? = nil, imageTintColor: UIColor? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, cellNib: UINib? = nil, height: CGFloat? = nil, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString) {
+        image: UIImage? = nil, imageTintColor: UIColor? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, height: CGFloat = UITableViewAutomaticDimension, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString) {
         
-        if let _ = cellNib where cellClass == nil {
-            assert(false, "Specifying a cell Nib requires specifying a custom cell Class too")
-        }
-
         self.UUID = UUID
         self.text = text
         self.detailText = detailText
@@ -157,7 +150,6 @@ public struct Row: Hashable, Equatable {
         self.imageTintColor = imageTintColor
         self.accessory = accessory
         self.cellClass = cellClass ?? Value1Cell.self
-        self.cellNib = cellNib
         self.height = height
         self.context = context
         self.editActions = editActions
