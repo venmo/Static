@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CustomTableViewCell" customModule="Example" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="104" id="KGk-i7-Jjw" customClass="NibTableViewCell" customModule="Example" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="103"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Kr-e3-EF9">
-                        <rect key="frame" x="130" y="11" width="60" height="21"/>
+                        <rect key="frame" x="130" y="41" width="60" height="21"/>
                         <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -23,14 +24,16 @@
                 </subviews>
                 <animations/>
                 <constraints>
-                    <constraint firstItem="0Kr-e3-EF9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="TvJ-Yt-F1h"/>
-                    <constraint firstItem="0Kr-e3-EF9" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="si3-fF-73q"/>
+                    <constraint firstItem="0Kr-e3-EF9" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="0DV-UL-ORw"/>
+                    <constraint firstItem="0Kr-e3-EF9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="33" id="S1U-RN-9XC"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="0Kr-e3-EF9" secondAttribute="bottom" constant="33" id="sGI-dG-GYf"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
             <connections>
-                <outlet property="centeredLabel" destination="0Kr-e3-EF9" id="eep-kQ-JYH"/>
+                <outlet property="centeredLabel" destination="0Kr-e3-EF9" id="BTw-PS-u6X"/>
             </connections>
+            <point key="canvasLocation" x="883" y="636"/>
         </tableViewCell>
     </objects>
 </document>
