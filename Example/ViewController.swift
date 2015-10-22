@@ -36,8 +36,8 @@ class ViewController: TableViewController {
                 Row(text: "Button", detailText: "Detail", cellClass: ButtonCell.self, selection: { [unowned self] in
                     self.showAlert(title: "Row Selection")
                 }),
-                Row(text: "Custom", cellClass: CustomTableViewCell.self, cellNib: UINib(nibName: "CustomTableViewCell", bundle: nil)),
-                Row(text: "Custom with 64 height", cellClass: CustomTableViewCell.self, cellNib: UINib(nibName: "CustomTableViewCell", bundle: nil), height: 64)
+                Row(text: "Custom cell with explicit height", cellClass: CustomTableViewCell.self, height: 64),
+                Row(text: "Custom from nib", cellClass: NibTableViewCell.self)
             ], footer: "This is a section footer."),
             Section(header: "Accessories", rows: [
                 Row(text: "None"),
