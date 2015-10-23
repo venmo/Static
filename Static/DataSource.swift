@@ -187,17 +187,19 @@ extension DataSource: UITableViewDataSource {
     }
 
     public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return rowForIndexPath(indexPath)?.height ?? UITableViewAutomaticDimension
+        guard let height = rowForIndexPath(indexPath)?.height else {
+            return tableView.rowHeight
+        }
+        
+        return height
     }
     
     public func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        guard let row = rowForIndexPath(indexPath) else { return UITableViewAutomaticDimension }
-
-        if row.height == UITableViewAutomaticDimension {
-            return 44
+        guard let height = rowForIndexPath(indexPath)?.height else {
+            return UITableViewAutomaticDimension
         }
 
-        return row.height
+        return height
     }
     
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {

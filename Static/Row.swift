@@ -111,8 +111,8 @@ public struct Row: Hashable, Equatable {
     /// View to be used for the row.
     public var cellClass: CellType.Type
 
-    /// The row's height. Defaults to `UITableViewAutomaticDimension`.
-    public var height: CGFloat
+    /// The row's height.
+    public var height: CGFloat?
 
     /// Additional information for the row.
     public var context: Context?
@@ -140,7 +140,7 @@ public struct Row: Hashable, Equatable {
     // MARK: - Initializers
 
     public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil,
-        image: UIImage? = nil, imageTintColor: UIColor? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, height: CGFloat = UITableViewAutomaticDimension, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString) {
+        image: UIImage? = nil, imageTintColor: UIColor? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, height: CGFloat? = nil, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString) {
         
         self.UUID = UUID
         self.text = text
