@@ -25,6 +25,8 @@ class ViewController: TableViewController {
         super.viewDidLoad()
 
         title = "Static"
+        
+        tableView.rowHeight = 66
 
         dataSource.sections = [
             Section(header: "Styles", rows: [
@@ -36,8 +38,8 @@ class ViewController: TableViewController {
                 Row(text: "Button", detailText: "Detail", cellClass: ButtonCell.self, selection: { [unowned self] in
                     self.showAlert(title: "Row Selection")
                 }),
-                Row(text: "Custom cell with explicit height", cellClass: CustomTableViewCell.self, height: 64),
-                Row(text: "Custom from nib", cellClass: NibTableViewCell.self)
+                Row(text: "Custom cell with explicit height", cellClass: CustomTableViewCell.self, height: 44),
+                Row(text: "Custom from nib", cellClass: NibTableViewCell.self, height: UITableViewAutomaticDimension)
             ], footer: "This is a section footer."),
             Section(header: "Accessories", rows: [
                 Row(text: "None"),
