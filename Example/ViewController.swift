@@ -1,7 +1,10 @@
 import UIKit
 import Static
 
-class ViewController: TableViewController {
+class ViewController: TableViewController, UIGestureRecognizerDelegate {
+    var originalCenter = CGPoint()
+    var leftDragRelease = false
+    var rightDragRelease = false
 
     // MARK: - Properties
 
@@ -27,6 +30,9 @@ class ViewController: TableViewController {
         title = "Static"
         
         tableView.rowHeight = 66
+
+        let recognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
+        recognizer.delegate = self;
 
         dataSource.sections = [
             Section(header: "Styles", rows: [
@@ -70,7 +76,8 @@ class ViewController: TableViewController {
                     Row.EditAction(title: "Delete", style: .Destructive, selection: { [unowned self] in
                         self.showAlert(title: "Deleted.")
                     })
-                ])
+                ]),
+                Row(text: "Gesture recognizer", detailText: "Swipe left/right", cellClass: SubtitleCell.self, gestureRecognizer:recognizer)
             ])
         ]
     }
@@ -82,5 +89,48 @@ class ViewController: TableViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: button, style: .Cancel, handler: nil))
         presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Gesture Recognizer
+    
+    func handlePan(recognizer: UIPanGestureRecognizer) {
+        let cell = recognizer.view as! UITableViewCell
+        if recognizer.state == .Began {
+            // when the gesture begins, record the current center location
+            originalCenter = cell.center
+        }
+        if recognizer.state == .Changed {
+            let translation = recognizer.translationInView(cell)
+            cell.center = CGPointMake(originalCenter.x + translation.x, originalCenter.y)
+            //dragged the item far enough?
+            leftDragRelease = cell.frame.origin.x < -cell.frame.size.width / 2.0
+            rightDragRelease = cell.frame.origin.x > cell.frame.size.width / 2.0
+        }
+        if recognizer.state == .Ended {
+            // the frame this cell had before user dragged it
+            let originalFrame = CGRect(x: 0, y: cell.frame.origin.y,
+                width: cell.bounds.size.width, height: cell.bounds.size.height)
+            if leftDragRelease {
+                self.showAlert(title: "Left swipe", message: cell.textLabel?.text)
+            }
+            if rightDragRelease {
+                self.showAlert(title: "Right swipe", message: cell.textLabel?.text)
+            }
+            UIView.animateWithDuration(0.2, animations: {cell.frame = originalFrame})
+        }
+    }
+    
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        //Determine whether the pan that is about to be initiated is horizontal or vertical. If it
+        //is vertical, we cancel the gesture recognizer, since we don’t want to handle any
+        //vertical pans.
+        if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+            let translation = panGestureRecognizer.translationInView(gestureRecognizer.view!)
+            if fabs(translation.x) > fabs(translation.y) {
+                return true
+            }
+            return false
+        }
+        return false
     }
 }

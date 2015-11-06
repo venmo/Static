@@ -24,5 +24,9 @@ extension CellType where Self: UITableViewCell {
         if let tintColor = row.imageTintColor {
             imageView?.tintColor = tintColor
         }
+        
+        if let gestureRecognizer = row.gestureRecognizer {
+            self.addGestureRecognizer(gestureRecognizer)
+        }
     }
 }
