@@ -119,6 +119,9 @@ public struct Row: Hashable, Equatable {
     
     /// Actions to show when swiping the cell, such as Delete.
     public var editActions: [EditAction]
+    
+    /// Gesture recognizer for the cell
+    public var gestureRecognizer: UIGestureRecognizer?
 
     var canEdit: Bool {
         return editActions.count > 0
@@ -140,7 +143,7 @@ public struct Row: Hashable, Equatable {
     // MARK: - Initializers
 
     public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil,
-        image: UIImage? = nil, imageTintColor: UIColor? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, height: CGFloat? = nil, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString) {
+        image: UIImage? = nil, imageTintColor: UIColor? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, height: CGFloat? = nil, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString, gestureRecognizer: UIGestureRecognizer? = nil) {
         
         self.UUID = UUID
         self.text = text
@@ -153,6 +156,7 @@ public struct Row: Hashable, Equatable {
         self.height = height
         self.context = context
         self.editActions = editActions
+        self.gestureRecognizer = gestureRecognizer;
     }
 }
 
