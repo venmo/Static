@@ -186,22 +186,6 @@ extension DataSource: UITableViewDataSource {
         return UITableViewCell()
     }
 
-    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        guard let height = rowForIndexPath(indexPath)?.height else {
-            return tableView.rowHeight
-        }
-        
-        return height
-    }
-    
-    public func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        guard let height = rowForIndexPath(indexPath)?.height else {
-            return UITableViewAutomaticDimension
-        }
-
-        return height
-    }
-    
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sections.count
     }
