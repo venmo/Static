@@ -26,7 +26,7 @@ class ViewController: TableViewController {
 
         title = "Static"
         
-        tableView.rowHeight = 66
+        tableView.rowHeight = 50
 
         dataSource.sections = [
             Section(header: "Styles", rows: [
