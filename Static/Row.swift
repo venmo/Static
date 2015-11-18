@@ -102,17 +102,11 @@ public struct Row: Hashable, Equatable {
     /// Image for the row
     public var image: UIImage?
 
-    /// Image tint color
-    public var imageTintColor: UIColor?
-
     /// Action to run when the row is selected.
     public var selection: Selection?
 
     /// View to be used for the row.
     public var cellClass: CellType.Type
-
-    /// The row's height.
-    public var height: CGFloat?
 
     /// Additional information for the row.
     public var context: Context?
@@ -140,17 +134,15 @@ public struct Row: Hashable, Equatable {
     // MARK: - Initializers
 
     public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil,
-        image: UIImage? = nil, imageTintColor: UIColor? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, height: CGFloat? = nil, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString) {
+        image: UIImage? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString) {
         
         self.UUID = UUID
         self.text = text
         self.detailText = detailText
         self.selection = selection
         self.image = image
-        self.imageTintColor = imageTintColor
         self.accessory = accessory
         self.cellClass = cellClass ?? Value1Cell.self
-        self.height = height
         self.context = context
         self.editActions = editActions
     }
