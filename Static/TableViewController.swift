@@ -18,42 +18,10 @@ public class TableViewController: UITableViewController {
     }
 
 
-    // MARK: - Initialization
-
-    public override init(style: UITableViewStyle) {
-        super.init(style: style)
-        initialize()
-    }
-
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        initialize()
-    }
-
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        initialize()
-    }
-
-
     // MARK: - UIViewController
 
-    public override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        performInitialLoad()
-    }
-
-
-    // MARK: - Private
-
-    private func initialize() {
+    public override func viewDidLoad() {
+        super.viewDidLoad()
         dataSource.tableView = tableView
-    }
-
-    private var initialLoadOnceToken = dispatch_once_t()
-    private func performInitialLoad() {
-        dispatch_once(&initialLoadOnceToken) {
-            self.tableView.reloadData()
-        }
     }
 }
