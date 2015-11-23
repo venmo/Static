@@ -15,7 +15,7 @@ public class DataSource: NSObject {
                 tableView.delegate = nil
             }
 
-			registeredCellIdentifiers.removeAll()
+            registeredCellIdentifiers.removeAll()
         }
 
         didSet {
@@ -32,13 +32,13 @@ public class DataSource: NSObject {
         }
     }
 
-	/// Section index titles.
-	public var sectionIndexTitles: [String]? {
-		didSet {
-			assert(NSThread.isMainThread(), "You must access Static.DataSource from the main thread.")
-			tableView?.reloadData()
-		}
-	}
+    /// Section index titles.
+    public var sectionIndexTitles: [String]? {
+        didSet {
+            assert(NSThread.isMainThread(), "You must access Static.DataSource from the main thread.")
+            tableView?.reloadData()
+        }
+    }
 
     private var registeredCellIdentifiers = Set<String>()
 
@@ -47,8 +47,8 @@ public class DataSource: NSObject {
 
     /// Initialize with optional `tableView` and `sections`.
     public init(tableView: UITableView? = nil, sections: [Section]? = nil) {
-		assert(NSThread.isMainThread(), "You must access Static.DataSource from the main thread.")
-		
+        assert(NSThread.isMainThread(), "You must access Static.DataSource from the main thread.")
+
         self.tableView = tableView
         self.sections = sections ?? []
 
@@ -63,12 +63,12 @@ public class DataSource: NSObject {
     }
 
 
-	// MARK: - Public
+    // MARK: - Public
 
-	public func rowAtPoint(point: CGPoint) -> Row? {
-		guard let indexPath = tableView?.indexPathForRowAtPoint(point) else { return nil }
-		return rowForIndexPath(indexPath)
-	}
+    public func rowAtPoint(point: CGPoint) -> Row? {
+        guard let indexPath = tableView?.indexPathForRowAtPoint(point) else { return nil }
+        return rowForIndexPath(indexPath)
+    }
 
 
     // MARK: - Private
@@ -140,8 +140,8 @@ public class DataSource: NSObject {
     }
 
     private func refreshRegisteredCells() {
-		// A table view is required to manipulate registered cells
-		guard let tableView = tableView else { return }
+        // A table view is required to manipulate registered cells
+        guard let tableView = tableView else { return }
 
         // Filter to only rows with unregistered cells
         let rows = sections.map({ $0.rows }).reduce([], combine: +).filter() {
@@ -217,21 +217,21 @@ extension DataSource: UITableViewDataSource {
     public func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return rowForIndexPath(indexPath)?.canEdit ?? false
     }
-    
+
     public func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         return rowForIndexPath(indexPath)?.editActions.map {
             action in
             let rowAction = UITableViewRowAction(style: action.style, title: action.title) { (_, _) in
                 action.selection?()
             }
-            
+
             // These calls have side effects when setting to nil
             // Setting a background color to nil will wipe out any predefined style
             // Wrapping these in if-lets prevents nil-setting side effects
             if let backgroundColor = action.backgroundColor {
                 rowAction.backgroundColor = backgroundColor
             }
-            
+
             if let backgroundEffect = action.backgroundEffect {
                 rowAction.backgroundEffect = backgroundEffect
             }
@@ -240,19 +240,19 @@ extension DataSource: UITableViewDataSource {
         }
     }
 
-	public func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
-		guard let sectionIndexTitles = sectionIndexTitles where sectionIndexTitles.count >= sections.count else { return nil }
-		return sectionIndexTitles
-	}
+    public func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
+        guard let sectionIndexTitles = sectionIndexTitles where sectionIndexTitles.count >= sections.count else { return nil }
+        return sectionIndexTitles
+    }
 
-	public func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-		for (i, section) in sections.enumerate() {
-			if let indexTitle = section.indexTitle where indexTitle == title {
-				return i
-			}
-		}
-		return max(index, sections.count - 1)
-	}
+    public func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        for (i, section) in sections.enumerate() {
+            if let indexTitle = section.indexTitle where indexTitle == title {
+                return i
+            }
+        }
+        return max(index, sections.count - 1)
+    }
 }
 
 

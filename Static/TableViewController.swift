@@ -14,15 +14,15 @@ public class TableViewController: UIViewController {
     public var clearsSelectionOnViewWillAppear: Bool = true
 
     /// Table view data source.
-	public var dataSource = DataSource() {
-		willSet {
-			dataSource.tableView = nil
-		}
-		
-		didSet {
-			dataSource.tableView = tableView
-		}
-	}
+    public var dataSource = DataSource() {
+        willSet {
+            dataSource.tableView = nil
+        }
+
+        didSet {
+            dataSource.tableView = tableView
+        }
+    }
 
 
     // MARK: - Initialization
@@ -30,13 +30,13 @@ public class TableViewController: UIViewController {
     public init(style: UITableViewStyle) {
         tableView = UITableView(frame: .zero, style: style)
         super.init(nibName: nil, bundle: nil)
-		dataSource.tableView = tableView
+        dataSource.tableView = tableView
     }
 
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         tableView = UITableView(frame: .zero, style: .Plain)
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-		dataSource.tableView = tableView
+        dataSource.tableView = tableView
     }
 
     public required init?(coder aDecoder: NSCoder) {
