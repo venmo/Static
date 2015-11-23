@@ -127,6 +127,7 @@
 				21826AAB1B3F51A100AA9641 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		21826AAB1B3F51A100AA9641 /* Products */ = {
 			isa = PBXGroup;
