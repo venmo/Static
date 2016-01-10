@@ -34,7 +34,7 @@ class ViewController: TableViewController {
                 Row(text: "Value 1", detailText: "with an image", cellClass: Value1Cell.self, image: UIImage(named: "Settings")),
                 Row(text: "Value 2", detailText: "Detail", cellClass: Value2Cell.self),
                 Row(text: "Subtitle", detailText: "Detail", cellClass: SubtitleCell.self),
-                Row(text: "Button", detailText: "Detail", cellClass: ButtonCell.self, selection: { [unowned self] in
+                Row(text: "Button", detailText: "Detail", cellClass: ButtonCell.self, selection: { [unowned self] indexPath in
                     self.showAlert(title: "Row Selection")
                 }),
                 Row(text: "Custom from nib", cellClass: NibTableViewCell.self)
@@ -42,30 +42,30 @@ class ViewController: TableViewController {
             Section(header: "Accessories", rows: [
                 Row(text: "None"),
                 Row(text: "Disclosure Indicator", accessory: .DisclosureIndicator),
-                Row(text: "Detail Disclosure Button", accessory: .DetailDisclosureButton({ [unowned self] in
+                Row(text: "Detail Disclosure Button", accessory: .DetailDisclosureButton({ [unowned self] indexPath in
                     self.showAlert(title: "Detail Disclosure Button")
                 })),
                 Row(text: "Checkmark", accessory: .Checkmark),
-                Row(text: "Detail Button", accessory: .DetailButton({ [unowned self] in
+                Row(text: "Detail Button", accessory: .DetailButton({ [unowned self] indexPath in
                     self.showAlert(title: "Detail Button")
                 })),
                 Row(text: "Custom View", accessory: .View(customAccessory))
             ], footer: "Try tapping the ⓘ buttons."),
             Section(header: "Selection", rows: [
-                Row(text: "Tap this row", selection: { [unowned self] in
+                Row(text: "Tap this row", selection: { [unowned self] indexPath in
                     self.showAlert(title: "Row Selection")
                 }),
-                Row(text: "Tap this row", selection: { [unowned self] in
+                Row(text: "Tap this row", selection: { [unowned self] indexPath in
                     let viewController = ViewController()
                     self.navigationController?.pushViewController(viewController, animated: true)
                 })
             ]),
             Section(header: "Editing", rows: [
                 Row(text: "Swipe this row", editActions: [
-                    Row.EditAction(title: "Warn", backgroundColor: .orangeColor(), selection: { [unowned self] in
+                    Row.EditAction(title: "Warn", backgroundColor: .orangeColor(), selection: { [unowned self] indexPath in
                         self.showAlert(title: "Warned.")
                     }),
-                    Row.EditAction(title: "Delete", style: .Destructive, selection: { [unowned self] in
+                    Row.EditAction(title: "Delete", style: .Destructive, selection: { [unowned self] indexPath in
                         self.showAlert(title: "Deleted.")
                     })
                 ])

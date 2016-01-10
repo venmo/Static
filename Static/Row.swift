@@ -1,7 +1,7 @@
 import UIKit
 
 /// Row or Accessory selection callback.
-public typealias Selection = () -> Void
+public typealias Selection = (indexPath: NSIndexPath) -> Void
 
 /// Representation of a table row.
 public struct Row: Hashable, Equatable {
@@ -104,6 +104,9 @@ public struct Row: Hashable, Equatable {
 
     /// Action to run when the row is selected.
     public var selection: Selection?
+    
+    /// Action to run when the row will display.
+    public var willDisplaySelection: Selection?
 
     /// View to be used for the row.
     public var cellClass: CellType.Type
@@ -133,13 +136,14 @@ public struct Row: Hashable, Equatable {
 
     // MARK: - Initializers
 
-    public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil,
+    public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil, willDisplaySelection: Selection? = nil,
         image: UIImage? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString) {
         
         self.UUID = UUID
         self.text = text
         self.detailText = detailText
         self.selection = selection
+        self.willDisplaySelection = willDisplaySelection
         self.image = image
         self.accessory = accessory
         self.cellClass = cellClass ?? Value1Cell.self
