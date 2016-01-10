@@ -223,7 +223,7 @@ extension DataSource: UITableViewDataSource {
         return rowForIndexPath(indexPath)?.editActions.map {
             action in
             let rowAction = UITableViewRowAction(style: action.style, title: action.title) { (_, _) in
-                action.selection?()
+                action.selection?(indexPath: indexPath)
             }
 
             // These calls have side effects when setting to nil
@@ -268,13 +268,19 @@ extension DataSource: UITableViewDelegate {
         }
 
         if let row = rowForIndexPath(indexPath) {
-            row.selection?()
+            row.selection?(indexPath: indexPath)
         }
     }
 
     public func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         if let row = rowForIndexPath(indexPath) {
-            row.accessory.selection?()
+            row.accessory.selection?(indexPath: indexPath)
+        }
+    }
+    
+    public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if let row = rowForIndexPath(indexPath) {
+            row.willDisplaySelection?(indexPath: indexPath)
         }
     }
 }
