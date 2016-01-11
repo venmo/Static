@@ -10,7 +10,7 @@ public class TableViewController: UIViewController {
 
     /// A Boolean value indicating if the controller clears the selection when the table appears.
     ///
-    /// The default value of this property is YES. When YES, the table view controller clears the table’s current selection when it receives a viewWillAppear: message. Setting this property to NO preserves the selection.
+    /// The default value of this property is true. When true, the table view controller clears the table’s current selection when it receives a viewWillAppear: message. Setting this property to false preserves the selection.
     public var clearsSelectionOnViewWillAppear: Bool = true
 
     /// Table view data source.
