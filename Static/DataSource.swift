@@ -40,6 +40,9 @@ public class DataSource: NSObject {
         }
     }
 
+    /// Automatically deselect rows after they are selected
+    public var automaticallyDeselectRows = true
+
     private var registeredCellIdentifiers = Set<String>()
 
 
@@ -262,7 +265,9 @@ extension DataSource: UITableViewDelegate {
     }
 
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if automaticallyDeselectRows {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
 
         if let row = rowForIndexPath(indexPath) {
             row.selection?()
