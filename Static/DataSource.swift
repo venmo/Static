@@ -147,9 +147,7 @@ public class DataSource: NSObject {
         guard let tableView = tableView else { return }
 
         // Filter to only rows with unregistered cells
-        let rows = sections.map({ $0.rows }).reduce([], combine: +).filter() {
-            !self.registeredCellIdentifiers.contains($0.cellIdentifier)
-        }
+        let rows = sections.flatMap{ $0.rows }.filter { !self.registeredCellIdentifiers.contains($0.cellIdentifier) }
 
         for row in rows {
             let identifier = row.cellIdentifier
