@@ -160,7 +160,8 @@ public class DataSource: NSObject {
             registeredCellIdentifiers.insert(identifier)
             if let nib = row.cellClass.nib() {
                 tableView.registerNib(nib, forCellReuseIdentifier: identifier)
-            } else {
+            } else if row.storyboardCellIdentifier == nil {
+            // Only register when we are not using storyboard cell identifier. Registering will cause the prototype cell not to be loaded and assume that we are using custom class
                 tableView.registerClass(row.cellClass, forCellReuseIdentifier: identifier)
             }
         }
