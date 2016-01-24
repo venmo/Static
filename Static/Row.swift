@@ -113,6 +113,9 @@ public struct Row: Hashable, Equatable {
     
     /// Actions to show when swiping the cell, such as Delete.
     public var editActions: [EditAction]
+    
+    /// Cell identifier from storyboard
+    public var storyboardCellIdentifier: String?
 
     var canEdit: Bool {
         return editActions.count > 0
@@ -123,7 +126,8 @@ public struct Row: Hashable, Equatable {
     }
 
     var cellIdentifier: String {
-        return cellClass.description()
+        // Storyboard cell identifier have precedence
+        return storyboardCellIdentifier ?? cellClass.description()
     }
 
     public var hashValue: Int {
@@ -134,8 +138,8 @@ public struct Row: Hashable, Equatable {
     // MARK: - Initializers
 
     public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil,
-        image: UIImage? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString) {
-        
+        image: UIImage? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, storyboardCellIdentifier: String? = nil, context: Context? = nil, editActions: [EditAction] = [], UUID: String = NSUUID().UUIDString, backgroundColor: UIColor? = nil) {
+            
         self.UUID = UUID
         self.text = text
         self.detailText = detailText
@@ -145,6 +149,7 @@ public struct Row: Hashable, Equatable {
         self.cellClass = cellClass ?? Value1Cell.self
         self.context = context
         self.editActions = editActions
+        self.storyboardCellIdentifier = storyboardCellIdentifier
     }
 }
 
