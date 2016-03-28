@@ -7,7 +7,7 @@ Simple static table views for iOS in Swift. Static's goal is to separate model d
 
 ## Building
 
-Xcode 7 is required since Static is written in Swift 2. There aren't any dependencies besides system frameworks.
+Static 1.1 requires Swift 2.2. For Swift 2.1 support, please use Static 1.0.
 
 
 ## Installation
