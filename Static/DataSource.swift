@@ -277,4 +277,18 @@ extension DataSource: UITableViewDelegate {
             row.accessory.selection?()
         }
     }
+    
+    public func tableView(tableView: UITableView, shouldShowMenuForRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return rowForIndexPath(indexPath)?.canCopy ?? false
+    }
+    
+    public func tableView(tableView: UITableView, canPerformAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+        return action == #selector(NSObject.copy(_:)) && (rowForIndexPath(indexPath)?.canCopy ?? false)
+    }
+    
+    public func tableView(tableView: UITableView, performAction action: Selector, forRowAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+        if let row = rowForIndexPath(indexPath) where action == #selector(NSObject.copy(_:)) {
+            row.copyAction?(row)
+        }
+    }
 }
