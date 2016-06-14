@@ -181,7 +181,7 @@ extension DataSource: UITableViewDataSource {
         if let row = rowForIndexPath(indexPath: indexPath) {
             let tableCell = tableView.dequeueReusableCell(withIdentifier: row.cellIdentifier, for: indexPath)
 
-            if let cell = tableCell as? CellType {
+            if let cell = tableCell as? Cell {
                 cell.configure(row: row)
             }
 
@@ -196,11 +196,11 @@ extension DataSource: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionForIndex(index: section)?.header?.title
+        return sectionForIndex(index: section)?.header?._title
     }
 
     public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return sectionForIndex(index: section)?.header?.view
+        return sectionForIndex(index: section)?.header?._view
     }
 
     public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -208,11 +208,11 @@ extension DataSource: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return sectionForIndex(index: section)?.footer?.title
+        return sectionForIndex(index: section)?.footer?._title
     }
 
     public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return sectionForIndex(index: section)?.footer?.view
+        return sectionForIndex(index: section)?.footer?._view
     }
 
     public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

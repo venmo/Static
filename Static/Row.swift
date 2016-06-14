@@ -106,7 +106,7 @@ public struct Row: Hashable, Equatable {
     public var selection: Selection?
 
     /// View to be used for the row.
-    public var cellClass: CellType.Type
+    public var cellClass: Cell.Type
 
     /// Additional information for the row.
     public var context: Context?
@@ -134,7 +134,7 @@ public struct Row: Hashable, Equatable {
     // MARK: - Initializers
 
     public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil,
-        image: UIImage? = nil, accessory: Accessory = .none, cellClass: CellType.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], uuid: String = UUID().uuidString) {
+        image: UIImage? = nil, accessory: Accessory = .none, cellClass: Cell.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], uuid: String = UUID().uuidString) {
         
         self.uuid = uuid
         self.text = text

@@ -13,22 +13,22 @@ public struct Section: Hashable, Equatable {
         /// Custom view for the header or footer. The height will be the view's `bounds.height`.
         case view(UIView)
 
-        public var title: String? {
+        var _title: String? {
             switch self {
             case .title(let extremityTitle): return extremityTitle
             default: return nil
             }
         }
 
-        public var view: UIView? {
+        var _view: UIView? {
             switch self {
             case .view(let extremityView): return extremityView
             default: return nil
             }
         }
 
-        public var viewHeight: CGFloat? {
-            return view?.bounds.height
+        var viewHeight: CGFloat? {
+            return _view?.bounds.height
         }
     }
 
