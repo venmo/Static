@@ -8,21 +8,21 @@ public struct Section: Hashable, Equatable {
     /// Representation of a section header or footer.
     public enum Extremity {
         /// System defined style for the title of the header or footer.
-        case Title(String)
+        case title(String)
 
         /// Custom view for the header or footer. The height will be the view's `bounds.height`.
-        case View(UIView)
+        case view(UIView)
 
         public var title: String? {
             switch self {
-            case .Title(let extremityTitle): return extremityTitle
+            case .title(let extremityTitle): return extremityTitle
             default: return nil
             }
         }
 
         public var view: UIView? {
             switch self {
-            case .View(let extremityView): return extremityView
+            case .view(let extremityView): return extremityView
             default: return nil
             }
         }
@@ -36,7 +36,7 @@ public struct Section: Hashable, Equatable {
     // MARK: - Properties
 
     /// Unique identifier used to identify the section.
-    public let UUID: String
+    public let uuid: String
 
     /// Title or view for the header of the section.
     public var header: Extremity?
@@ -51,14 +51,14 @@ public struct Section: Hashable, Equatable {
     public var indexTitle: String?
 
     public var hashValue: Int {
-        return UUID.hashValue
+        return uuid.hashValue
     }
 
 
     // MARK: - Initiailizers
 
-    public init(header: Extremity? = nil, rows: [Row] = [], footer: Extremity? = nil, indexTitle: String? = nil, UUID: String = NSUUID().UUIDString) {
-        self.UUID = UUID
+    public init(header: Extremity? = nil, rows: [Row] = [], footer: Extremity? = nil, indexTitle: String? = nil, uuid: String = UUID().uuidString) {
+        self.uuid = uuid
         self.header = header
         self.rows = rows
         self.footer = footer
@@ -72,19 +72,19 @@ extension Section.Extremity: StringLiteralConvertible {
     public typealias ExtendedGraphemeClusterLiteralType = StringLiteralType
 
     public init(unicodeScalarLiteral value: UnicodeScalarLiteralType) {
-        self = .Title(value)
+        self = .title(value)
     }
 
     public init(extendedGraphemeClusterLiteral value: ExtendedGraphemeClusterLiteralType) {
-        self = .Title(value)
+        self = .title(value)
     }
 
     public init(stringLiteral value: StringLiteralType) {
-        self = .Title(value)
+        self = .title(value)
     }
 }
 
 
 public func ==(lhs: Section, rhs: Section) -> Bool {
-    return lhs.UUID == rhs.UUID
+    return lhs.uuid == rhs.uuid
 }
