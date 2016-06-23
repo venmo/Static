@@ -23,7 +23,7 @@ class RowTests: XCTestCase {
     }
 
     func testInitWithAccessoryType() {
-        let accessory: Row.Accessory = .Checkmark
+        let accessory: Row.Accessory = .checkmark
 
         let row = Row(accessory: accessory)
 
@@ -32,7 +32,7 @@ class RowTests: XCTestCase {
 
     func testInitWithSelectableAccessoryType() {
         let selection: Selection = {}
-        let accessory: Row.Accessory = .DetailButton(selection)
+        let accessory: Row.Accessory = .detailButton(selection)
 
         let row = Row(accessory: accessory)
 
