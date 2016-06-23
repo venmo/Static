@@ -14,7 +14,7 @@ final class NibTableViewCell: UITableViewCell, CellType {
         return UINib(nibName: String(self), bundle: nil)
     }
 
-    func configure(row row: Row) {
+    func configure(row: Row) {
         centeredLabel.text = row.text
     }
 }
