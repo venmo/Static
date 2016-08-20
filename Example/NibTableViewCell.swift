@@ -5,16 +5,16 @@ final class NibTableViewCell: UITableViewCell, CellType {
 
     // MARK: - Properties
 
-    @IBOutlet weak private var centeredLabel: UILabel!
+    @IBOutlet weak fileprivate var centeredLabel: UILabel!
 
     
     // MARK: - CellType
 
     static func nib() -> UINib? {
-        return UINib(nibName: String(self), bundle: nil)
+        return UINib(nibName: String(describing: self), bundle: nil)
     }
 
-    func configure(row row: Row) {
+    func configure(row: Row) {
         centeredLabel.text = row.text
     }
 }

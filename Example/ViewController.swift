@@ -5,9 +5,9 @@ class ViewController: TableViewController {
 
     // MARK: - Properties
 
-    private let customAccessory: UIView = {
+    fileprivate let customAccessory: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
-        view.backgroundColor = .redColor()
+        view.backgroundColor = .red
         return view
     }()
 
@@ -15,7 +15,7 @@ class ViewController: TableViewController {
     // MARK: - Initializers
 
     convenience init() {
-        self.init(style: .Grouped)
+        self.init(style: .grouped)
     }
 
 
@@ -31,22 +31,22 @@ class ViewController: TableViewController {
         dataSource.sections = [
             Section(header: "Styles", rows: [
                 Row(text: "Value 1", detailText: "Detail", cellClass: Value1Cell.self),
-                Row(text: "Value 1", detailText: "with an image", cellClass: Value1Cell.self, image: UIImage(named: "Settings")),
+                Row(text: "Value 1", detailText: "with an image", image: UIImage(named: "Settings"), cellClass: Value1Cell.self),
                 Row(text: "Value 2", detailText: "Detail", cellClass: Value2Cell.self),
                 Row(text: "Subtitle", detailText: "Detail", cellClass: SubtitleCell.self),
-                Row(text: "Button", detailText: "Detail", cellClass: ButtonCell.self, selection: { [unowned self] in
+                Row(text: "Button", detailText: "Detail", selection: { [unowned self] in
                     self.showAlert(title: "Row Selection")
-                }),
+                }, cellClass: ButtonCell.self),
                 Row(text: "Custom from nib", cellClass: NibTableViewCell.self)
             ], footer: "This is a section footer."),
             Section(header: "Accessories", rows: [
                 Row(text: "None"),
-                Row(text: "Disclosure Indicator", accessory: .DisclosureIndicator),
-                Row(text: "Detail Disclosure Button", accessory: .DetailDisclosureButton({ [unowned self] in
+                Row(text: "Disclosure Indicator", accessory: .disclosureIndicator),
+                Row(text: "Detail Disclosure Button", accessory: .detailDisclosureButton({ [unowned self] in
                     self.showAlert(title: "Detail Disclosure Button")
                 })),
-                Row(text: "Checkmark", accessory: .Checkmark),
-                Row(text: "Detail Button", accessory: .DetailButton({ [unowned self] in
+                Row(text: "Checkmark", accessory: .checkmark),
+                Row(text: "Detail Button", accessory: .detailButton({ [unowned self] in
                     self.showAlert(title: "Detail Button")
                 })),
                 Row(text: "Custom View", accessory: .View(customAccessory))
@@ -62,10 +62,10 @@ class ViewController: TableViewController {
             ]),
             Section(header: "Editing", rows: [
                 Row(text: "Swipe this row", editActions: [
-                    Row.EditAction(title: "Warn", backgroundColor: .orangeColor(), selection: { [unowned self] in
+                    Row.EditAction(title: "Warn", backgroundColor: .orange, selection: { [unowned self] in
                         self.showAlert(title: "Warned.")
                     }),
-                    Row.EditAction(title: "Delete", style: .Destructive, selection: { [unowned self] in
+                    Row.EditAction(title: "Delete", style: .destructive, selection: { [unowned self] in
                         self.showAlert(title: "Deleted.")
                     })
                 ])
@@ -76,9 +76,9 @@ class ViewController: TableViewController {
 
     // MARK: - Private
 
-    private func showAlert(title title: String? = nil, message: String? = "You tapped it. Good work.", button: String = "Thanks") {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: button, style: .Cancel, handler: nil))
-        presentViewController(alert, animated: true, completion: nil)
+    fileprivate func showAlert(title: String? = nil, message: String? = "You tapped it. Good work.", button: String = "Thanks") {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: button, style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }

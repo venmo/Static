@@ -4,7 +4,7 @@ public protocol CellType: class {
     static func description() -> String
     static func nib() -> UINib?
 
-    func configure(row row: Row)
+    func configure(row: Row)
 }
 
 extension CellType {
@@ -14,7 +14,7 @@ extension CellType {
 }
 
 extension CellType where Self: UITableViewCell {
-    public func configure(row row: Row) {
+    public func configure(row: Row) {
         textLabel?.text = row.text
         detailTextLabel?.text = row.detailText
         imageView?.image = row.image
