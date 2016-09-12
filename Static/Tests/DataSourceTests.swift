@@ -125,15 +125,15 @@ class DataSourceTests: XCTestCase {
     }
 
     func testChangeTableView() {
-        XCTAssertEqual(dataSource, tableView.dataSource as! DataSource)
-        XCTAssertEqual(dataSource, tableView.delegate as! DataSource)
+        XCTAssertEqual(dataSource, tableView.dataSource as? DataSource)
+        XCTAssertEqual(dataSource, tableView.delegate as? DataSource)
 
         let tableView2 = UITableView()
         dataSource.tableView = tableView2
 
         XCTAssertNil(tableView.dataSource)
         XCTAssertNil(tableView.delegate)
-        XCTAssertEqual(dataSource, tableView2.dataSource as! DataSource)
-        XCTAssertEqual(dataSource, tableView2.delegate as! DataSource)
+        XCTAssertEqual(dataSource, tableView2.dataSource as? DataSource)
+        XCTAssertEqual(dataSource, tableView2.delegate as? DataSource)
     }
 }
