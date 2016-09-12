@@ -5,9 +5,13 @@
 Simple static table views for iOS in Swift. Static's goal is to separate model data from presentation. `Row`s and `Section`s are your “view models” for your cells. You simply specify a cell class to use and that handles all of the presentation. See the [usage](#usage) section below for details.
 
 
-## Building
+## Version Compatibility
 
-Static 1.1 requires Swift 2.2. For Swift 2.1 support, please use Static 1.0.
+| Swift Version | Static Version |
+| ------------- | -------------- |
+| 2.3           | 1.2            |
+| 2.2           | 1.1            |
+| 2.0 - 2.1     | 1.0            |
 
 
 ## Installation
