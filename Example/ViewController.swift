@@ -7,7 +7,7 @@ class ViewController: TableViewController {
 
     private let customAccessory: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
-        view.backgroundColor = .red()
+        view.backgroundColor = .red
         return view
     }()
 
@@ -31,12 +31,12 @@ class ViewController: TableViewController {
         dataSource.sections = [
             Section(header: "Styles", rows: [
                 Row(text: "Value 1", detailText: "Detail", cellClass: Value1Cell.self),
-                Row(text: "Value 1", detailText: "with an image", cellClass: Value1Cell.self, image: UIImage(named: "Settings")),
+                Row(text: "Value 1", detailText: "with an image", image: UIImage(named: "Settings"), cellClass: Value1Cell.self),
                 Row(text: "Value 2", detailText: "Detail", cellClass: Value2Cell.self),
                 Row(text: "Subtitle", detailText: "Detail", cellClass: SubtitleCell.self),
-                Row(text: "Button", detailText: "Detail", cellClass: ButtonCell.self, selection: { [unowned self] in
+                Row(text: "Button", detailText: "Detail", selection: { [unowned self] in
                     self.showAlert(title: "Row Selection")
-                }),
+                }, cellClass: ButtonCell.self),
                 Row(text: "Custom from nib", cellClass: NibTableViewCell.self)
             ], footer: "This is a section footer."),
             Section(header: "Accessories", rows: [
@@ -62,7 +62,7 @@ class ViewController: TableViewController {
             ]),
             Section(header: "Editing", rows: [
                 Row(text: "Swipe this row", editActions: [
-                    Row.EditAction(title: "Warn", backgroundColor: .orange(), selection: { [unowned self] in
+                    Row.EditAction(title: "Warn", backgroundColor: .orange, selection: { [unowned self] in
                         self.showAlert(title: "Warned.")
                     }),
                     Row.EditAction(title: "Delete", style: .destructive, selection: { [unowned self] in

@@ -19,7 +19,7 @@ public class DataSource: NSObject {
         }
 
         didSet {
-            assert(Thread.isMainThread(), "You must access Static.DataSource from the main thread.")
+            assert(Thread.isMainThread, "You must access Static.DataSource from the main thread.")
             updateTableView()
         }
     }
@@ -27,7 +27,7 @@ public class DataSource: NSObject {
     /// Sections to use in the table view.
     public var sections: [Section] {
         didSet {
-            assert(Thread.isMainThread(), "You must access Static.DataSource from the main thread.")
+            assert(Thread.isMainThread, "You must access Static.DataSource from the main thread.")
             refresh()
         }
     }
@@ -35,7 +35,7 @@ public class DataSource: NSObject {
     /// Section index titles.
     public var sectionIndexTitles: [String]? {
         didSet {
-            assert(Thread.isMainThread(), "You must access Static.DataSource from the main thread.")
+            assert(Thread.isMainThread, "You must access Static.DataSource from the main thread.")
             tableView?.reloadData()
         }
     }
@@ -50,7 +50,7 @@ public class DataSource: NSObject {
 
     /// Initialize with optional `tableView` and `sections`.
     public init(tableView: UITableView? = nil, sections: [Section]? = nil) {
-        assert(Thread.isMainThread(), "You must access Static.DataSource from the main thread.")
+        assert(Thread.isMainThread, "You must access Static.DataSource from the main thread.")
 
         self.tableView = tableView
         self.sections = sections ?? []
@@ -68,9 +68,9 @@ public class DataSource: NSObject {
 
     // MARK: - Public
 
-    public func rowAtPoint(point: CGPoint) -> Row? {
+    public func row(atPoint point: CGPoint) -> Row? {
         guard let indexPath = tableView?.indexPathForRow(at: point) else { return nil }
-        return rowForIndexPath(indexPath: indexPath)
+        return row(forIndexPath: indexPath)
     }
 
 
@@ -88,7 +88,7 @@ public class DataSource: NSObject {
         refreshRegisteredCells()
     }
 
-    private func sectionForIndex(index: Int) -> Section? {
+    fileprivate func section(forIndex index: Int) -> Section? {
         if sections.count <= index {
             assert(false, "Invalid section index: \(index)")
             return nil
@@ -97,8 +97,8 @@ public class DataSource: NSObject {
         return sections[index]
     }
 
-    private func rowForIndexPath(indexPath: NSIndexPath) -> Row? {
-        if let section = sectionForIndex(index: indexPath.section) {
+    fileprivate func row(forIndexPath indexPath: IndexPath) -> Row? {
+        if let section = section(forIndex: indexPath.section) {
             let rows = section.rows
             if rows.count >= indexPath.row {
                 return rows[indexPath.row]
@@ -174,11 +174,11 @@ public class DataSource: NSObject {
 
 extension DataSource: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sectionForIndex(index: section)?.rows.count ?? 0
+        return self.section(forIndex: section)?.rows.count ?? 0
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let row = rowForIndexPath(indexPath: indexPath) {
+        if let row = self.row(forIndexPath: indexPath) {
             let tableCell = tableView.dequeueReusableCell(withIdentifier: row.cellIdentifier, for: indexPath)
 
             if let cell = tableCell as? Cell {
@@ -196,36 +196,36 @@ extension DataSource: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionForIndex(index: section)?.header?._title
+        return self.section(forIndex: section)?.header?._title
     }
 
     public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return sectionForIndex(index: section)?.header?._view
+        return self.section(forIndex: section)?.header?._view
     }
 
     public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return sectionForIndex(index: section)?.header?.viewHeight ?? UITableViewAutomaticDimension
+        return self.section(forIndex: section)?.header?.viewHeight ?? UITableViewAutomaticDimension
     }
 
     public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return sectionForIndex(index: section)?.footer?._title
+        return self.section(forIndex: section)?.footer?._title
     }
 
     public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return sectionForIndex(index: section)?.footer?._view
+        return self.section(forIndex: section)?.footer?._view
     }
 
     public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return sectionForIndex(index: section)?.footer?.viewHeight ?? UITableViewAutomaticDimension
+        return self.section(forIndex: section)?.footer?.viewHeight ?? UITableViewAutomaticDimension
     }
 
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return rowForIndexPath(indexPath: indexPath)?.canEdit ?? false
+        return row(forIndexPath: indexPath)?.canEdit ?? false
     }
 
     @objc(tableView:editActionsForRowAtIndexPath:)
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        return rowForIndexPath(indexPath: indexPath)?.editActions.map {
+        return row(forIndexPath: indexPath)?.editActions.map {
             action in
             let rowAction = UITableViewRowAction(style: action.style, title: action.title) { (_, _) in
                 action.selection?()
@@ -247,13 +247,13 @@ extension DataSource: UITableViewDataSource {
     }
 
     public func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        guard let sectionIndexTitles = sectionIndexTitles where sectionIndexTitles.count >= sections.count else { return nil }
+        guard let sectionIndexTitles = sectionIndexTitles, sectionIndexTitles.count >= sections.count else { return nil }
         return sectionIndexTitles
     }
 
     public func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         for (i, section) in sections.enumerated() {
-            if let indexTitle = section.indexTitle where indexTitle == title {
+            if let indexTitle = section.indexTitle, indexTitle == title {
                 return i
             }
         }
@@ -264,7 +264,7 @@ extension DataSource: UITableViewDataSource {
 
 extension DataSource: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return rowForIndexPath(indexPath: indexPath)?.isSelectable ?? false
+        return row(forIndexPath: indexPath)?.isSelectable ?? false
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -272,13 +272,13 @@ extension DataSource: UITableViewDelegate {
             tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         }
 
-        if let row = rowForIndexPath(indexPath: indexPath) {
+        if let row = row(forIndexPath: indexPath) {
             row.selection?()
         }
     }
 
     public func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        if let row = rowForIndexPath(indexPath: indexPath) {
+        if let row = row(forIndexPath: indexPath) {
             row.accessory.selection?()
         }
     }

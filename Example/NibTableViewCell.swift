@@ -11,7 +11,7 @@ final class NibTableViewCell: UITableViewCell, Cell {
     // MARK: - CellType
 
     static func nib() -> UINib? {
-        return UINib(nibName: String(self), bundle: nil)
+        return UINib(nibName: String(describing: self), bundle: nil)
     }
 
     func configure(row: Row) {

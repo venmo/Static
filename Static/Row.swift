@@ -31,10 +31,10 @@ public struct Row: Hashable, Equatable {
         /// Table view cell accessory type
         public var type: UITableViewCellAccessoryType {
             switch self {
-            case disclosureIndicator: return .disclosureIndicator
-            case detailDisclosureButton(_): return .detailDisclosureButton
-            case checkmark: return .checkmark
-            case detailButton(_): return .detailButton
+            case .disclosureIndicator: return .disclosureIndicator
+            case .detailDisclosureButton(_): return .detailDisclosureButton
+            case .checkmark: return .checkmark
+            case .detailButton(_): return .detailButton
             default: return .none
             }
         }
@@ -42,7 +42,7 @@ public struct Row: Hashable, Equatable {
         /// Accessory view
         public var view: UIView? {
             switch self {
-            case view(let view): return view
+            case .view(let view): return view
             default: return nil
             }
         }
@@ -50,8 +50,8 @@ public struct Row: Hashable, Equatable {
         /// Selection block for accessory buttons
         public var selection: Selection? {
             switch self {
-            case detailDisclosureButton(let selection): return selection
-            case detailButton(let selection): return selection
+            case .detailDisclosureButton(let selection): return selection
+            case .detailButton(let selection): return selection
             default: return nil
             }
         }

@@ -8,7 +8,7 @@ final class CustomTableViewCell: UITableViewCell, Cell {
     private lazy var centeredLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.textColor = .white()
+        label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -18,7 +18,7 @@ final class CustomTableViewCell: UITableViewCell, Cell {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .gray()
+        contentView.backgroundColor = .gray
 
         contentView.addSubview(centeredLabel)
 

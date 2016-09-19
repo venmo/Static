@@ -51,7 +51,7 @@ class DataSourceTests: XCTestCase {
                 Row(text: "Merrily", detailText: "merrily", accessory: .DisclosureIndicator)
             ])
         ]
-        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))!
+        let cell = tableView.cellForRowAtIndexPath(IndexPath(forRow: 0, inSection: 0))!
         XCTAssertEqual("Merrily", cell.textLabel!.text!)
         XCTAssertEqual("merrily", cell.detailTextLabel!.text!)
         XCTAssertEqual(UITableViewCellAccessoryType.DisclosureIndicator, cell.accessoryType)
@@ -87,12 +87,12 @@ class DataSourceTests: XCTestCase {
         dataSource.sections = [
             Section(rows: [Row(text: "Cookies")])
         ]
-        XCTAssertFalse(dataSource.tableView(tableView, shouldHighlightRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0)))
+        XCTAssertFalse(dataSource.tableView(tableView, shouldHighlightRowAtIndexPath: IndexPath(forRow: 0, inSection: 0)))
 
         dataSource.sections = [
             Section(rows: [Row(text: "Cupcakes", selection: {})])
         ]
-        XCTAssertTrue(dataSource.tableView(tableView, shouldHighlightRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0)))
+        XCTAssertTrue(dataSource.tableView(tableView, shouldHighlightRowAtIndexPath: IndexPath(forRow: 0, inSection: 0)))
     }
 
     func testSelection() {
@@ -104,7 +104,7 @@ class DataSourceTests: XCTestCase {
         dataSource.sections = [
             Section(rows: [Row(text: "Button", selection: selection)])
         ]
-        dataSource.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+        dataSource.tableView(tableView, didSelectRowAtIndexPath: IndexPath(forRow: 0, inSection: 0))
         waitForExpectationsWithTimeout(1, handler: nil)
     }
 
@@ -120,7 +120,7 @@ class DataSourceTests: XCTestCase {
             Section(rows: [Row(text: "Banana Cream Pie", accessory: accessory)])
         ]
 
-        dataSource.tableView(tableView, accessoryButtonTappedForRowWithIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+        dataSource.tableView(tableView, accessoryButtonTappedForRowWithIndexPath: IndexPath(forRow: 0, inSection: 0))
         waitForExpectationsWithTimeout(1, handler: nil)
     }
 

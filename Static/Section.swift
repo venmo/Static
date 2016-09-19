@@ -67,7 +67,7 @@ public struct Section: Hashable, Equatable {
 }
 
 
-extension Section.Extremity: StringLiteralConvertible {
+extension Section.Extremity: ExpressibleByStringLiteral {
     public typealias UnicodeScalarLiteralType = StringLiteralType
     public typealias ExtendedGraphemeClusterLiteralType = StringLiteralType
 
