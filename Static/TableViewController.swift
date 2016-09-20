@@ -78,6 +78,7 @@ open class TableViewController: UIViewController {
     private func performInitialLoad() {
         if !initiallyLoaded {
             tableView.reloadData()
+            initiallyLoaded = true
         }
     }
 
