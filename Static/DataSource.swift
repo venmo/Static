@@ -68,9 +68,9 @@ public class DataSource: NSObject {
 
     // MARK: - Public
 
-    public func row(atPoint point: CGPoint) -> Row? {
+    public func row(at point: CGPoint) -> Row? {
         guard let indexPath = tableView?.indexPathForRow(at: point) else { return nil }
-        return row(forIndexPath: indexPath)
+        return row(at: indexPath)
     }
 
 
@@ -88,7 +88,7 @@ public class DataSource: NSObject {
         refreshRegisteredCells()
     }
 
-    fileprivate func section(forIndex index: Int) -> Section? {
+    fileprivate func section(at index: Int) -> Section? {
         if sections.count <= index {
             assert(false, "Invalid section index: \(index)")
             return nil
@@ -97,8 +97,8 @@ public class DataSource: NSObject {
         return sections[index]
     }
 
-    fileprivate func row(forIndexPath indexPath: IndexPath) -> Row? {
-        if let section = section(forIndex: indexPath.section) {
+    fileprivate func row(at indexPath: IndexPath) -> Row? {
+        if let section = section(at: indexPath.section) {
             let rows = section.rows
             if rows.count >= indexPath.row {
                 return rows[indexPath.row]
@@ -173,12 +173,12 @@ public class DataSource: NSObject {
 
 
 extension DataSource: UITableViewDataSource {
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.section(forIndex: section)?.rows.count ?? 0
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection sectionIndex: Int) -> Int {
+        return section(at: sectionIndex)?.rows.count ?? 0
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let row = self.row(forIndexPath: indexPath) {
+        if let row = row(at: indexPath) {
             let tableCell = tableView.dequeueReusableCell(withIdentifier: row.cellIdentifier, for: indexPath)
 
             if let cell = tableCell as? Cell {
@@ -195,37 +195,37 @@ extension DataSource: UITableViewDataSource {
         return sections.count
     }
 
-    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.section(forIndex: section)?.header?._title
+    public func tableView(_ tableView: UITableView, titleForHeaderInSection sectionIndex: Int) -> String? {
+        return section(at: sectionIndex)?.header?._title
     }
 
-    public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return self.section(forIndex: section)?.header?._view
+    public func tableView(tableView: UITableView, viewForHeaderInSection sectionIndex: Int) -> UIView? {
+        return section(at: sectionIndex)?.header?._view
     }
 
-    public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return self.section(forIndex: section)?.header?.viewHeight ?? UITableViewAutomaticDimension
+    public func tableView(tableView: UITableView, heightForHeaderInSection sectionIndex: Int) -> CGFloat {
+        return section(at: sectionIndex)?.header?.viewHeight ?? UITableViewAutomaticDimension
     }
 
-    public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return self.section(forIndex: section)?.footer?._title
+    public func tableView(_ tableView: UITableView, titleForFooterInSection sectionIndex: Int) -> String? {
+        return section(at: sectionIndex)?.footer?._title
     }
 
-    public func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return self.section(forIndex: section)?.footer?._view
+    public func tableView(tableView: UITableView, viewForFooterInSection sectionIndex: Int) -> UIView? {
+        return section(at: sectionIndex)?.footer?._view
     }
 
-    public func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return self.section(forIndex: section)?.footer?.viewHeight ?? UITableViewAutomaticDimension
+    public func tableView(tableView: UITableView, heightForFooterInSection sectionIndex: Int) -> CGFloat {
+        return section(at: sectionIndex)?.footer?.viewHeight ?? UITableViewAutomaticDimension
     }
 
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return row(forIndexPath: indexPath)?.canEdit ?? false
+        return row(at: indexPath)?.canEdit ?? false
     }
 
     @objc(tableView:editActionsForRowAtIndexPath:)
     public func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        return row(forIndexPath: indexPath)?.editActions.map {
+        return row(at: indexPath)?.editActions.map {
             action in
             let rowAction = UITableViewRowAction(style: action.style, title: action.title) { (_, _) in
                 action.selection?()
@@ -264,7 +264,7 @@ extension DataSource: UITableViewDataSource {
 
 extension DataSource: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return row(forIndexPath: indexPath)?.isSelectable ?? false
+        return row(at: indexPath)?.isSelectable ?? false
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -272,13 +272,13 @@ extension DataSource: UITableViewDelegate {
             tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         }
 
-        if let row = row(forIndexPath: indexPath) {
+        if let row = row(at: indexPath) {
             row.selection?()
         }
     }
 
     public func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        if let row = row(forIndexPath: indexPath) {
+        if let row = row(at: indexPath) {
             row.accessory.selection?()
         }
     }
