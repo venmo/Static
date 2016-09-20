@@ -1,11 +1,11 @@
 import UIKit
 
-public class ButtonCell: UITableViewCell, CellType {
+public class ButtonCell: UITableViewCell, Cell {
 
     // MARK: - Initializers
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .Default, reuseIdentifier: reuseIdentifier)
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
         initialize()
     }
 
