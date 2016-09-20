@@ -84,28 +84,28 @@ open class TableViewController: UIViewController {
     private func clearSelectionsIfNecessary(animated: Bool) {
         guard let selectedIndexPaths = tableView.indexPathsForSelectedRows, clearsSelectionOnViewWillAppear else { return }
         guard let coordinator = transitionCoordinator else {
-            deselectRowsAtIndexPaths(indexPaths: selectedIndexPaths, animated: animated)
+            deselectRows(at: selectedIndexPaths, animated: animated)
             return
         }
 
         let animation: (UIViewControllerTransitionCoordinatorContext) -> Void = { [weak self] _ in
-            self?.deselectRowsAtIndexPaths(indexPaths: selectedIndexPaths, animated: animated)
+            self?.deselectRows(at: selectedIndexPaths, animated: animated)
         }
 
         let completion: (UIViewControllerTransitionCoordinatorContext) -> Void = { [weak self] context in
             if context.isCancelled {
-                self?.selectRowsAtIndexPaths(indexPaths: selectedIndexPaths, animated: animated)
+                self?.selectRows(at: selectedIndexPaths, animated: animated)
             }
         }
 
         coordinator.animate(alongsideTransition: animation, completion: completion)
     }
 
-    private func selectRowsAtIndexPaths(indexPaths: [IndexPath], animated: Bool) {
-        indexPaths.forEach { tableView.selectRow(at: $0 as IndexPath, animated: animated, scrollPosition: .none) }
+    private func selectRows(at indexPaths: [IndexPath], animated: Bool) {
+        indexPaths.forEach { tableView.selectRow(at: $0, animated: animated, scrollPosition: .none) }
     }
 
-    private func deselectRowsAtIndexPaths(indexPaths: [IndexPath], animated: Bool) {
-        indexPaths.forEach { tableView.deselectRow(at: $0 as IndexPath, animated: animated) }
+    private func deselectRows(at indexPaths: [IndexPath], animated: Bool) {
+        indexPaths.forEach { tableView.deselectRow(at: $0, animated: animated) }
     }
 }
