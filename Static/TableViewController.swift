@@ -1,20 +1,20 @@
 import UIKit
 
 /// Table view controller with a `DataSource` setup to use its `tableView`.
-public class TableViewController: UIViewController {
+open class TableViewController: UIViewController {
 
     // MARK: - Properties
 
     /// Returns the table view managed by the controller object.
-    public let tableView: UITableView
+    open let tableView: UITableView
 
     /// A Boolean value indicating if the controller clears the selection when the table appears.
     ///
     /// The default value of this property is true. When true, the table view controller clears the table’s current selection when it receives a viewWillAppear: message. Setting this property to false preserves the selection.
-    public var clearsSelectionOnViewWillAppear: Bool = true
+    open var clearsSelectionOnViewWillAppear: Bool = true
 
     /// Table view data source.
-    public var dataSource = DataSource() {
+    open var dataSource = DataSource() {
         willSet {
             dataSource.tableView = nil
         }
@@ -33,8 +33,8 @@ public class TableViewController: UIViewController {
         dataSource.tableView = tableView
     }
 
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        tableView = UITableView(frame: .zero, style: .Plain)
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        tableView = UITableView(frame: .zero, style: .plain)
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         dataSource.tableView = tableView
     }
@@ -44,29 +44,29 @@ public class TableViewController: UIViewController {
     }
 
     public convenience init() {
-        self.init(style: .Plain)
+        self.init(style: .plain)
     }
 
 
     // MARK: - UIViewController
 
-    public override func loadView() {
-        tableView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+    open override func loadView() {
+        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view = tableView
     }
 
-    public override func viewWillAppear(animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         performInitialLoad()
-        clearSelectionsIfNecessary(animated)
+        clearSelectionsIfNecessary(animated: animated)
     }
 
-    public override func viewDidAppear(animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.flashScrollIndicators()
     }
 
-    public override func setEditing(editing: Bool, animated: Bool) {
+    open override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
     }
@@ -74,38 +74,39 @@ public class TableViewController: UIViewController {
 
     // MARK: - Private
 
-    private var initialLoadOnceToken = dispatch_once_t()
+    private var initiallyLoaded = false
     private func performInitialLoad() {
-        dispatch_once(&initialLoadOnceToken) {
-            self.tableView.reloadData()
+        if !initiallyLoaded {
+            tableView.reloadData()
+            initiallyLoaded = true
         }
     }
 
     private func clearSelectionsIfNecessary(animated: Bool) {
-        guard let selectedIndexPaths = tableView.indexPathsForSelectedRows where clearsSelectionOnViewWillAppear else { return }
-        guard let coordinator = transitionCoordinator() else {
-            deselectRowsAtIndexPaths(selectedIndexPaths, animated: animated)
+        guard let selectedIndexPaths = tableView.indexPathsForSelectedRows, clearsSelectionOnViewWillAppear else { return }
+        guard let coordinator = transitionCoordinator else {
+            deselectRows(at: selectedIndexPaths, animated: animated)
             return
         }
 
-        let animation: UIViewControllerTransitionCoordinatorContext -> Void = { [weak self] _ in
-            self?.deselectRowsAtIndexPaths(selectedIndexPaths, animated: animated)
+        let animation: (UIViewControllerTransitionCoordinatorContext) -> Void = { [weak self] _ in
+            self?.deselectRows(at: selectedIndexPaths, animated: animated)
         }
 
-        let completion: UIViewControllerTransitionCoordinatorContext -> Void = { [weak self] context in
-            if context.isCancelled() {
-                self?.selectRowsAtIndexPaths(selectedIndexPaths, animated: animated)
+        let completion: (UIViewControllerTransitionCoordinatorContext) -> Void = { [weak self] context in
+            if context.isCancelled {
+                self?.selectRows(at: selectedIndexPaths, animated: animated)
             }
         }
 
-        coordinator.animateAlongsideTransition(animation, completion: completion)
+        coordinator.animate(alongsideTransition: animation, completion: completion)
     }
 
-    private func selectRowsAtIndexPaths(indexPaths: [NSIndexPath], animated: Bool) {
-        indexPaths.forEach { tableView.selectRowAtIndexPath($0, animated: animated, scrollPosition: .None) }
+    private func selectRows(at indexPaths: [IndexPath], animated: Bool) {
+        indexPaths.forEach { tableView.selectRow(at: $0, animated: animated, scrollPosition: .none) }
     }
 
-    private func deselectRowsAtIndexPaths(indexPaths: [NSIndexPath], animated: Bool) {
-        indexPaths.forEach { tableView.deselectRowAtIndexPath($0, animated: animated) }
+    private func deselectRows(at indexPaths: [IndexPath], animated: Bool) {
+        indexPaths.forEach { tableView.deselectRow(at: $0, animated: animated) }
     }
 }
