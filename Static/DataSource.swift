@@ -42,7 +42,11 @@ public class DataSource: NSObject {
 
     /// Automatically deselect rows after they are selected
     public var automaticallyDeselectRows = true
+    
+    public var willDisplayHeader: ((UIView, Int) -> Void)? = nil
 
+    public var willDisplayFooter: ((UIView, Int) -> Void)? = nil
+    
     private var registeredCellIdentifiers = Set<String>()
 
 
@@ -219,6 +223,14 @@ extension DataSource: UITableViewDataSource {
         return section(at: sectionIndex)?.footer?.viewHeight ?? UITableViewAutomaticDimension
     }
 
+    public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        willDisplayHeader?(view, section)
+    }
+    
+    public func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        willDisplayFooter?(view, section)
+    }
+    
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return row(at: indexPath)?.canEdit ?? false
     }
