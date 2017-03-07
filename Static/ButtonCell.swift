@@ -1,11 +1,11 @@
 import UIKit
 
-public class ButtonCell: UITableViewCell, CellType {
+open class ButtonCell: UITableViewCell, CellType {
 
     // MARK: - Initializers
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .Default, reuseIdentifier: reuseIdentifier)
+        super.init(style: .default, reuseIdentifier: reuseIdentifier)
         initialize()
     }
 
@@ -17,7 +17,7 @@ public class ButtonCell: UITableViewCell, CellType {
 
     // MARK: - UIView
 
-    public override func tintColorDidChange() {
+    open override func tintColorDidChange() {
         super.tintColorDidChange()
         textLabel?.textColor = tintColor
     }
@@ -25,7 +25,7 @@ public class ButtonCell: UITableViewCell, CellType {
 
     // MARK: - Private
 
-    private func initialize() {
+    fileprivate func initialize() {
         tintColorDidChange()
     }
 }

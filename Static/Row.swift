@@ -14,19 +14,19 @@ public struct Row: Hashable, Equatable {
     /// Representation of a row accessory.
     public enum Accessory: Equatable {
         /// No accessory
-        case None
+        case none
 
         /// Chevron
-        case DisclosureIndicator
+        case disclosureIndicator
 
         /// Info button with chevron. Handles selection.
-        case DetailDisclosureButton(Selection)
+        case detailDisclosureButton(Selection)
 
         /// Checkmark
-        case Checkmark
+        case checkmark
 
         /// Info button. Handles selection.
-        case DetailButton(Selection)
+        case detailButton(Selection)
 
         /// Custom view
         case View(UIView)
@@ -34,18 +34,18 @@ public struct Row: Hashable, Equatable {
         /// Table view cell accessory type
         public var type: UITableViewCellAccessoryType {
             switch self {
-            case DisclosureIndicator: return .DisclosureIndicator
-            case DetailDisclosureButton(_): return .DetailDisclosureButton
-            case Checkmark: return .Checkmark
-            case DetailButton(_): return .DetailButton
-            default: return .None
+            case .disclosureIndicator: return .disclosureIndicator
+            case .detailDisclosureButton(_): return .detailDisclosureButton
+            case .checkmark: return .checkmark
+            case .detailButton(_): return .detailButton
+            default: return .none
             }
         }
 
         /// Accessory view
         public var view: UIView? {
             switch self {
-            case View(let view): return view
+            case .View(let view): return view
             default: return nil
             }
         }
@@ -53,8 +53,8 @@ public struct Row: Hashable, Equatable {
         /// Selection block for accessory buttons
         public var selection: Selection? {
             switch self {
-            case DetailDisclosureButton(let selection): return selection
-            case DetailButton(let selection): return selection
+            case .detailDisclosureButton(let selection): return selection
+            case .detailButton(let selection): return selection
             default: return nil
             }
         }
@@ -79,7 +79,7 @@ public struct Row: Hashable, Equatable {
         /// Invoked when selecting the action.
         public let selection: Selection?
         
-        public init(title: String, style: UITableViewRowActionStyle = .Default, backgroundColor: UIColor? = nil, backgroundEffect: UIVisualEffect? = nil, selection: Selection? = nil) {
+        public init(title: String, style: UITableViewRowActionStyle = .default, backgroundColor: UIColor? = nil, backgroundEffect: UIVisualEffect? = nil, selection: Selection? = nil) {
             self.title = title
             self.style = style
             self.backgroundColor = backgroundColor
@@ -144,7 +144,7 @@ public struct Row: Hashable, Equatable {
     // MARK: - Initializers
 
     public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil,
-                image: UIImage? = nil, accessory: Accessory = .None, cellClass: CellType.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], copyAction: CopyAction? = nil, UUID: String = NSUUID().UUIDString) {
+                image: UIImage? = nil, accessory: Accessory = .none, cellClass: CellType.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], copyAction: CopyAction? = nil, UUID: String = Foundation.UUID().uuidString) {
         
         self.UUID = UUID
         self.text = text
@@ -167,11 +167,11 @@ public func ==(lhs: Row, rhs: Row) -> Bool {
 
 public func ==(lhs: Row.Accessory, rhs: Row.Accessory) -> Bool {
     switch (lhs, rhs) {
-    case (.None, .None): return true
-    case (.DisclosureIndicator, .DisclosureIndicator): return true
-    case (.DetailDisclosureButton(_), .DetailDisclosureButton(_)): return true
-    case (.Checkmark, .Checkmark): return true
-    case (.DetailButton(_), .DetailButton(_)): return true
+    case (.none, .none): return true
+    case (.disclosureIndicator, .disclosureIndicator): return true
+    case (.detailDisclosureButton(_), .detailDisclosureButton(_)): return true
+    case (.checkmark, .checkmark): return true
+    case (.detailButton(_), .detailButton(_)): return true
     case (.View(let l), .View(let r)): return l == r
     default: return false
     }
