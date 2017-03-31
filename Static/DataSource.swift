@@ -282,7 +282,10 @@ extension DataSource: UITableViewDelegate {
         return rowForIndexPath(indexPath)?.canCopy ?? false
     }
     
-    public func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+    
+    // The parameter indexPath: IndexPath? is optinal for a purpose. See: https://openradar.appspot.com/31375101
+    public func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath?, withSender sender: Any?) -> Bool {
+        guard let indexPath = indexPath else { return false }
         return action == #selector(UIResponder.copy(_:)) && (rowForIndexPath(indexPath)?.canCopy ?? false)
     }
     
