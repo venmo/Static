@@ -187,6 +187,10 @@ extension DataSource: UITableViewDataSource {
         return UITableViewCell()
     }
 
+    public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return rowForIndexPath(indexPath)?.height ?? 44
+    }
+
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sections.count
     }

@@ -108,6 +108,9 @@ public struct Row: Hashable, Equatable {
     /// View to be used for the row.
     public var cellClass: CellType.Type
 
+    /// Custom height of the row
+    public var height: CGFloat?
+
     /// Additional information for the row.
     public var context: Context?
     
