@@ -57,6 +57,8 @@ public struct Row: Hashable, Equatable {
         }
     }
 
+    public var associatedObject: Any?
+
     public typealias Context = [String: Any]
 
     /// Representation of an editing action, when swiping to edit a cell.
