@@ -6,7 +6,8 @@ import UIKit
 public class DataSource: NSObject {
 
     // MARK: - Properties
-
+    public weak var scrollViewDelegate: UIScrollViewDelegate?
+        
     /// The table view that will use this object as its data source.
     public weak var tableView: UITableView? {
         willSet {
@@ -281,5 +282,9 @@ extension DataSource: UITableViewDelegate {
         if let row = row(at: indexPath) {
             row.accessory.selection?()
         }
+    }
+    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollViewDelegate?.scrollViewDidScroll?(scrollView)
     }
 }
