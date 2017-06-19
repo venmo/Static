@@ -94,7 +94,7 @@ There are several custom cells provided:
 * `SubtitleCell` — Plain `UITableViewCell` with the `.Subtitle` style.
 * `ButtonCell` — Plain `UITableViewCell` with the `.Default` style. The `textLabel`'s `textColor` is set to the cell's `tintColor`.
 
-All of these conform to [`CellType`](Static/CellType.swift). The gist of the protocol is one method:
+All of these conform to [`Cell`](Static/Cell.swift). The gist of the protocol is one method:
 
 ```swift
 func configure(row row: Row)
