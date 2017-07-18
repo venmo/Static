@@ -28,7 +28,7 @@ public class DataSource: NSObject {
     public var sections: [Section] {
         didSet {
             assert(Thread.isMainThread, "You must access Static.DataSource from the main thread.")
-            refresh()
+            refresh(oldSections: oldValue)
         }
     }
 
@@ -72,7 +72,7 @@ public class DataSource: NSObject {
         guard let indexPath = tableView?.indexPathForRow(at: point) else { return nil }
         return row(at: indexPath)
     }
-
+    
 
     // MARK: - Private
 
@@ -83,8 +83,8 @@ public class DataSource: NSObject {
         refresh()
     }
 
-    private func refresh() {
-        refreshTableSections()
+    private func refresh(oldSections: [Section] = []) {
+        refreshTableSections(oldSections: oldSections)
         refreshRegisteredCells()
     }
 
@@ -96,7 +96,7 @@ public class DataSource: NSObject {
 
         return sections[index]
     }
-
+    
     fileprivate func row(at indexPath: IndexPath) -> Row? {
         if let section = section(at: indexPath.section) {
             let rows = section.rows
@@ -104,14 +104,14 @@ public class DataSource: NSObject {
                 return rows[indexPath.row]
             }
         }
-
+        
         assert(false, "Invalid index path: \(indexPath)")
         return nil
     }
-
-    private func refreshTableSections(oldSections: [Section]? = nil) {
+    
+    private func refreshTableSections(oldSections: [Section] = []) {
         guard let tableView = tableView else { return }
-        guard let oldSections = oldSections else {
+        if oldSections.isEmpty {
             tableView.reloadData()
             return
         }
@@ -120,9 +120,9 @@ public class DataSource: NSObject {
         let newCount = sections.count
         let delta = newCount - oldCount
         let animation = UITableViewRowAnimation.automatic
-
+        
         tableView.beginUpdates()
-
+        
         if delta == 0 {
             tableView.reloadSections(IndexSet(integersIn: 0..<newCount), with: animation)
         } else {
@@ -137,12 +137,12 @@ public class DataSource: NSObject {
                 let range: Range<IndexSet.Element> = start..<(start - delta)
                 tableView.deleteSections(IndexSet(integersIn: range), with: animation)
             }
-
+            
             // Reload existing sections
             let commonCount = min(oldCount, newCount)
             tableView.reloadSections(IndexSet(integersIn: 0..<commonCount), with: animation)
         }
-
+        
         tableView.endUpdates()
     }
 
