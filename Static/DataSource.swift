@@ -204,9 +204,12 @@ extension DataSource: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, heightForHeaderInSection sectionIndex: Int) -> CGFloat {
-        var headerHeight = section(at: sectionIndex)?.header?.viewHeight ?? UITableViewAutomaticDimension
-        if headerHeight == 0 {
-            headerHeight = UITableViewAutomaticDimension
+        var headerHeight: CGFloat = 0
+        if let headerView = section(at: sectionIndex)?.header {
+            headerHeight = headerView.viewHeight ?? UITableViewAutomaticDimension
+            if headerHeight == 0 {
+                headerHeight = UITableViewAutomaticDimension
+            }
         }
         return headerHeight
     }
@@ -220,9 +223,12 @@ extension DataSource: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, heightForFooterInSection sectionIndex: Int) -> CGFloat {
-        var footerHeight = section(at: sectionIndex)?.footer?.viewHeight ?? UITableViewAutomaticDimension
-        if footerHeight == 0 {
-            footerHeight = UITableViewAutomaticDimension
+        var footerHeight: CGFloat = 0
+        if let footerView = section(at: sectionIndex)?.footer {
+            footerHeight = footerView.viewHeight ?? UITableViewAutomaticDimension
+            if footerHeight == 0 {
+                footerHeight = UITableViewAutomaticDimension
+            }
         }
         return footerHeight
     }
