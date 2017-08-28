@@ -69,7 +69,7 @@ You can configure `Section`s and `Row`s for anything you want. Here's another ex
 
 ```swift
 Section(header: "Money", rows: [
-    Row(text: "Balance", detailText: "$12.00", accessory: .DisclosureIndicator, selection: {
+    Row(text: "Balance", detailText: "$12.00", accessory: .disclosureIndicator, selection: {
         // Show statement
     }),
     Row(text: "Transfer to Bank…", cellClass: ButtonCell.self, selection: {
@@ -94,7 +94,7 @@ There are several custom cells provided:
 * `SubtitleCell` — Plain `UITableViewCell` with the `.Subtitle` style.
 * `ButtonCell` — Plain `UITableViewCell` with the `.Default` style. The `textLabel`'s `textColor` is set to the cell's `tintColor`.
 
-All of these conform to [`CellType`](Static/CellType.swift). The gist of the protocol is one method:
+All of these conform to [`Cell`](Static/Cell.swift). The gist of the protocol is one method:
 
 ```swift
 func configure(row row: Row)
@@ -110,23 +110,23 @@ This gets called by [`DataSource`](Static/DataSource.swift) (which we'll look at
 `Row` has an `accessory` property that is an `Accessory` enum. This has cases for all of `UITableViewCellAccessoryType`. Here's a row with a checkmark:
 
 ```swift
-Row(text: "Buy milk", accessory: .Checkmark)
+Row(text: "Buy milk", accessory: .checkmark)
 ```
 
 Easy enough. Some of the system accessory types are selectable (like that little *i* button with a circle around it). You can make those and handle the selection like this:
 
 ```swift
-Row(text: "Sam Soffes", accessory: .DetailButton({
+Row(text: "Sam Soffes", accessory: .detailButton({
   // Show info about this contact
 }))
 ```
 
 Again, you could use whatever function here. Instance methods are great for this.
 
-There is an additional case called `.View` that takes a custom view. Here's a `Row` with a custom accessory view:
+There is an additional case called `.view` that takes a custom view. Here's a `Row` with a custom accessory view:
 
 ```swift
-Row(text: "My Profile", accessory: .View(someEditButton))
+Row(text: "My Profile", accessory: .view(someEditButton))
 ```
 
 
@@ -137,7 +137,7 @@ Row(text: "My Profile", accessory: .View(someEditButton))
 For a custom view, you can simply specify the `View` case:
 
 ```swift
-Section(header: .View(yourView))
+Section(header: .view(yourView))
 ```
 
 The height returned to the table view will be the view's `bounds.height` so be sure it's already sized properly.
