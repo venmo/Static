@@ -204,7 +204,13 @@ extension DataSource: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, heightForHeaderInSection sectionIndex: Int) -> CGFloat {
-        return section(at: sectionIndex)?.header?.viewHeight ?? 0
+        guard let headerView = section(at: sectionIndex)?.header else { return 0 }
+
+        var headerHeight = headerView.viewHeight
+        if headerHeight == 0 {
+            headerHeight = UITableViewAutomaticDimension
+        }
+        return headerHeight
     }
 
     public func tableView(_ tableView: UITableView, titleForFooterInSection sectionIndex: Int) -> String? {
@@ -216,7 +222,13 @@ extension DataSource: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, heightForFooterInSection sectionIndex: Int) -> CGFloat {
-        return section(at: sectionIndex)?.footer?.viewHeight ?? 0
+        guard let footerView = section(at: sectionIndex)?.footer else { return 0 }
+
+        var footerHeight = footerView.viewHeight
+        if footerHeight == 0 {
+            footerHeight = UITableViewAutomaticDimension
+        }
+        return footerHeight
     }
 
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
