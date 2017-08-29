@@ -27,11 +27,8 @@ public struct Section: Hashable, Equatable {
             }
         }
 
-        var viewHeight: CGFloat {
-            switch self {
-            case .title: return UITableViewAutomaticDimension
-            case .view(let extremityView): return extremityView.bounds.height
-            }
+        var viewHeight: CGFloat? {
+            return _view?.bounds.height
         }
     }
 
