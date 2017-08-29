@@ -13,6 +13,10 @@ public struct Section: Hashable, Equatable {
         /// Custom view for the header or footer. The height will be the view's `bounds.height`.
         case view(UIView)
 
+        // View Sized with autolayout
+        // If Pre iOS11: Requires tableview estimatedSectionHeader/FooterHeight to be > 0
+        case autoLayoutView(UIView)
+
         var _title: String? {
             switch self {
             case .title(let extremityTitle): return extremityTitle
@@ -23,12 +27,16 @@ public struct Section: Hashable, Equatable {
         var _view: UIView? {
             switch self {
             case .view(let extremityView): return extremityView
+            case .autoLayoutView(let extremityView): return extremityView
             default: return nil
             }
         }
 
-        var viewHeight: CGFloat? {
-            return _view?.bounds.height
+        var viewHeight: CGFloat {
+            switch self {
+            case .title(_), .autoLayoutView(_): return UITableViewAutomaticDimension
+            case .view(let view): return view.bounds.height
+            }
         }
     }
 
