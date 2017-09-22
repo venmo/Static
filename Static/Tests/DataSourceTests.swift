@@ -51,7 +51,9 @@ class DataSourceTests: XCTestCase {
                 Row(text: "Merrily", detailText: "merrily", accessory: .disclosureIndicator)
             ])
         ]
-        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))!
+
+        let cell = dataSource.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0))
+
         XCTAssertEqual("Merrily", cell.textLabel!.text!)
         XCTAssertEqual("merrily", cell.detailTextLabel!.text!)
         XCTAssertEqual(UITableViewCellAccessoryType.disclosureIndicator, cell.accessoryType)
