@@ -9,6 +9,7 @@ Simple static table views for iOS in Swift. Static's goal is to separate model d
 
 | Swift Version | Static Version |
 | ------------- | -------------- |
+| 3.2+          | 2.1            |
 | 3.0.1         | 2.0.1          |
 | 3.0           | 2.0            |
 | 2.3           | 1.2            |
