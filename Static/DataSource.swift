@@ -204,13 +204,7 @@ extension DataSource: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, heightForHeaderInSection sectionIndex: Int) -> CGFloat {
-        guard let headerView = section(at: sectionIndex)?.header else { return 0 }
-
-        var headerHeight = headerView.viewHeight
-        if headerHeight == 0 {
-            headerHeight = UITableViewAutomaticDimension
-        }
-        return headerHeight
+        return section(at: sectionIndex)?.header?.viewHeight ?? tableView.style.defaultSectionExtremityHeight
     }
 
     public func tableView(_ tableView: UITableView, titleForFooterInSection sectionIndex: Int) -> String? {
@@ -222,13 +216,7 @@ extension DataSource: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, heightForFooterInSection sectionIndex: Int) -> CGFloat {
-        guard let footerView = section(at: sectionIndex)?.footer else { return 0 }
-
-        var footerHeight = footerView.viewHeight
-        if footerHeight == 0 {
-            footerHeight = UITableViewAutomaticDimension
-        }
-        return footerHeight
+        return section(at: sectionIndex)?.footer?.viewHeight ?? tableView.style.defaultSectionExtremityHeight
     }
 
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -292,6 +280,15 @@ extension DataSource: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         if let row = row(at: indexPath) {
             row.accessory.selection?()
+        }
+    }
+}
+
+extension UITableViewStyle {
+    var defaultSectionExtremityHeight: CGFloat {
+        switch self {
+        case .plain: return 0
+        case .grouped: return UITableViewAutomaticDimension
         }
     }
 }
