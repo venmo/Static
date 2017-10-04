@@ -28,6 +28,11 @@ class ViewController: TableViewController {
         
         tableView.rowHeight = 50
 
+        // Note:
+        // Required to be set pre iOS11, to support autosizing
+        tableView.estimatedSectionHeaderHeight = 13.5
+        tableView.estimatedSectionFooterHeight = 13.5
+
         dataSource.sections = [
             Section(header: "Styles", rows: [
                 Row(text: "Value 1", detailText: "Detail", cellClass: Value1Cell.self),
@@ -69,7 +74,8 @@ class ViewController: TableViewController {
                         self.showAlert(title: "Deleted.")
                     })
                 ])
-            ])
+            ]),
+            Section(header: "AutoSized SectionFooterView", rows: [], footer: Section.Extremity.autoLayoutView(LargeAutoSizedExtremityView()))
         ]
     }
 
@@ -80,5 +86,30 @@ class ViewController: TableViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: button, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+}
+
+class LargeAutoSizedExtremityView: UIView {
+    lazy var label: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Is this the real life?\nIs this just fantasy?\nCaught in a landslide,\nNo escape from reality."
+        return label
+    }()
+
+    init() {
+        super.init(frame: .zero)
+
+        layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        addSubview(label)
+        label.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor).isActive = true
+        label.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor).isActive = true
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
