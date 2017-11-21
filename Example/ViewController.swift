@@ -33,6 +33,7 @@ class ViewController: TableViewController {
         tableView.estimatedSectionHeaderHeight = 13.5
         tableView.estimatedSectionFooterHeight = 13.5
 
+        dataSource = DataSource(tableViewDelegate: self)
         dataSource.sections = [
             Section(header: "Styles", rows: [
                 Row(text: "Value 1", detailText: "Detail", cellClass: Value1Cell.self),
@@ -86,6 +87,25 @@ class ViewController: TableViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: button, style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+}
+
+extension TableViewController: UITableViewDelegate {
+    // MARK: - UIScrollViewDelegate example functions
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        // You can get UIScrollViewDelegate functions forwarded, even though the `DataSource` instance is the true delegate
+        // ...
+    }
+    
+    // MARK: - UITableViewDelegate example functions
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // You can get UITableViewDelegate functions forwarded, even though the `DataSource` instance is the true delegate
+        // ...
+    }
+
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // The Row object's `selection` property will handle most of your use cases, but
+        // if you need to do something additional you can still implement this function.
     }
 }
 

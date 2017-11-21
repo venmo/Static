@@ -138,4 +138,31 @@ class DataSourceTests: XCTestCase {
         XCTAssertEqual(dataSource, tableView2.dataSource as? DataSource)
         XCTAssertEqual(dataSource, tableView2.delegate as? DataSource)
     }
+
+    func testTableViewDelegateForwarding() {
+        // Sample object that conforms to `UITableViewDelegate` protocol
+        class TestTableViewDelegate: NSObject, UITableViewDelegate {
+            static var delegateDidForward = false
+
+            func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+                TestTableViewDelegate.delegateDidForward = true
+            }
+        }
+
+        let sampleDelegate = TestTableViewDelegate()
+        let dataSource2 = DataSource(tableViewDelegate: sampleDelegate)
+
+        XCTAssertNotNil(dataSource2.tableViewDelegate)
+
+        let forwardingTarget = dataSource2.forwardingTarget(for: #selector(UITableViewDelegate.tableView(_:willDisplay:forRowAt:)))
+        XCTAssertNotNil(forwardingTarget)
+        XCTAssertNotNil(forwardingTarget as? TestTableViewDelegate)
+
+        // Test actual message
+        TestTableViewDelegate.delegateDidForward = false
+
+        (dataSource2 as UITableViewDelegate).tableView!(UITableView(), willDisplay: UITableViewCell(), forRowAt: IndexPath())
+        XCTAssertTrue(TestTableViewDelegate.delegateDidForward)
+
+    }
 }
