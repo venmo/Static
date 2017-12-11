@@ -48,12 +48,13 @@ public class DataSource: NSObject {
 
     // MARK: - Initializers
 
-    /// Initialize with optional `tableView` and `sections`.
-    public init(tableView: UITableView? = nil, sections: [Section]? = nil) {
+    /// Initialize with optional `tableView`, `sections` and `tableViewDelegate`.
+    public init(tableView: UITableView? = nil, sections: [Section]? = nil, tableViewDelegate: UITableViewDelegate? = nil) {
         assert(Thread.isMainThread, "You must access Static.DataSource from the main thread.")
 
         self.tableView = tableView
         self.sections = sections ?? []
+        self.tableViewDelegate = tableViewDelegate
 
         super.init()
 
@@ -73,6 +74,23 @@ public class DataSource: NSObject {
         return row(at: indexPath)
     }
 
+    // MARK: - Forwarding UITableViewDelegate messages
+
+    /// If you have a use for `UITableViewDelegate` or `UIScrollViewDelegate` messages, you can use this property to receive those messages. `DataSource` needs to be the `UITableView` instance's true `delegate`, but will forward messages to this property.
+    /// You must pass this in the `init` function.
+    weak public private(set) var tableViewDelegate: UITableViewDelegate?
+
+    override public func forwardingTarget(for aSelector: Selector!) -> Any? {
+        if let forwardDelegate = tableViewDelegate, forwardDelegate.responds(to: aSelector) {
+            return forwardDelegate
+        } else {
+            return super.forwardingTarget(for: aSelector)
+        }
+    }
+
+    override public func responds(to aSelector: Selector!) -> Bool {
+        return super.responds(to: aSelector) || tableViewDelegate?.responds(to: aSelector) == true
+    }
 
     // MARK: - Private
 
@@ -275,12 +293,16 @@ extension DataSource: UITableViewDelegate {
         if let row = row(at: indexPath) {
             row.selection?()
         }
+
+        tableViewDelegate?.tableView?(tableView, didSelectRowAt: indexPath)
     }
 
     public func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         if let row = row(at: indexPath) {
             row.accessory.selection?()
         }
+
+        tableViewDelegate?.tableView?(tableView, accessoryButtonTappedForRowWith: indexPath)
     }
 }
 
