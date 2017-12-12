@@ -3,10 +3,6 @@ import UIKit
 /// Table view controller with a `DataSource` setup to use its `tableView`.
 open class TableViewController: UIViewController {
 
-    private lazy var __once: () = { [weak self] in
-            self?.tableView.reloadData()
-    }()
-
     // MARK: - Properties
 
     /// Returns the table view managed by the controller object.
@@ -62,7 +58,7 @@ open class TableViewController: UIViewController {
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         performInitialLoad()
-        clearSelectionsIfNecessary(animated)
+        clearSelectionsIfNecessary(animated: animated)
     }
 
     open override func viewDidAppear(_ animated: Bool) {
@@ -78,36 +74,39 @@ open class TableViewController: UIViewController {
 
     // MARK: - Private
 
-    fileprivate var initialLoadOnceToken = Int()
-    fileprivate func performInitialLoad() {
-        _ = self.__once
+    private var initiallyLoaded = false
+    private func performInitialLoad() {
+        if !initiallyLoaded {
+            tableView.reloadData()
+            initiallyLoaded = true
+        }
     }
 
-    fileprivate func clearSelectionsIfNecessary(_ animated: Bool) {
+    private func clearSelectionsIfNecessary(animated: Bool) {
         guard let selectedIndexPaths = tableView.indexPathsForSelectedRows, clearsSelectionOnViewWillAppear else { return }
         guard let coordinator = transitionCoordinator else {
-            deselectRowsAtIndexPaths(selectedIndexPaths, animated: animated)
+            deselectRows(at: selectedIndexPaths, animated: animated)
             return
         }
 
         let animation: (UIViewControllerTransitionCoordinatorContext) -> Void = { [weak self] _ in
-            self?.deselectRowsAtIndexPaths(selectedIndexPaths, animated: animated)
+            self?.deselectRows(at: selectedIndexPaths, animated: animated)
         }
 
         let completion: (UIViewControllerTransitionCoordinatorContext) -> Void = { [weak self] context in
             if context.isCancelled {
-                self?.selectRowsAtIndexPaths(selectedIndexPaths, animated: animated)
+                self?.selectRows(at: selectedIndexPaths, animated: animated)
             }
         }
 
         coordinator.animate(alongsideTransition: animation, completion: completion)
     }
 
-    fileprivate func selectRowsAtIndexPaths(_ indexPaths: [IndexPath], animated: Bool) {
+    private func selectRows(at indexPaths: [IndexPath], animated: Bool) {
         indexPaths.forEach { tableView.selectRow(at: $0, animated: animated, scrollPosition: .none) }
     }
 
-    fileprivate func deselectRowsAtIndexPaths(_ indexPaths: [IndexPath], animated: Bool) {
+    private func deselectRows(at indexPaths: [IndexPath], animated: Bool) {
         indexPaths.forEach { tableView.deselectRow(at: $0, animated: animated) }
     }
 }

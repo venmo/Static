@@ -1,7 +1,7 @@
 import UIKit
 import Static
 
-final class NibTableViewCell: UITableViewCell, CellType {
+final class NibTableViewCell: UITableViewCell, Cell {
 
     // MARK: - Properties
 

@@ -29,7 +29,7 @@ public struct Row: Hashable, Equatable {
         case detailButton(Selection)
 
         /// Custom view
-        case View(UIView)
+        case view(UIView)
 
         /// Table view cell accessory type
         public var type: UITableViewCellAccessoryType {
@@ -45,7 +45,7 @@ public struct Row: Hashable, Equatable {
         /// Accessory view
         public var view: UIView? {
             switch self {
-            case .View(let view): return view
+            case .view(let view): return view
             default: return nil
             }
         }
@@ -91,7 +91,7 @@ public struct Row: Hashable, Equatable {
     // MARK: - Properties
 
     /// Unique identifier for the row.
-    public let UUID: String
+    public let uuid: String
 
     /// The row's primary text.
     public var text: String?
@@ -109,7 +109,7 @@ public struct Row: Hashable, Equatable {
     public var selection: Selection?
 
     /// View to be used for the row.
-    public var cellClass: CellType.Type
+    public var cellClass: Cell.Type
 
     /// Additional information for the row.
     public var context: Context?
@@ -137,16 +137,16 @@ public struct Row: Hashable, Equatable {
     }
 
     public var hashValue: Int {
-        return UUID.hashValue
+        return uuid.hashValue
     }
 
 
     // MARK: - Initializers
 
     public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil,
-                image: UIImage? = nil, accessory: Accessory = .none, cellClass: CellType.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], copyAction: CopyAction? = nil, UUID: String = Foundation.UUID().uuidString) {
+        image: UIImage? = nil, accessory: Accessory = .none, cellClass: Cell.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], copyAction: CopyAction? = nil, uuid: String = UUID().uuidString) {
         
-        self.UUID = UUID
+        self.uuid = uuid
         self.text = text
         self.detailText = detailText
         self.selection = selection
@@ -161,7 +161,7 @@ public struct Row: Hashable, Equatable {
 
 
 public func ==(lhs: Row, rhs: Row) -> Bool {
-    return lhs.UUID == rhs.UUID
+    return lhs.uuid == rhs.uuid
 }
 
 
@@ -172,7 +172,7 @@ public func ==(lhs: Row.Accessory, rhs: Row.Accessory) -> Bool {
     case (.detailDisclosureButton(_), .detailDisclosureButton(_)): return true
     case (.checkmark, .checkmark): return true
     case (.detailButton(_), .detailButton(_)): return true
-    case (.View(let l), .View(let r)): return l == r
+    case (.view(let l), .view(let r)): return l == r
     default: return false
     }
 }

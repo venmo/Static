@@ -28,8 +28,8 @@ class DataSourceTests: XCTestCase {
             Section(rows: [Row(text: "Row"), Row(text: "Row")])
         ]
         XCTAssertEqual(2, tableView.numberOfSections)
-        XCTAssertEqual(1, tableView.numberOfRowsInSection(0))
-        XCTAssertEqual(2, tableView.numberOfRowsInSection(1))
+        XCTAssertEqual(1, tableView.numberOfRows(inSection: 0))
+        XCTAssertEqual(2, tableView.numberOfRows(inSection: 1))
 
         dataSource.sections = [
             Section(rows: [Row(text: "Your"), Row(text: "Boat")]),
@@ -37,9 +37,9 @@ class DataSourceTests: XCTestCase {
             Section(rows: [Row(text: "Merrily"), Row(text: "Merrily")])
         ]
         XCTAssertEqual(3, tableView.numberOfSections)
-        XCTAssertEqual(2, tableView.numberOfRowsInSection(0))
-        XCTAssertEqual(4, tableView.numberOfRowsInSection(1))
-        XCTAssertEqual(2, tableView.numberOfRowsInSection(2))
+        XCTAssertEqual(2, tableView.numberOfRows(inSection: 0))
+        XCTAssertEqual(4, tableView.numberOfRows(inSection: 1))
+        XCTAssertEqual(2, tableView.numberOfRows(inSection: 2))
 
         dataSource.sections = []
         XCTAssertEqual(0, tableView.numberOfSections)
@@ -48,13 +48,15 @@ class DataSourceTests: XCTestCase {
     func testCellForRowAtIndexPath() {
         dataSource.sections = [
             Section(rows: [
-                Row(text: "Merrily", detailText: "merrily", accessory: .DisclosureIndicator)
+                Row(text: "Merrily", detailText: "merrily", accessory: .disclosureIndicator)
             ])
         ]
-        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))!
+
+        let cell = dataSource.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0))
+
         XCTAssertEqual("Merrily", cell.textLabel!.text!)
         XCTAssertEqual("merrily", cell.detailTextLabel!.text!)
-        XCTAssertEqual(UITableViewCellAccessoryType.DisclosureIndicator, cell.accessoryType)
+        XCTAssertEqual(UITableViewCellAccessoryType.disclosureIndicator, cell.accessoryType)
     }
 
     func testExtremityTitles() {
@@ -74,7 +76,7 @@ class DataSourceTests: XCTestCase {
         let header = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 100))
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
         dataSource.sections = [
-            Section(header: .View(header), footer: .View(footer))
+            Section(header: .view(header), footer: .view(footer))
         ]
 
         XCTAssertEqual(header, dataSource.tableView(tableView, viewForHeaderInSection: 0)!)
@@ -87,16 +89,16 @@ class DataSourceTests: XCTestCase {
         dataSource.sections = [
             Section(rows: [Row(text: "Cookies")])
         ]
-        XCTAssertFalse(dataSource.tableView(tableView, shouldHighlightRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0)))
+        XCTAssertFalse(dataSource.tableView(tableView, shouldHighlightRowAt: IndexPath(row: 0, section: 0)))
 
         dataSource.sections = [
             Section(rows: [Row(text: "Cupcakes", selection: {})])
         ]
-        XCTAssertTrue(dataSource.tableView(tableView, shouldHighlightRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0)))
+        XCTAssertTrue(dataSource.tableView(tableView, shouldHighlightRowAt: IndexPath(row: 0, section: 0)))
     }
 
     func testSelection() {
-        let expectation = expectationWithDescription("Selected")
+        let expectation = self.expectation(description: "Selected")
         let selection = {
             expectation.fulfill()
         }
@@ -104,24 +106,24 @@ class DataSourceTests: XCTestCase {
         dataSource.sections = [
             Section(rows: [Row(text: "Button", selection: selection)])
         ]
-        dataSource.tableView(tableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
-        waitForExpectationsWithTimeout(1, handler: nil)
+        dataSource.tableView(tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+        waitForExpectations(timeout: 1, handler: nil)
     }
 
     func testAccessorySelection() {
-        let expectation = expectationWithDescription("Accessory Selected")
+        let expectation = self.expectation(description: "Accessory Selected")
         let selection = {
             expectation.fulfill()
         }
 
-        let accessory = Row.Accessory.DetailButton(selection)
+        let accessory = Row.Accessory.detailButton(selection)
 
         dataSource.sections = [
             Section(rows: [Row(text: "Banana Cream Pie", accessory: accessory)])
         ]
 
-        dataSource.tableView(tableView, accessoryButtonTappedForRowWithIndexPath: NSIndexPath(forRow: 0, inSection: 0))
-        waitForExpectationsWithTimeout(1, handler: nil)
+        dataSource.tableView(tableView, accessoryButtonTappedForRowWith: IndexPath(row: 0, section: 0))
+        waitForExpectations(timeout: 1, handler: nil)
     }
 
     func testChangeTableView() {
@@ -135,5 +137,32 @@ class DataSourceTests: XCTestCase {
         XCTAssertNil(tableView.delegate)
         XCTAssertEqual(dataSource, tableView2.dataSource as? DataSource)
         XCTAssertEqual(dataSource, tableView2.delegate as? DataSource)
+    }
+
+    func testTableViewDelegateForwarding() {
+        // Sample object that conforms to `UITableViewDelegate` protocol
+        class TestTableViewDelegate: NSObject, UITableViewDelegate {
+            static var delegateDidForward = false
+
+            func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+                TestTableViewDelegate.delegateDidForward = true
+            }
+        }
+
+        let sampleDelegate = TestTableViewDelegate()
+        let dataSource2 = DataSource(tableViewDelegate: sampleDelegate)
+
+        XCTAssertNotNil(dataSource2.tableViewDelegate)
+
+        let forwardingTarget = dataSource2.forwardingTarget(for: #selector(UITableViewDelegate.tableView(_:willDisplay:forRowAt:)))
+        XCTAssertNotNil(forwardingTarget)
+        XCTAssertNotNil(forwardingTarget as? TestTableViewDelegate)
+
+        // Test actual message
+        TestTableViewDelegate.delegateDidForward = false
+
+        (dataSource2 as UITableViewDelegate).tableView!(UITableView(), willDisplay: UITableViewCell(), forRowAt: IndexPath())
+        XCTAssertTrue(TestTableViewDelegate.delegateDidForward)
+
     }
 }

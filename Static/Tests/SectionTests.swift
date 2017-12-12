@@ -1,23 +1,23 @@
 import XCTest
-import Static
+@testable import Static
 
 class SectionTests: XCTestCase {
 
     func testInit() {
         let rows = [Row(text: "Row")]
-        let section = Section(UUID: "1234", header: "Header", rows: rows, footer: "Footer")
-        XCTAssertEqual("1234", section.UUID)
-        XCTAssertEqual("Header", section.header!.title!)
+        let section = Section(header: "Header", rows: rows, footer: "Footer", uuid: "1234")
+        XCTAssertEqual("1234", section.uuid)
+        XCTAssertEqual("Header", section.header!._title!)
         XCTAssertEqual(rows, section.rows)
-        XCTAssertEqual("Footer", section.footer!.title!)
+        XCTAssertEqual("Footer", section.footer!._title!)
     }
 
     func testExtermityViews() {
         let header = UIView()
         let footer = UIView()
-        let section = Section(header: .View(header), footer: .View(footer))
-        XCTAssertEqual(header, section.header!.view!)
-        XCTAssertEqual(footer, section.footer!.view!)
+        let section = Section(header: .view(header), footer: .view(footer))
+        XCTAssertEqual(header, section.header!._view!)
+        XCTAssertEqual(footer, section.footer!._view!)
     }
 
     func testHashable() {

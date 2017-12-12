@@ -1,11 +1,11 @@
 import UIKit
 import Static
 
-final class CustomTableViewCell: UITableViewCell, CellType {
+final class CustomTableViewCell: UITableViewCell, Cell {
 
     // MARK: - Properties
 
-    fileprivate lazy var centeredLabel: UILabel = {
+    private lazy var centeredLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = .white
