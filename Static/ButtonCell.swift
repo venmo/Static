@@ -1,6 +1,6 @@
 import UIKit
 
-public class ButtonCell: UITableViewCell, Cell {
+open class ButtonCell: UITableViewCell, Cell {
 
     // MARK: - Initializers
 
@@ -17,7 +17,7 @@ public class ButtonCell: UITableViewCell, Cell {
 
     // MARK: - UIView
 
-    public override func tintColorDidChange() {
+    open override func tintColorDidChange() {
         super.tintColorDidChange()
         textLabel?.textColor = tintColor
     }
