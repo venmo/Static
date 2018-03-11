@@ -55,6 +55,9 @@ class ViewController: TableViewController {
                 Row(text: "Detail Button", accessory: .detailButton({ [unowned self] in
                     self.showAlert(title: "Detail Button")
                 })),
+                Row(text: "UISwitch", accessory: .switchToggle(value: false) { [unowned self] newValue in
+                    self.showAlert(title: "Switch Toggled: \(newValue ? "On" : "Off")")
+                }),
                 Row(text: "Custom View", accessory: .view(customAccessory))
             ], footer: "Try tapping the ⓘ buttons."),
             Section(header: "Selection", rows: [
