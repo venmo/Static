@@ -20,6 +20,7 @@ open class ButtonCell: UITableViewCell, Cell {
     open override func tintColorDidChange() {
         super.tintColorDidChange()
         textLabel?.textColor = tintColor
+        
     }
 
 
