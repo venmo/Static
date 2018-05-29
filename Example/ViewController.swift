@@ -26,7 +26,7 @@ class ViewController: TableViewController {
 
         title = "Static"
         
-        tableView.rowHeight = 50
+        tableView.estimatedRowHeight = 60
 
         // Note:
         // Required to be set pre iOS11, to support autosizing
@@ -78,6 +78,11 @@ class ViewController: TableViewController {
                         self.showAlert(title: "Deleted.")
                     })
                 ])
+            ]),
+            Section(header: "Copying", rows: [
+                Row(text: "Tap and hold this row", copyAction: { [unowned self] row in
+                    self.showAlert(title: "Copied.")
+                })
             ]),
             Section(header: "AutoSized SectionFooterView", rows: [], footer: Section.Extremity.autoLayoutView(LargeAutoSizedExtremityView()))
         ]

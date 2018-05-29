@@ -304,6 +304,20 @@ extension DataSource: UITableViewDelegate {
 
         tableViewDelegate?.tableView?(tableView, accessoryButtonTappedForRowWith: indexPath)
     }
+    
+    public func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        return row(at: indexPath)?.canCopy ?? false
+    }
+    
+    public func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        return action == #selector(UIResponder.copy(_:)) && (row(at: indexPath)?.canCopy ?? false)
+    }
+    
+    public func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+        if let row = row(at: indexPath), action == #selector(UIResponder.copy(_:)) {
+            row.copyAction?(row)
+        }
+    }
 }
 
 extension UITableViewStyle {

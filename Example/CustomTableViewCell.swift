@@ -22,13 +22,10 @@ final class CustomTableViewCell: UITableViewCell, Cell {
 
         contentView.addSubview(centeredLabel)
 
-        NSLayoutConstraint.activate([
-            centeredLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            centeredLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 8),
-            centeredLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            centeredLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 8),
-            centeredLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -8)
-        ])
+        let views = ["centeredLabel": centeredLabel]
+        var constraints: [NSLayoutConstraint] = NSLayoutConstraint.constraints(withVisualFormat: "|-[centeredLabel]-|", options: [], metrics: nil, views: views)
+        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-[centeredLabel]-|", options: [], metrics: nil, views: views)
+        NSLayoutConstraint.activate(constraints)
     }
 
     required init?(coder aDecoder: NSCoder) {

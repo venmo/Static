@@ -284,7 +284,7 @@
 					};
 					36748D4E1B5034EC0046F207 = {
 						CreatedOnToolsVersion = 7.0;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};

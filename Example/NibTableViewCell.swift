@@ -5,7 +5,7 @@ final class NibTableViewCell: UITableViewCell, Cell {
 
     // MARK: - Properties
 
-    @IBOutlet weak private var centeredLabel: UILabel!
+    @IBOutlet weak fileprivate var centeredLabel: UILabel!
 
     
     // MARK: - CellType

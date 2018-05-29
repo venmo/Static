@@ -4,6 +4,9 @@ import UIKit
 public typealias Selection = () -> Void
 public typealias ValueChange = (Bool) -> ()
 
+/// Row copy callback
+public typealias CopyAction = (Row) -> Void
+
 /// Representation of a table row.
 public struct Row: Hashable, Equatable {
 
@@ -125,7 +128,14 @@ public struct Row: Hashable, Equatable {
     
     /// Actions to show when swiping the cell, such as Delete.
     public var editActions: [EditAction]
+    
+    /// Action to run when the row is selected to copy
+    public var copyAction: CopyAction?
 
+    var canCopy: Bool {
+        return copyAction != nil
+    }
+    
     var canEdit: Bool {
         return editActions.count > 0
     }
@@ -146,7 +156,7 @@ public struct Row: Hashable, Equatable {
     // MARK: - Initializers
 
     public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil,
-        image: UIImage? = nil, accessory: Accessory = .none, cellClass: Cell.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], uuid: String = UUID().uuidString) {
+        image: UIImage? = nil, accessory: Accessory = .none, cellClass: Cell.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], copyAction: CopyAction? = nil, uuid: String = UUID().uuidString) {
         
         self.uuid = uuid
         self.text = text
@@ -157,6 +167,7 @@ public struct Row: Hashable, Equatable {
         self.cellClass = cellClass ?? Value1Cell.self
         self.context = context
         self.editActions = editActions
+        self.copyAction = copyAction
     }
 }
 
