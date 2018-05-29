@@ -23,6 +23,10 @@ public struct Row: Hashable, Equatable {
         /// Checkmark
         case checkmark
 
+        /// Checkmark Placeholder.
+        /// Allows spacing to continue to work when switching back & forth between checked states.
+        case checkmarkPlaceholder
+
         /// Info button. Handles selection.
         case detailButton(Selection)
         
@@ -49,6 +53,8 @@ public struct Row: Hashable, Equatable {
             case .view(let view): return view
             case .switchToggle(let value, let valueChange):
                 return SwitchAccessory(initialValue: value, valueChange: valueChange)
+            case .checkmarkPlaceholder:
+                return UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
             default: return nil
             }
         }
