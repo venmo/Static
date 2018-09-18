@@ -6,7 +6,7 @@ open class TableViewController: UIViewController {
     // MARK: - Properties
 
     /// Returns the table view managed by the controller object.
-    open let tableView: UITableView
+    public let tableView: UITableView
 
     /// A Boolean value indicating if the controller clears the selection when the table appears.
     ///
