@@ -27,7 +27,7 @@ open class TableViewController: UIViewController {
 
     // MARK: - Initialization
 
-    public init(style: UITableViewStyle) {
+    public init(style: UITableView.Style) {
         tableView = UITableView(frame: .zero, style: style)
         super.init(nibName: nil, bundle: nil)
         dataSource.tableView = tableView

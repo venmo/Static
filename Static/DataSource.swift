@@ -137,7 +137,7 @@ public class DataSource: NSObject {
         let oldCount = oldSections.count
         let newCount = sections.count
         let delta = newCount - oldCount
-        let animation = UITableViewRowAnimation.automatic
+        let animation = UITableView.RowAnimation.automatic
 
         tableView.beginUpdates()
 
@@ -306,11 +306,11 @@ extension DataSource: UITableViewDelegate {
     }
 }
 
-extension UITableViewStyle {
+extension UITableView.Style {
     var defaultSectionExtremityHeight: CGFloat {
         switch self {
         case .plain: return 0
-        case .grouped: return UITableViewAutomaticDimension
+        case .grouped: return UITableView.automaticDimension
         }
     }
 }
