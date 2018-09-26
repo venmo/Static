@@ -34,7 +34,7 @@ public struct Section: Hashable, Equatable {
 
         var viewHeight: CGFloat {
             switch self {
-            case .title(_), .autoLayoutView(_): return UITableViewAutomaticDimension
+            case .title(_), .autoLayoutView(_): return UITableView.automaticDimension
             case .view(let view): return view.bounds.height
             }
         }

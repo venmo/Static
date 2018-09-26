@@ -6,7 +6,7 @@ open class TableViewController: UIViewController {
     // MARK: - Properties
 
     /// Returns the table view managed by the controller object.
-    open let tableView: UITableView
+    public let tableView: UITableView
 
     /// A Boolean value indicating if the controller clears the selection when the table appears.
     ///
@@ -27,7 +27,7 @@ open class TableViewController: UIViewController {
 
     // MARK: - Initialization
 
-    public init(style: UITableViewStyle) {
+    public init(style: UITableView.Style) {
         tableView = UITableView(frame: .zero, style: style)
         super.init(nibName: nil, bundle: nil)
         dataSource.tableView = tableView

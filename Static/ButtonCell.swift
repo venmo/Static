@@ -4,7 +4,7 @@ open class ButtonCell: UITableViewCell, Cell {
 
     // MARK: - Initializers
 
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         initialize()
     }
