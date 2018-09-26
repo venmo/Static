@@ -1,6 +1,6 @@
 ![Static Logo](docs/static.png)
 
-[![Version](https://img.shields.io/github/release/venmo/Static.svg)](https://github.com/venmo/Static/releases) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Version](https://img.shields.io/github/release/venmo/Static.svg)](https://github.com/venmo/Static/releases) ![Status](https://travis-ci.org/venmo/Static.svg?branch=master) ![Swift Version](https://img.shields.io/badge/swift-4.2-orange.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Simple static table views for iOS in Swift. Static's goal is to separate model data from presentation. `Row`s and `Section`s are your “view models” for your cells. You simply specify a cell class to use and that handles all of the presentation. See the [usage](#usage) section below for details.
 
@@ -9,6 +9,7 @@ Simple static table views for iOS in Swift. Static's goal is to separate model d
 
 | Swift Version | Static Version |
 | ------------- | -------------- |
+| 4.2+          | 3.0.1          |
 | 3.2+          | 2.1            |
 | 3.0.1         | 2.0.1          |
 | 3.0           | 2.0            |
