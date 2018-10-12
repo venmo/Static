@@ -71,6 +71,7 @@ public struct Row: Hashable, Equatable {
 
     public typealias Context = [String: Any]
     public var value: String?
+    public var other: String?
     /// Representation of an editing action, when swiping to edit a cell.
     public struct EditAction {
         /// Title of the action's button.
