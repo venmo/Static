@@ -29,7 +29,7 @@ public struct Row: Hashable, Equatable {
 
         /// Info button. Handles selection.
         case detailButton(Selection)
-        
+
         /// Switch. Handles value change.
         case switchToggle(value: Bool, ValueChange)
 
@@ -70,24 +70,24 @@ public struct Row: Hashable, Equatable {
     }
 
     public typealias Context = [String: Any]
-
+    public var value: String?
     /// Representation of an editing action, when swiping to edit a cell.
     public struct EditAction {
         /// Title of the action's button.
         public let title: String
-        
+
         /// Styling for button's action, used primarily for destructive actions.
         public let style: UITableViewRowAction.Style
-        
+
         /// Background color of the button.
         public let backgroundColor: UIColor?
-        
+
         /// Visual effect to be applied to the button's background.
         public let backgroundEffect: UIVisualEffect?
-        
+
         /// Invoked when selecting the action.
         public let selection: Selection?
-        
+
         public init(title: String, style: UITableViewRowAction.Style = .default, backgroundColor: UIColor? = nil, backgroundEffect: UIVisualEffect? = nil, selection: Selection? = nil) {
             self.title = title
             self.style = style
@@ -122,7 +122,7 @@ public struct Row: Hashable, Equatable {
 
     /// Additional information for the row.
     public var context: Context?
-    
+
     /// Actions to show when swiping the cell, such as Delete.
     public var editActions: [EditAction]
 
@@ -147,7 +147,7 @@ public struct Row: Hashable, Equatable {
 
     public init(text: String? = nil, detailText: String? = nil, selection: Selection? = nil,
         image: UIImage? = nil, accessory: Accessory = .none, cellClass: Cell.Type? = nil, context: Context? = nil, editActions: [EditAction] = [], uuid: String = UUID().uuidString) {
-        
+
         self.uuid = uuid
         self.text = text
         self.detailText = detailText
