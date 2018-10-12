@@ -74,6 +74,8 @@ public struct Row: Hashable, Equatable {
     public var other: String?
     /// Representation of an editing action, when swiping to edit a cell.
     public struct EditAction {
+        asdf
+        
         /// Title of the action's button.
         public let title: String
 
