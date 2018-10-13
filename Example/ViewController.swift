@@ -71,11 +71,11 @@ class ViewController: TableViewController {
             ]),
             Section(header: "Editing", rows: [
                 Row(text: "Swipe this row", editActions: [
-                    Row.EditAction(title: "Warn", backgroundColor: .orange, selection: { [unowned self] in
-                        self.showAlert(title: "Warned.")
+                    Row.EditAction(title: "Warn", backgroundColor: .orange, selection: { [unowned self] (indexPath) in
+                        self.showAlert(title: "Warned at indexPath: \(indexPath).")
                     }),
-                    Row.EditAction(title: "Delete", style: .destructive, selection: { [unowned self] in
-                        self.showAlert(title: "Deleted.")
+                    Row.EditAction(title: "Delete", style: .destructive, selection: { [unowned self] (indexPath) in
+                        self.showAlert(title: "Deleted at indexPath: \(indexPath).")
                     })
                 ])
             ]),
