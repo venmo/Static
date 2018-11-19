@@ -43,6 +43,9 @@ public struct Section: Hashable, Equatable {
 
     // MARK: - Properties
 
+    /// The section's accessibility identifier.
+    public var accessibilityIdentifier: String?
+
     /// Unique identifier used to identify the section.
     public let uuid: String
 
@@ -65,7 +68,8 @@ public struct Section: Hashable, Equatable {
 
     // MARK: - Initiailizers
 
-    public init(header: Extremity? = nil, rows: [Row] = [], footer: Extremity? = nil, indexTitle: String? = nil, uuid: String = UUID().uuidString) {
+    public init(accessibilityIdentifier: String? = nil, header: Extremity? = nil, rows: [Row] = [], footer: Extremity? = nil, indexTitle: String? = nil, uuid: String = UUID().uuidString) {
+        self.accessibilityIdentifier = accessibilityIdentifier
         self.uuid = uuid
         self.header = header
         self.rows = rows
