@@ -15,6 +15,7 @@ extension Cell {
 
 extension Cell where Self: UITableViewCell {
     public func configure(row: Row) {
+        accessibilityIdentifier = row.accessibilityIdentifier
         textLabel?.text = row.text
         detailTextLabel?.text = row.detailText
         imageView?.image = row.image

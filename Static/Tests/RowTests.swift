@@ -9,11 +9,12 @@ class RowTests: XCTestCase {
             "Hello": "world"
         ]
 
-        let row = Row(text: "Title", detailText: "Detail", selection: selection, cellClass: ButtonCell.self, context: context, uuid: "1234")
+        let row = Row(text: "Title", detailText: "Detail", selection: selection, cellClass: ButtonCell.self, context: context, uuid: "1234", accessibilityIdentifier: "TitleRow")
         XCTAssertEqual("1234", row.uuid)
         XCTAssertEqual("Title", row.text!)
         XCTAssertEqual("Detail", row.detailText!)
         XCTAssertEqual("world", row.context?["Hello"] as? String)
+        XCTAssertEqual("TitleRow", row.accessibilityIdentifier)
     }
 
     func testInitWithImage() {
