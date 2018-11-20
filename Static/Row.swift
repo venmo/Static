@@ -70,6 +70,7 @@ public struct Row: Hashable, Equatable {
     }
 
     public typealias Context = [String: Any]
+    public typealias EditActionSelection = (IndexPath) -> ()
 
     /// Representation of an editing action, when swiping to edit a cell.
     public struct EditAction {
@@ -86,9 +87,9 @@ public struct Row: Hashable, Equatable {
         public let backgroundEffect: UIVisualEffect?
         
         /// Invoked when selecting the action.
-        public let selection: Selection?
+        public let selection: EditActionSelection?
         
-        public init(title: String, style: UITableViewRowAction.Style = .default, backgroundColor: UIColor? = nil, backgroundEffect: UIVisualEffect? = nil, selection: Selection? = nil) {
+        public init(title: String, style: UITableViewRowAction.Style = .default, backgroundColor: UIColor? = nil, backgroundEffect: UIVisualEffect? = nil, selection: EditActionSelection? = nil) {
             self.title = title
             self.style = style
             self.backgroundColor = backgroundColor
