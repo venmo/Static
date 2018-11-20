@@ -36,14 +36,14 @@ class ViewController: TableViewController {
         dataSource = DataSource(tableViewDelegate: self)
         dataSource.sections = [
             Section(header: "Styles", rows: [
-                Row(text: "Value 1", detailText: "Detail", cellClass: Value1Cell.self),
+                Row(text: "Value 1", detailText: "Detail", cellClass: Value1Cell.self, accessibilityIdentifier: "Value1Row"),
                 Row(text: "Value 1", detailText: "with an image", image: UIImage(named: "Settings"), cellClass: Value1Cell.self),
                 Row(text: "Value 2", detailText: "Detail", cellClass: Value2Cell.self),
                 Row(text: "Subtitle", detailText: "Detail", cellClass: SubtitleCell.self),
                 Row(text: "Button", detailText: "Detail", selection: { [unowned self] in
                     self.showAlert(title: "Row Selection")
                 }, cellClass: ButtonCell.self),
-                Row(text: "Custom from nib", cellClass: NibTableViewCell.self)
+                Row(text: "Custom from nib", cellClass: NibTableViewCell.self, accessibilityIdentifier: "NibTableViewCell")
             ], footer: "This is a section footer."),
             Section(header: "Accessories", rows: [
                 Row(text: "None"),
@@ -58,7 +58,7 @@ class ViewController: TableViewController {
                 Row(text: "UISwitch", accessory: .switchToggle(value: false) { [unowned self] newValue in
                     self.showAlert(title: "Switch Toggled: \(newValue ? "On" : "Off")")
                 }),
-                Row(text: "Custom View", accessory: .view(customAccessory))
+                Row(text: "Custom View", accessory: .view(customAccessory), accessibilityIdentifier: "CustomView")
             ], footer: "Try tapping the ⓘ buttons."),
             Section(header: "Selection", rows: [
                 Row(text: "Tap this row", selection: { [unowned self] in
