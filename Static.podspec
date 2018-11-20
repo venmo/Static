@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = 'Static'
-  spec.version = '3.0.2'
+  spec.version = '3.0.3'
   spec.summary = 'Simple static table views for iOS in Swift.'
   spec.description = 'Static provides simple static table views for iOS in Swift.'
   spec.homepage = 'https://github.com/venmo/static'
