@@ -58,6 +58,9 @@ class ViewController: TableViewController {
                 Row(text: "UISwitch", accessory: .switchToggle(value: false) { [unowned self] newValue in
                     self.showAlert(title: "Switch Toggled: \(newValue ? "On" : "Off")")
                 }),
+                Row(text: "Segmented control", accessory: .segmentedControl(items: ["Left", "Middle", "Right"], selectedIndex: 1) { [unowned self] (i, str) in
+                    self.showAlert(title: "Segment \"\(str!)\" at index \(i) selected")
+                }),
                 Row(text: "Custom View", accessory: .view(customAccessory), accessibilityIdentifier: "CustomView")
             ], footer: "Try tapping the ⓘ buttons."),
             Section(header: "Selection", rows: [
