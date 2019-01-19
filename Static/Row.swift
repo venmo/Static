@@ -3,6 +3,7 @@ import UIKit
 /// Row or Accessory selection callback.
 public typealias Selection = () -> Void
 public typealias ValueChange = (Bool) -> ()
+public typealias SegmentedControlValueChange = (Int, Any?) -> ()
 
 /// Representation of a table row.
 public struct Row: Hashable, Equatable {
@@ -32,6 +33,9 @@ public struct Row: Hashable, Equatable {
         
         /// Switch. Handles value change.
         case switchToggle(value: Bool, ValueChange)
+        
+        /// Segmented control. Handles value change.
+        case segmentedControl(items: [Any], selectedIndex: Int, SegmentedControlValueChange)
 
         /// Custom view
         case view(UIView)
@@ -55,6 +59,8 @@ public struct Row: Hashable, Equatable {
                 return SwitchAccessory(initialValue: value, valueChange: valueChange)
             case .checkmarkPlaceholder:
                 return UIView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+            case .segmentedControl(let items, let selectedIndex, let valueChange):
+                return SegmentedControlAccessory(items: items, selectedIndex: selectedIndex, valueChange: valueChange)
             default: return nil
             }
         }
