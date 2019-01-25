@@ -4,7 +4,7 @@ import Static
 class RowTests: XCTestCase {
 
     func testInit() {
-        let selection: Selection = {}
+        let selection: Selection = { (row) in }
         let context: Row.Context = [
             "Hello": "world"
         ]
@@ -36,7 +36,7 @@ class RowTests: XCTestCase {
     }
 
     func testInitWithSelectableAccessoryType() {
-        let selection: Selection = {}
+        let selection: Selection = { (row) in }
         let accessory: Row.Accessory = .detailButton(selection)
 
         let row = Row(accessory: accessory)
