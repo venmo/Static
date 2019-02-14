@@ -28,6 +28,7 @@
 		36748D591B5034EC0046F207 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36748D581B5034EC0046F207 /* Assets.xcassets */; };
 		36748D5C1B5034EC0046F207 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36748D5A1B5034EC0046F207 /* LaunchScreen.storyboard */; };
 		39DC804A1BD96BB0001F04CD /* NibTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DC80491BD96BB0001F04CD /* NibTableViewCell.swift */; };
+		4AEF73EB21F2B802004927DA /* SegmentedControlAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEF73EA21F2B802004927DA /* SegmentedControlAccessory.swift */; };
 		A706253D1BC81C1400E471EF /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A706253B1BC81C1400E471EF /* CustomTableViewCell.swift */; };
 		A706253E1BC81C1400E471EF /* NibTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A706253C1BC81C1400E471EF /* NibTableViewCell.xib */; };
 		B84E13F720555E26001D6C99 /* SwitchAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84E13F620555E26001D6C99 /* SwitchAccessory.swift */; };
@@ -89,6 +90,7 @@
 		36799F981B41C857009A9D16 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		36C8FE9A1B4EECF30004DA5B /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		39DC80491BD96BB0001F04CD /* NibTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibTableViewCell.swift; sourceTree = "<group>"; };
+		4AEF73EA21F2B802004927DA /* SegmentedControlAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlAccessory.swift; sourceTree = "<group>"; };
 		A706253B1BC81C1400E471EF /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		A706253C1BC81C1400E471EF /* NibTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibTableViewCell.xib; sourceTree = "<group>"; };
 		B84E13F620555E26001D6C99 /* SwitchAccessory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchAccessory.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				21826AC61B3F51D000AA9641 /* Section.swift */,
 				21826AC51B3F51D000AA9641 /* Row.swift */,
 				B84E13F620555E26001D6C99 /* SwitchAccessory.swift */,
+				4AEF73EA21F2B802004927DA /* SegmentedControlAccessory.swift */,
 				366AB2E91B4DFCDD002C4717 /* Cells */,
 				21826AAF1B3F51A100AA9641 /* Info.plist */,
 				366AB2ED1B4EE1A7002C4717 /* Tests */,
@@ -342,6 +345,7 @@
 			files = (
 				21F219631D10B7B9001EC0F5 /* SubtitleCell.swift in Sources */,
 				21F219611D10B7A9001EC0F5 /* Value1Cell.swift in Sources */,
+				4AEF73EB21F2B802004927DA /* SegmentedControlAccessory.swift in Sources */,
 				B84E13F720555E26001D6C99 /* SwitchAccessory.swift in Sources */,
 				21826ACA1B3F51D000AA9641 /* Row.swift in Sources */,
 				21F219671D10B7CF001EC0F5 /* Section.swift in Sources */,
