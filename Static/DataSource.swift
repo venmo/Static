@@ -28,7 +28,7 @@ public class DataSource: NSObject {
     public var sections: [Section] {
         didSet {
             assert(Thread.isMainThread, "You must access Static.DataSource from the main thread.")
-            refresh()
+            refresh(oldSections: oldValue)
         }
     }
 
@@ -101,8 +101,8 @@ public class DataSource: NSObject {
         refresh()
     }
 
-    private func refresh() {
-        refreshTableSections()
+    private func refresh(oldSections: [Section]? = nil) {
+        refreshTableSections(oldSections: oldSections)
         refreshRegisteredCells()
     }
 

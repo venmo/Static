@@ -9,6 +9,7 @@ Pod::Spec.new do |spec|
   spec.author = { 'Venmo' => 'ios@venmo.com', 'Sam Soffes' => 'sam@soff.es' }
 
   spec.platform = :ios, '8.0'
+  spec.swift_version = '4.2'
   spec.frameworks = 'UIKit'
   spec.source_files = 'Static/*.{swift,h}'
 end
