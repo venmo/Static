@@ -49,6 +49,13 @@
 			remoteGlobalIDString = 21826AA91B3F51A100AA9641;
 			remoteInfo = "Static-iOS";
 		};
+		3B1129252226E5D800B6E06A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 21826AA11B3F51A100AA9641 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 36748D4E1B5034EC0046F207;
+			remoteInfo = Example;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -242,6 +249,7 @@
 			);
 			dependencies = (
 				21826AB71B3F51A100AA9641 /* PBXTargetDependency */,
+				3B1129262226E5D800B6E06A /* PBXTargetDependency */,
 			);
 			name = StaticTests;
 			productName = StaticTests;
@@ -390,6 +398,11 @@
 			isa = PBXTargetDependency;
 			target = 21826AA91B3F51A100AA9641 /* Static-iOS */;
 			targetProxy = 363129C51B50354E0024E339 /* PBXContainerItemProxy */;
+		};
+		3B1129262226E5D800B6E06A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 36748D4E1B5034EC0046F207 /* Example */;
+			targetProxy = 3B1129252226E5D800B6E06A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

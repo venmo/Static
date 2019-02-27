@@ -41,6 +41,14 @@ class DataSourceTests: XCTestCase {
         XCTAssertEqual(4, tableView.numberOfRows(inSection: 1))
         XCTAssertEqual(2, tableView.numberOfRows(inSection: 2))
 
+        dataSource.sections = [
+            Section(rows: [Row(text: "Merrily"), Row(text: "Merrily")]),
+            Section(rows: [Row(text: "Life"), Row(text: "Is"), Row(text: "But"), Row(text: "A"), Row(text: "Dream")]),
+        ]
+        XCTAssertEqual(2, tableView.numberOfSections)
+        XCTAssertEqual(2, tableView.numberOfRows(inSection: 0))
+        XCTAssertEqual(5, tableView.numberOfRows(inSection: 1))
+
         dataSource.sections = []
         XCTAssertEqual(0, tableView.numberOfSections)
     }
