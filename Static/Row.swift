@@ -148,8 +148,8 @@ public struct Row: Hashable, Equatable {
         return cellClass.description()
     }
 
-    public var hashValue: Int {
-        return uuid.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
     }
 
 

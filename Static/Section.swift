@@ -58,8 +58,8 @@ public struct Section: Hashable, Equatable {
     /// Section index title
     public var indexTitle: String?
 
-    public var hashValue: Int {
-        return uuid.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
     }
 
 

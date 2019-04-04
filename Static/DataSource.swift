@@ -311,6 +311,7 @@ extension UITableView.Style {
         switch self {
         case .plain: return 0
         case .grouped: return UITableView.automaticDimension
+        @unknown default: return UITableView.automaticDimension
         }
     }
 }
