@@ -1,5 +1,5 @@
 language: swift
-osx_image: xcode10
+osx_image: xcode10.2
 xcode_project: Static.xcodeproj
 
 script: xcodebuild -scheme "$TRAVIS_XCODE_SCHEME" -sdk "$TRAVIS_XCODE_SDK" -destination "$DESTINATION" test
@@ -9,4 +9,4 @@ matrix:
     - xcode_scheme: Static-iOS
       xcode_sdk: iphonesimulator
       env:
-        - DESTINATION="OS=10.1,name=iPhone 7 Plus"
+        - DESTINATION="OS=12.2,name=iPhone X"
