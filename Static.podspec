@@ -8,7 +8,8 @@ Pod::Spec.new do |spec|
   spec.source = { git: 'https://github.com/venmo/Static.git', tag: "v#{spec.version}" }
   spec.author = { 'Venmo' => 'ios@venmo.com', 'Sam Soffes' => 'sam@soff.es' }
 
+  spec.swift_versions = ['5.0', '5.2']
   spec.platform = :ios, '8.0'
   spec.frameworks = 'UIKit'
-  spec.source_files = 'Static/*.{swift,h}'
+  spec.source_files = 'Sources/**/*.swift'
 end

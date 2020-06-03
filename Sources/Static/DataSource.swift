@@ -310,9 +310,12 @@ extension DataSource: UITableViewDelegate {
 extension UITableView.Style {
     var defaultSectionExtremityHeight: CGFloat {
         switch self {
-        case .plain: return 0
-        case .grouped: return UITableView.automaticDimension
-        @unknown default: return UITableView.automaticDimension
+        case .plain:
+            return 0
+        case .grouped, .insetGrouped:
+            return UITableView.automaticDimension
+        @unknown default:
+            return UITableView.automaticDimension
         }
     }
 }
