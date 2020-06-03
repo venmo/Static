@@ -53,7 +53,7 @@ class RowTests: XCTestCase {
 
     func testHashable() {
         let row = Row()
-        var hash = [
+        let hash = [
             row: "hi"
         ]
 
