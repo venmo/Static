@@ -22,7 +22,7 @@ class SectionTests: XCTestCase {
 
     func testHashable() {
         let section = Section()
-        var hash = [
+        let hash = [
             section: "hi"
         ]
 
