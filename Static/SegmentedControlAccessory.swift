@@ -1,5 +1,6 @@
 import UIKit
 
+@objc(STCSegmentedControlAccessory)
 open class SegmentedControlAccessory: UISegmentedControl {
     public typealias ValueChange = (Int, Any?) -> ()
     var valueChange: ValueChange? = nil

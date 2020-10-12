@@ -3,6 +3,7 @@ import UIKit
 /// Table view data source.
 ///
 /// You should always access this object from the main thread since it talks to UIKit.
+@objc(STCDataSource)
 public class DataSource: NSObject {
 
     // MARK: - Properties
