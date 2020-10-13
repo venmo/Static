@@ -1,5 +1,6 @@
 import UIKit
 
+@objc(STCButtonCell)
 open class ButtonCell: UITableViewCell, Cell {
 
     // MARK: - Initializers

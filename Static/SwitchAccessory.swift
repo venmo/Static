@@ -1,5 +1,6 @@
 import UIKit
 
+@objc(STCSwitchAccessory)
 class SwitchAccessory : UISwitch {
     typealias ValueChange = (Bool) -> ()
     
