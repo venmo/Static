@@ -1,5 +1,6 @@
 import UIKit
 
+@objc(STCValue2Cell)
 open class Value2Cell: UITableViewCell, Cell {
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value2, reuseIdentifier: reuseIdentifier)

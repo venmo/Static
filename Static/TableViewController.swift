@@ -1,6 +1,7 @@
 import UIKit
 
 /// Table view controller with a `DataSource` setup to use its `tableView`.
+@objc(STCTableViewController)
 open class TableViewController: UIViewController {
 
     // MARK: - Properties
