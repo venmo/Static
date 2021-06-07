@@ -8,13 +8,17 @@ class RowTests: XCTestCase {
         let context: Row.Context = [
             "Hello": "world"
         ]
+        let accessibilityTraits: UIAccessibilityTraits = [.button, .staticText]
 
-        let row = Row(text: "Title", detailText: "Detail", selection: selection, cellClass: ButtonCell.self, context: context, uuid: "1234", accessibilityIdentifier: "TitleRow")
+        let row = Row(text: "Title", detailText: "Detail", selection: selection, cellClass: ButtonCell.self, context: context, uuid: "1234", accessibilityIdentifier: "TitleRow", accessibilityLabel: "TitleRowAccessibilityLabel", accessibilityTraits: accessibilityTraits)
+
         XCTAssertEqual("1234", row.uuid)
         XCTAssertEqual("Title", row.text!)
         XCTAssertEqual("Detail", row.detailText!)
         XCTAssertEqual("world", row.context?["Hello"] as? String)
         XCTAssertEqual("TitleRow", row.accessibilityIdentifier)
+        XCTAssertEqual("TitleRowAccessibilityLabel", row.accessibilityLabel)
+        XCTAssertEqual(accessibilityTraits, row.accessibilityTraits)
     }
 
     func testInitWithImage() {
@@ -53,7 +57,7 @@ class RowTests: XCTestCase {
 
     func testHashable() {
         let row = Row()
-        var hash = [
+        let hash = [
             row: "hi"
         ]
 
