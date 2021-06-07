@@ -16,7 +16,7 @@ extension Cell {
 extension Cell where Self: UITableViewCell {
     public func configure(row: Row) {
         accessibilityTraits = row.accessibilityTraits ?? accessibilityTraits
-        accessibilityLabel = row.accessibilityLabel ?? accessibilityLabel
+        accessibilityLabel = row.accessibilityLabel
         accessibilityIdentifier = row.accessibilityIdentifier
         textLabel?.text = row.text
         detailTextLabel?.text = row.detailText
