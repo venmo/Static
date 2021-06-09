@@ -92,14 +92,14 @@ class DataSourceTests: XCTestCase {
         XCTAssertFalse(dataSource.tableView(tableView, shouldHighlightRowAt: IndexPath(row: 0, section: 0)))
 
         dataSource.sections = [
-            Section(rows: [Row(text: "Cupcakes", selection: {})])
+            Section(rows: [Row(text: "Cupcakes", selection: { (row) in })])
         ]
         XCTAssertTrue(dataSource.tableView(tableView, shouldHighlightRowAt: IndexPath(row: 0, section: 0)))
     }
 
     func testSelection() {
         let expectation = self.expectation(description: "Selected")
-        let selection = {
+        let selection: Selection = { (row) in
             expectation.fulfill()
         }
 
@@ -112,7 +112,7 @@ class DataSourceTests: XCTestCase {
 
     func testAccessorySelection() {
         let expectation = self.expectation(description: "Accessory Selected")
-        let selection = {
+        let selection: Selection = { (row) in
             expectation.fulfill()
         }
 

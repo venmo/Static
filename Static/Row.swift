@@ -1,7 +1,7 @@
 import UIKit
 
 /// Row or Accessory selection callback.
-public typealias Selection = () -> Void
+public typealias Selection = (Row) -> Void
 public typealias ValueChange = (Bool) -> ()
 public typealias SegmentedControlValueChange = (Int, Any?) -> ()
 
