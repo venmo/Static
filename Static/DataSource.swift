@@ -29,7 +29,7 @@ public class DataSource: NSObject {
     public var sections: [Section] {
         didSet {
             assert(Thread.isMainThread, "You must access Static.DataSource from the main thread.")
-            refresh()
+            refresh(oldSections: oldValue)
         }
     }
 
@@ -102,8 +102,8 @@ public class DataSource: NSObject {
         refresh()
     }
 
-    private func refresh() {
-        refreshTableSections()
+    private func refresh(oldSections: [Section] = []) {
+        refreshTableSections(oldSections: oldSections)
         refreshRegisteredCells()
     }
 
@@ -128,9 +128,9 @@ public class DataSource: NSObject {
         return nil
     }
 
-    private func refreshTableSections(oldSections: [Section]? = nil) {
+    private func refreshTableSections(oldSections: [Section] = []) {
         guard let tableView = tableView else { return }
-        guard let oldSections = oldSections else {
+        guard !oldSections.isEmpty else {
             tableView.reloadData()
             return
         }
@@ -152,8 +152,7 @@ public class DataSource: NSObject {
                 tableView.insertSections(IndexSet(integersIn: range), with: animation)
             } else {
                 // Remove sections
-                let start = oldCount - 1
-                let range: Range<IndexSet.Element> = start..<(start - delta)
+                let range: Range<IndexSet.Element> = newCount..<(newCount - delta)
                 tableView.deleteSections(IndexSet(integersIn: range), with: animation)
             }
 
