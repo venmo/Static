@@ -264,6 +264,22 @@ extension DataSource: UITableViewDataSource {
             return rowAction
         }
     }
+    
+    public func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        return row(at: indexPath)?.leadingSwipeActionsConfiguration.map {
+            let actionsConfiguration = UISwipeActionsConfiguration(actions: $0.actions)
+            actionsConfiguration.performsFirstActionWithFullSwipe = $0.performsFirstActionWithFullSwipe
+            return actionsConfiguration
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        return row(at: indexPath)?.trailingSwipeActionsConfiguration.map {
+            let actionsConfiguration = UISwipeActionsConfiguration(actions: $0.actions)
+            actionsConfiguration.performsFirstActionWithFullSwipe = $0.performsFirstActionWithFullSwipe
+            return actionsConfiguration
+        }
+    }
 
     public func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         guard let sectionIndexTitles = sectionIndexTitles, sectionIndexTitles.count >= sections.count else { return nil }
