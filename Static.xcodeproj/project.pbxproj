@@ -85,7 +85,7 @@
 		2139286F24880DBE0009AFBF /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		21826AAA1B3F51A100AA9641 /* Static.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Static.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		21826AB41B3F51A100AA9641 /* StaticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StaticTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		36748D4F1B5034EC0046F207 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		36748D4F1B5034EC0046F207 /* StaticExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StaticExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36748D511B5034EC0046F207 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		36748D531B5034EC0046F207 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		36748D581B5034EC0046F207 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 			children = (
 				21826AAA1B3F51A100AA9641 /* Static.framework */,
 				21826AB41B3F51A100AA9641 /* StaticTests.xctest */,
-				36748D4F1B5034EC0046F207 /* Example.app */,
+				36748D4F1B5034EC0046F207 /* StaticExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -264,9 +264,9 @@
 			productReference = 21826AB41B3F51A100AA9641 /* StaticTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		36748D4E1B5034EC0046F207 /* Example */ = {
+		36748D4E1B5034EC0046F207 /* StaticExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 36748D5E1B5034EC0046F207 /* Build configuration list for PBXNativeTarget "Example" */;
+			buildConfigurationList = 36748D5E1B5034EC0046F207 /* Build configuration list for PBXNativeTarget "StaticExample" */;
 			buildPhases = (
 				36748D4B1B5034EC0046F207 /* Sources */,
 				36748D4C1B5034EC0046F207 /* Frameworks */,
@@ -278,9 +278,9 @@
 			dependencies = (
 				363129C61B50354E0024E339 /* PBXTargetDependency */,
 			);
-			name = Example;
+			name = StaticExample;
 			productName = Example;
-			productReference = 36748D4F1B5034EC0046F207 /* Example.app */;
+			productReference = 36748D4F1B5034EC0046F207 /* StaticExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -322,7 +322,7 @@
 			targets = (
 				21826AA91B3F51A100AA9641 /* Static-iOS */,
 				21826AB31B3F51A100AA9641 /* StaticTests */,
-				36748D4E1B5034EC0046F207 /* Example */,
+				36748D4E1B5034EC0046F207 /* StaticExample */,
 			);
 		};
 /* End PBXProject section */
@@ -661,7 +661,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		36748D5E1B5034EC0046F207 /* Build configuration list for PBXNativeTarget "Example" */ = {
+		36748D5E1B5034EC0046F207 /* Build configuration list for PBXNativeTarget "StaticExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				36748D5F1B5034EC0046F207 /* Debug */,
