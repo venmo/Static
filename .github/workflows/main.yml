@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    env:
+      DESTINATION: "name=iPhone 12"
+      XCODE_SDK: iphonesimulator
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Test Xcode Framework
+        run: xcodebuild -scheme Static-iOS -sdk "$XCODE_SDK" -destination "$DESTINATION" test
+
+      - name: Test Swift Package
+        run: xcodebuild -workspace .swiftpm/xcode/package.xcworkspace -scheme Static -sdk "$XCODE_SDK" -destination "$DESTINATION" test
